@@ -1,178 +1,87 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ví - TUAN4422 MARKET</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ví - TUAN4422</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
-
-    <a href="index.html" class="brand">
-      <div class="brand-logo">T</div>
-
-      <div class="brand-text">
-        <strong>TUAN4422</strong>
-        <span>MARKET</span>
-      </div>
+<header class="header">
+    <a href="index.html" class="logo">
+        <span>TUAN</span>4422 <small>MARKET</small>
     </a>
 
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html">Trang chủ</a>
-      <a href="shop.html">Shop</a>
-      <a href="server.html">Server</a>
-      <a href="chat.html">Chat</a>
-      <a href="forum.html">Forum</a>
-      <a href="account.html">Tài khoản</a>
-      <a href="wallet.html" class="active">Ví</a>
-      <a href="admin.html" id="adminMenu" class="admin-only">Admin</a>
+    <button class="mobile-menu" id="mobileMenuBtn">☰</button>
+
+    <nav id="mainNav">
+        <a href="index.html">Trang chủ</a>
+        <a href="shop.html">Cửa hàng</a>
+        <a href="server.html">Minecraft Server</a>
+        <a href="chat.html">Chat</a>
+        <a href="forum.html">Forum</a>
+        <a href="account.html">Tài khoản</a>
+        <a href="wallet.html" class="active">Ví</a>
+        <a href="admin.html" class="admin-only">Admin</a>
     </nav>
 
-    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-
-  </div>
+    <button class="theme-btn" id="themeBtn">☾</button>
 </header>
 
-<main>
+<main class="page">
 
-  <section class="page-hero">
-    <div class="eyebrow">WALLET</div>
-    <h1>Ví của tôi</h1>
-    <p>Quản lý số dư dùng để mua sản phẩm.</p>
-  </section>
+    <section class="page-title">
+        <span class="section-label">WALLET</span>
+        <h1>Ví của tôi</h1>
+        <p>Quản lý số dư tài khoản.</p>
+    </section>
 
-  <section class="section" style="padding-top:20px">
+    <div class="wallet-card">
 
-    <div class="balance-card">
+        <div>
+            <span>SỐ DƯ HIỆN TẠI</span>
+            <h1 id="walletBalance">0$</h1>
+        </div>
 
-      <small>Số dư tài khoản</small>
-
-      <strong id="walletBalance">
-        0$
-      </strong>
-
-      <p style="
-        margin-top:10px;
-        color:var(--muted);
-        font-size:12px;
-      ">
-        Đây là ví demo chạy bằng LocalStorage.
-      </p>
-
-      <button
-        id="demoAddMoney"
-        class="btn btn-primary"
-        style="margin-top:18px"
-      >
-        + Thêm tiền demo
-      </button>
+        <div class="wallet-logo">
+            T4422
+        </div>
 
     </div>
-
 
     <div class="panel">
 
-      <div class="panel-title">
-        <div>
-          <h2>Thông tin ví</h2>
-          <span>Ví hiện tại của tài khoản</span>
+        <h2>Nạp tiền Demo</h2>
+
+        <p class="description">
+            Đây chỉ là hệ thống mô phỏng để thử giao diện.
+            Chưa kết nối thanh toán thật.
+        </p>
+
+        <div class="money-buttons">
+            <button class="btn btn-secondary add-money" data-money="10000">
+                +10.000$
+            </button>
+
+            <button class="btn btn-secondary add-money" data-money="50000">
+                +50.000$
+            </button>
+
+            <button class="btn btn-secondary add-money" data-money="100000">
+                +100.000$
+            </button>
+
         </div>
-      </div>
-
-      <div class="stats-grid">
-
-        <div class="stat-card">
-          <span>Số dư</span>
-          <strong id="walletBalance2">0$</strong>
-        </div>
-
-        <div class="stat-card">
-          <span>Đơn hàng</span>
-          <strong>—</strong>
-        </div>
-
-        <div class="stat-card">
-          <span>Đơn vị</span>
-          <strong>$</strong>
-        </div>
-
-        <div class="stat-card">
-          <span>Trạng thái</span>
-          <strong style="color:var(--green)">
-            Hoạt động
-          </strong>
-        </div>
-
-      </div>
 
     </div>
-
-  </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <strong>TUAN4422 MARKET</strong>
-      <p>Wallet.</p>
-    </div>
-  </div>
-</footer>
+<div id="toast" class="toast"></div>
 
-<div class="toast" id="toast"></div>
-
+<script src="database.js"></script>
 <script src="script.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const balance = document.getElementById("walletBalance");
-  const balance2 = document.getElementById("walletBalance2");
-
-  function updateWalletExtra() {
-    const value = Number(localStorage.getItem("tuan4422_balance") || 0);
-
-    if (balance) {
-      balance.textContent =
-        value.toLocaleString("vi-VN") + "$";
-    }
-
-    if (balance2) {
-      balance2.textContent =
-        value.toLocaleString("vi-VN") + "$";
-    }
-  }
-
-  updateWalletExtra();
-
-  const add = document.getElementById("demoAddMoney");
-
-  if (add) {
-    add.addEventListener("click", () => {
-
-      let value =
-        Number(localStorage.getItem("tuan4422_balance") || 0);
-
-      value += 100000;
-
-      localStorage.setItem(
-        "tuan4422_balance",
-        String(value)
-      );
-
-      updateWalletExtra();
-
-      if (typeof toast === "function") {
-        toast("Đã thêm 100.000$ demo");
-      }
-    });
-  }
-});
-</script>
 
 </body>
 </html>
