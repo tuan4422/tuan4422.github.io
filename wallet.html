@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ví - TUAN4422</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+  <a class="logo" href="index.html">
+    TUAN<span>4422</span>
+  </a>
+
+  <nav id="nav">
+    <a href="index.html">Trang chủ</a>
+    <a href="shop.html">Shop</a>
+    <a href="server.html">Server</a>
+    <a href="chat.html">Chat</a>
+    <a href="forum.html">Diễn đàn</a>
+    <a href="account.html">Tài khoản</a>
+    <a class="active" href="wallet.html">Ví</a>
+  </nav>
+
+  <div class="header-actions">
+
+    <button id="themeBtn" class="icon-btn">
+      ☾
+    </button>
+
+    <button id="menuBtn" class="menu-btn">
+      ☰
+    </button>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+  <div class="page-heading center">
+
+    <div class="small-title">
+      WALLET
+    </div>
+
+    <h1>Ví của bạn</h1>
+
+    <p>
+      Quản lý số dư và giao dịch.
+    </p>
+
+  </div>
+
+
+  <div class="wallet-card">
+
+    <span>
+      SỐ DƯ HIỆN TẠI
+    </span>
+
+    <strong id="walletBalance">
+      100.000đ
+    </strong>
+
+    <button
+      class="btn primary"
+      onclick="addDemoMoney()">
+      + Nạp tiền demo
+    </button>
+
+  </div>
+
+
+  <div class="transactions">
+
+    <h3>
+      Lịch sử giao dịch
+    </h3>
+
+    <div id="transactionsList">
+
+      <div class="empty">
+        Chưa có giao dịch.
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<div id="toast"></div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
