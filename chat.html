@@ -1,214 +1,217 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat - TUAN4422 MARKET</title>
-  <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Chat - TUAN4422 MARKET</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <header class="header">
 
-  <a href="index.html" class="logo">
-    TUAN<span>4422</span>
-  </a>
+<a class="logo" href="index.html">
+TUAN4422<span>MARKET</span>
+</a>
 
-  <nav id="nav">
-    <a href="index.html">Trang chủ</a>
-    <a href="shop.html">Shop</a>
-    <a href="server.html">Server</a>
-    <a href="chat.html" class="active">Chat</a>
-    <a href="forum.html">Forum</a>
-    <a href="account.html">Tài khoản</a>
-    <a href="wallet.html">Ví</a>
-  </nav>
+<nav id="nav">
 
-  <div class="header-actions">
+<a href="index.html">Trang chủ</a>
+<a href="shop.html">Shop</a>
+<a href="server.html">Server</a>
+<a class="active" href="chat.html">Chat</a>
+<a href="forum.html">Forum</a>
+<a href="account.html">Tài khoản</a>
+<a href="wallet.html">Ví</a>
 
-    <button id="themeBtn" class="icon-btn">☾</button>
+</nav>
 
-    <button id="cartBtn" class="cart-btn">
-      🛒
-      <span id="cartCount">0</span>
-    </button>
+<div class="header-actions">
 
-    <button id="menuBtn" class="menu-btn">☰</button>
+<button id="themeBtn" class="icon-btn">☾</button>
 
-  </div>
+<button id="cartBtn" class="cart-btn">
+🛒
+<span id="cartCount">0</span>
+</button>
+
+<button id="menuBtn" class="menu-btn">☰</button>
+
+</div>
 
 </header>
 
 
 <main class="page">
 
-  <div class="page-heading">
+<div class="page-heading">
 
-    <div>
+<div>
 
-      <div class="small-title">
-        COMMUNITY
-      </div>
+<small class="small-title">
+COMMUNITY
+</small>
 
-      <h1>Chat</h1>
+<h1>Chat</h1>
 
-      <p>
-        Khu vực trò chuyện của TUAN4422.
-      </p>
+<p>
+Khu vực trò chuyện demo của TUAN4422 MARKET.
+</p>
 
-    </div>
+</div>
 
-  </div>
-
-
-  <div class="chat-container">
-
-    <aside class="chat-sidebar">
-
-      <h3>Kênh chat</h3>
-
-      <button class="chat-channel active">
-        💬 Chung
-      </button>
-
-      <button class="chat-channel">
-        🎮 Minecraft
-      </button>
-
-      <button class="chat-channel">
-        🛒 Shop
-      </button>
-
-      <button class="chat-channel">
-        💡 Hỗ trợ
-      </button>
-
-    </aside>
+</div>
 
 
-    <section class="chat-main">
+<div class="chat-container">
 
-      <div class="chat-messages" id="chatMessages">
+<aside class="chat-sidebar">
 
-        <div class="message">
+<h3>Phòng chat</h3>
 
-          <div class="avatar">
-            T
-          </div>
+<button class="chat-room active">
+💬 Chung
+</button>
 
-          <div>
+<button class="chat-room">
+⛏️ Minecraft
+</button>
 
-            <strong>
-              TUAN4422
-            </strong>
+<button class="chat-room">
+💻 Script
+</button>
 
-            <p>
-              Chào mừng bạn đến với
-              TUAN4422 MARKET!
-            </p>
-
-          </div>
-
-        </div>
+</aside>
 
 
-        <div class="message">
+<section class="chat-main">
 
-          <div class="avatar blue">
-            A
-          </div>
+<div id="chatMessages" class="chat-messages">
 
-          <div>
+<div class="message">
 
-            <strong>
-              Admin
-            </strong>
+<div class="avatar">
+T
+</div>
 
-            <p>
-              Hãy giữ cuộc trò chuyện
-              văn minh nhé.
-            </p>
+<div>
 
-          </div>
+<strong>TUAN4422</strong>
 
-        </div>
+<p>
+Chào mừng bạn đến với TUAN4422 MARKET!
+</p>
 
-      </div>
+</div>
+
+</div>
 
 
-      <form
-        id="chatForm"
-        class="chat-input"
-      >
+<div class="message">
 
-        <input
-          id="chatInput"
-          type="text"
-          placeholder="Nhập tin nhắn..."
-          maxlength="300"
-          autocomplete="off"
-        >
+<div class="avatar blue">
+M
+</div>
 
-        <button
-          type="submit"
-          class="btn primary"
-        >
-          Gửi
-        </button>
+<div>
 
-      </form>
+<strong>Member</strong>
 
-    </section>
+<p>
+Website nhìn khá đẹp.
+</p>
 
-  </div>
+</div>
+
+</div>
+
+</div>
+
+
+<form id="chatForm" class="chat-input">
+
+<input
+id="chatInput"
+type="text"
+placeholder="Nhập tin nhắn..."
+autocomplete="off">
+
+<button class="btn primary">
+Gửi
+</button>
+
+</form>
+
+</section>
+
+</div>
 
 </main>
 
 
+<footer>
+
+<div class="footer-logo">
+TUAN4422<span>MARKET</span>
+</div>
+
+<p>
+© <span id="year"></span> TUAN4422 MARKET
+</p>
+
+</footer>
+
+
+<!-- CART -->
+
 <div id="cartModal" class="modal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div class="modal-header">
-      <h2>🛒 Giỏ hàng</h2>
-      <button id="closeCart">×</button>
-    </div>
+<div class="modal-header">
 
-    <div id="cartItems"></div>
+<h2>🛒 Giỏ hàng</h2>
 
-    <div class="cart-total">
-      <span>Tổng cộng</span>
-      <strong id="cartTotal">0đ</strong>
-    </div>
+<button
+id="cartClose"
+class="modal-close">
+×
+</button>
 
-    <button id="checkoutBtn" class="btn primary full">
-      Thanh toán
-    </button>
+</div>
 
-  </div>
+<div id="cartItems"></div>
+
+<div class="cart-total">
+
+<span>Tổng cộng</span>
+
+<strong id="cartTotal">
+0$
+</strong>
+
+</div>
+
+<button
+id="checkoutBtn"
+class="btn primary full">
+Thanh toán
+</button>
+
+</div>
 
 </div>
 
 
 <div id="toast"></div>
-
-
-<footer>
-
-  <div class="footer-logo">
-    TUAN<span>4422</span>
-  </div>
-
-  <p>TUAN4422 MARKET</p>
-
-  <small>
-    © <span id="year"></span>
-    TUAN4422. All rights reserved.
-  </small>
-
-</footer>
-
 
 <script src="script.js"></script>
 
