@@ -7,102 +7,172 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body data-page="wallet">
+<body>
 
 <header class="site-header">
   <div class="header-inner">
 
     <a href="index.html" class="brand">
-      <span class="brand-mark">T</span>
-      <span class="brand-text">
+      <div class="brand-logo">T</div>
+
+      <div class="brand-text">
         <strong>TUAN4422</strong>
-        <small>MARKET</small>
-      </span>
+        <span>MARKET</span>
+      </div>
     </a>
 
     <nav class="main-nav" id="mainNav">
-      <a href="index.html" data-page="home">Trang chủ</a>
-      <a href="shop.html" data-page="shop">Shop</a>
-      <a href="server.html" data-page="server">Server</a>
-      <a href="chat.html" data-page="chat">Chat</a>
-      <a href="forum.html" data-page="forum">Forum</a>
-      <a href="account.html" data-page="account">Tài khoản</a>
-      <a href="wallet.html" data-page="wallet">Ví</a>
+      <a href="index.html">Trang chủ</a>
+      <a href="shop.html">Shop</a>
+      <a href="server.html">Server</a>
+      <a href="chat.html">Chat</a>
+      <a href="forum.html">Forum</a>
+      <a href="account.html">Tài khoản</a>
+      <a href="wallet.html" class="active">Ví</a>
+      <a href="admin.html" id="adminMenu" class="admin-only">Admin</a>
     </nav>
 
-    <div class="header-tools">
-      <button class="header-btn cart-btn" id="cartBtn">
-        Giỏ hàng
-        <span class="cart-count" id="cartCount">0</span>
-      </button>
-      <button class="mobile-menu" id="menuBtn">☰</button>
-    </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
 
   </div>
 </header>
 
-<main class="page">
-  <div class="container">
+<main>
 
-    <div class="page-heading">
-      <h1>Ví</h1>
-      <p>Quản lý số dư demo của bạn.</p>
+  <section class="page-hero">
+    <div class="eyebrow">WALLET</div>
+    <h1>Ví của tôi</h1>
+    <p>Quản lý số dư dùng để mua sản phẩm.</p>
+  </section>
+
+  <section class="section" style="padding-top:20px">
+
+    <div class="balance-card">
+
+      <small>Số dư tài khoản</small>
+
+      <strong id="walletBalance">
+        0$
+      </strong>
+
+      <p style="
+        margin-top:10px;
+        color:var(--muted);
+        font-size:12px;
+      ">
+        Đây là ví demo chạy bằng LocalStorage.
+      </p>
+
+      <button
+        id="demoAddMoney"
+        class="btn btn-primary"
+        style="margin-top:18px"
+      >
+        + Thêm tiền demo
+      </button>
+
     </div>
 
-    <div class="dashboard-grid">
 
-      <div class="panel">
+    <div class="panel">
 
-        <div class="wallet-balance">
-          <span>Số dư hiện tại</span>
-          <strong id="walletBalance">100.000$</strong>
+      <div class="panel-title">
+        <div>
+          <h2>Thông tin ví</h2>
+          <span>Ví hiện tại của tài khoản</span>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <span>Số dư</span>
+          <strong id="walletBalance2">0$</strong>
         </div>
 
-        <button
-          class="btn btn-primary"
-          id="addDemoMoney">
-          +100.000$ Demo
-        </button>
+        <div class="stat-card">
+          <span>Đơn hàng</span>
+          <strong>—</strong>
+        </div>
 
-        <div class="demo-note">
-          Chức năng cộng tiền ở đây chỉ là demo.
-          Website chưa kết nối thanh toán thật.
+        <div class="stat-card">
+          <span>Đơn vị</span>
+          <strong>$</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>Trạng thái</span>
+          <strong style="color:var(--green)">
+            Hoạt động
+          </strong>
         </div>
 
       </div>
 
-      <div class="panel">
-
-        <h2>Giao dịch</h2>
-        <p class="panel-description">
-          Các giao dịch sẽ được kết nối với hệ thống thật sau.
-        </p>
-
-        <div class="transaction">
-          <div>
-            <strong>Số dư ban đầu</strong>
-            <small>Demo</small>
-          </div>
-
-          <strong class="plus">+100.000$</strong>
-        </div>
-
-      </div>
-
     </div>
 
-  </div>
+  </section>
+
 </main>
 
-<footer>
+<footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-logo">TUAN4422 MARKET</div>
-    <div>© 2026 TUAN4422</div>
+    <div class="footer-brand">
+      <strong>TUAN4422 MARKET</strong>
+      <p>Wallet.</p>
+    </div>
   </div>
 </footer>
 
-<div id="toast"></div>
+<div class="toast" id="toast"></div>
 
 <script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const balance = document.getElementById("walletBalance");
+  const balance2 = document.getElementById("walletBalance2");
+
+  function updateWalletExtra() {
+    const value = Number(localStorage.getItem("tuan4422_balance") || 0);
+
+    if (balance) {
+      balance.textContent =
+        value.toLocaleString("vi-VN") + "$";
+    }
+
+    if (balance2) {
+      balance2.textContent =
+        value.toLocaleString("vi-VN") + "$";
+    }
+  }
+
+  updateWalletExtra();
+
+  const add = document.getElementById("demoAddMoney");
+
+  if (add) {
+    add.addEventListener("click", () => {
+
+      let value =
+        Number(localStorage.getItem("tuan4422_balance") || 0);
+
+      value += 100000;
+
+      localStorage.setItem(
+        "tuan4422_balance",
+        String(value)
+      );
+
+      updateWalletExtra();
+
+      if (typeof toast === "function") {
+        toast("Đã thêm 100.000$ demo");
+      }
+    });
+  }
+});
+</script>
+
 </body>
 </html>
