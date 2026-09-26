@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server - TUAN4422</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+  <a class="logo" href="index.html">
+    TUAN<span>4422</span>
+  </a>
+
+  <nav id="nav">
+    <a href="index.html">Trang chủ</a>
+    <a href="shop.html">Shop</a>
+    <a class="active" href="server.html">Server</a>
+    <a href="chat.html">Chat</a>
+    <a href="forum.html">Diễn đàn</a>
+    <a href="account.html">Tài khoản</a>
+    <a href="wallet.html">Ví</a>
+  </nav>
+
+  <div class="header-actions">
+    <button id="themeBtn" class="icon-btn">☾</button>
+    <a href="shop.html" class="cart-btn">🛒</a>
+    <button id="menuBtn" class="menu-btn">☰</button>
+  </div>
+
+</header>
+
+
+<main class="page">
+
+  <div class="page-heading center">
+
+    <div class="small-title">
+      MINECRAFT SERVER
+    </div>
+
+    <h1>
+      TUAN4422 NETWORK
+    </h1>
+
+    <p>
+      Thông tin server Minecraft.
+    </p>
+
+  </div>
+
+
+  <section class="server-card">
+
+    <div class="server-logo">
+      ⛏️
+    </div>
+
+    <div class="server-info">
+
+      <div class="server-status">
+        <span></span>
+        SERVER ONLINE
+      </div>
+
+      <h2>TUAN4422 NETWORK</h2>
+
+      <p>
+        Server Minecraft dành cho cộng đồng
+        TUAN4422. Tham gia và chơi cùng bạn bè.
+      </p>
+
+
+      <div class="server-data">
+
+        <div>
+          <span>IP SERVER</span>
+
+          <strong id="serverIp">
+            play.tuan4422.com
+          </strong>
+        </div>
+
+        <div>
+          <span>VERSION</span>
+
+          <strong>
+            Bedrock / Java
+          </strong>
+        </div>
+
+        <div>
+          <span>TRẠNG THÁI</span>
+
+          <strong class="green">
+            Online
+          </strong>
+        </div>
+
+      </div>
+
+
+      <button
+        class="btn primary"
+        onclick="copyServerIP()">
+        Sao chép IP
+      </button>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<div id="toast"></div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
