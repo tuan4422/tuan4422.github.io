@@ -1,209 +1,133 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TUAN4422 MARKET</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUAN4422 MARKET</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
-
-    <a href="index.html" class="brand">
-      <div class="brand-logo">T</div>
-      <div class="brand-text">
-        <strong>TUAN4422</strong>
-        <span>MARKET</span>
-      </div>
+<header class="header">
+    <a href="index.html" class="logo">
+        <span>TUAN</span>4422 <small>MARKET</small>
     </a>
 
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html" class="active">Trang chủ</a>
-      <a href="shop.html">Shop</a>
-      <a href="server.html">Server</a>
-      <a href="chat.html">Chat</a>
-      <a href="forum.html">Forum</a>
-      <a href="account.html">Tài khoản</a>
-      <a href="wallet.html">Ví</a>
-      <a href="admin.html" id="adminMenu" class="admin-only">Admin</a>
+    <button class="mobile-menu" id="mobileMenuBtn">☰</button>
+
+    <nav id="mainNav">
+        <a href="index.html" class="active">Trang chủ</a>
+        <a href="shop.html">Cửa hàng</a>
+        <a href="server.html">Minecraft Server</a>
+        <a href="chat.html">Chat</a>
+        <a href="forum.html">Forum</a>
+        <a href="account.html">Tài khoản</a>
+        <a href="wallet.html">Ví</a>
+        <a href="admin.html" class="admin-only" id="adminMenu">Admin</a>
     </nav>
 
-    <div class="header-actions">
-      <a href="shop.html" class="header-icon" title="Shop">🛒</a>
-      <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-    </div>
-
-  </div>
+    <button class="theme-btn" id="themeBtn">☾</button>
 </header>
 
 <main>
 
-  <section class="hero">
-
+<section class="hero">
     <div class="hero-content">
+        <div class="badge">TUAN4422 MARKET</div>
 
-      <div class="hero-badge">
-        ● TUAN4422 MARKET
-      </div>
+        <h1>
+            Mua sắm đơn giản.<br>
+            <span>Giao diện hiện đại.</span>
+        </h1>
 
-      <h1>
-        Kho tài nguyên<br>
-        <span>của riêng bạn.</span>
-      </h1>
+        <p>
+            Nơi cung cấp script, tài nguyên và các sản phẩm
+            dành cho cộng đồng Minecraft.
+        </p>
 
-      <p>
-        Nơi khám phá script, tài nguyên Minecraft và các sản phẩm kỹ thuật số.
-        Giao diện đơn giản, nhanh và dễ sử dụng.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="shop.html" class="btn btn-primary">
-          Khám phá Shop
-        </a>
-
-        <a href="server.html" class="btn btn-secondary">
-          Xem Server
-        </a>
-      </div>
-
+        <div class="hero-buttons">
+            <a href="shop.html" class="btn btn-primary">Khám phá cửa hàng</a>
+            <a href="server.html" class="btn btn-secondary">Xem Minecraft Server</a>
+        </div>
     </div>
 
-    <div class="hero-preview">
-
-      <div class="preview-top">
-        <div class="preview-dots">
-          <i></i>
-          <i></i>
-          <i></i>
+    <div class="hero-card">
+        <div class="hero-card-top">
+            <span>MARKET</span>
+            <span class="online-dot">● ONLINE</span>
         </div>
 
-        <div class="preview-title">
-          TUAN4422 MARKET
-        </div>
-      </div>
-
-      <div class="preview-body">
-
-        <div class="preview-balance">
-          <small>Số dư tài khoản</small>
-          <strong>100.000$</strong>
+        <div class="hero-card-logo">
+            T4422
         </div>
 
-        <div class="preview-products">
+        <h3>TUAN4422 MARKET</h3>
+        <p>Digital marketplace</p>
 
-          <div class="preview-product">
-            <div>◆</div>
-            <b>Script UI</b>
-            <span>49.000$</span>
-          </div>
-
-          <div class="preview-product">
-            <div>◆</div>
-            <b>Utility</b>
-            <span>69.000$</span>
-          </div>
-
-          <div class="preview-product">
-            <div>◆</div>
-            <b>MC Pack</b>
-            <span>79.000$</span>
-          </div>
-
-          <div class="preview-product">
-            <div>◆</div>
-            <b>Template</b>
-            <span>59.000$</span>
-          </div>
-
+        <div class="hero-stats">
+            <div>
+                <strong id="homeProductCount">0</strong>
+                <span>Sản phẩm</span>
+            </div>
+            <div>
+                <strong>24/7</strong>
+                <span>Online</span>
+            </div>
         </div>
-
-      </div>
-
     </div>
+</section>
 
-  </section>
-
-
-  <section class="section">
-
+<section class="section">
     <div class="section-head">
-      <div>
-        <h2>Mọi thứ ở một nơi</h2>
-        <p>Các chức năng chính của TUAN4422 MARKET.</p>
-      </div>
-    </div>
+        <div>
+            <span class="section-label">SHOP</span>
+            <h2>Sản phẩm nổi bật</h2>
+        </div>
 
-    <div class="feature-grid">
-
-      <div class="feature-card">
-        <div class="feature-icon">◆</div>
-        <h3>Script Store</h3>
-        <p>
-          Khám phá và mua các script, template và tài nguyên kỹ thuật số.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">◆</div>
-        <h3>Minecraft Server</h3>
-        <p>
-          Xem thông tin và giới thiệu server Minecraft của TUAN4422.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">◆</div>
-        <h3>Cộng đồng</h3>
-        <p>
-          Trò chuyện và chia sẻ thông tin cùng những người dùng khác.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section class="section">
-
-    <div class="section-head">
-      <div>
-        <h2>Sản phẩm nổi bật</h2>
-        <p>Một số sản phẩm đang có trên Market.</p>
-      </div>
-
-      <a href="shop.html">Xem tất cả →</a>
+        <a href="shop.html" class="text-link">Xem tất cả →</a>
     </div>
 
     <div class="product-grid" id="featuredProducts"></div>
+</section>
 
-  </section>
+<section class="info-grid">
+
+    <div class="info-card">
+        <div class="info-icon">S</div>
+        <div>
+            <h3>Script</h3>
+            <p>Khám phá các script và công cụ tiện ích.</p>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-icon">MC</div>
+        <div>
+            <h3>Minecraft Server</h3>
+            <p>Thông tin và giới thiệu server Minecraft.</p>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-icon">C</div>
+        <div>
+            <h3>Cộng đồng</h3>
+            <p>Tham gia chat và diễn đàn của TUAN4422.</p>
+        </div>
+    </div>
+
+</section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-
-    <div class="footer-brand">
-      <strong>TUAN4422 MARKET</strong>
-      <p>Digital marketplace của TUAN4422.</p>
-    </div>
-
-    <div class="footer-links">
-      <a href="shop.html">Shop</a>
-      <a href="server.html">Server</a>
-      <a href="forum.html">Forum</a>
-      <a href="account.html">Tài khoản</a>
-    </div>
-
-  </div>
+<footer class="footer">
+    <strong>TUAN4422 MARKET</strong>
+    <span>© 2026 TUAN4422. All rights reserved.</span>
 </footer>
 
-<div class="toast" id="toast"></div>
+<div id="toast" class="toast"></div>
 
+<script src="database.js"></script>
 <script src="script.js"></script>
 
 </body>
