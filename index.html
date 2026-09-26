@@ -3,35 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta name="description" content="TUAN4422 MARKET - Script, tài khoản và giới thiệu server Minecraft">
   <title>TUAN4422 MARKET</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header class="header">
-  <a href="#home" class="logo">
-    TUAN<span>4422</span>
-  </a>
+  <a class="logo" href="index.html">TUAN<span>4422</span></a>
 
   <nav id="nav">
-    <a href="#home">Trang chủ</a>
-    <a href="#shop">Shop</a>
-    <a href="#server">Server</a>
-    <a href="#chat">Chat</a>
-    <a href="#forum">Diễn đàn</a>
-    <a href="#account">Tài khoản</a>
-    <a href="#wallet">Ví</a>
+    <a class="active" href="index.html">Trang chủ</a>
+    <a href="shop.html">Shop</a>
+    <a href="server.html">Server</a>
+    <a href="chat.html">Chat</a>
+    <a href="forum.html">Diễn đàn</a>
+    <a href="account.html">Tài khoản</a>
+    <a href="wallet.html">Ví</a>
   </nav>
 
   <div class="header-actions">
     <button id="themeBtn" class="icon-btn">☾</button>
-    <button id="cartBtn" class="cart-btn">
-      🛒 <span id="cartCount">0</span>
-    </button>
+    <a href="shop.html" class="cart-btn">🛒 <span id="cartCount">0</span></a>
     <button id="menuBtn" class="menu-btn">☰</button>
   </div>
 </header>
@@ -39,30 +32,35 @@
 
 <main>
 
-<!-- HOME -->
-<section id="home" class="hero">
+<section class="home-hero">
 
   <div class="hero-content">
+
     <div class="badge">✦ TUAN4422 MARKET</div>
 
     <h1>
-      Mua bán<br>
-      <span>đơn giản hơn.</span>
+      Chào mừng đến<br>
+      <span>TUAN4422 MARKET</span>
     </h1>
 
     <p>
-      Nơi cung cấp script, tài khoản hợp lệ và thông tin
-      về server Minecraft của TUAN4422.
+      Website cung cấp script, tài khoản hợp lệ
+      và thông tin server Minecraft của TUAN4422.
     </p>
 
     <div class="hero-buttons">
-      <a href="#shop" class="btn primary">Khám phá Shop</a>
-      <a href="#server" class="btn secondary">Xem Server</a>
+      <a href="shop.html" class="btn primary">
+        Mở Shop
+      </a>
+
+      <a href="server.html" class="btn secondary">
+        Xem Server
+      </a>
     </div>
 
     <div class="stats">
       <div>
-        <strong id="productCount">0</strong>
+        <strong>8+</strong>
         <span>Sản phẩm</span>
       </div>
 
@@ -76,281 +74,68 @@
         <span>Demo</span>
       </div>
     </div>
+
   </div>
 
+
   <div class="hero-card">
+
     <div class="hero-card-top">
       <span>MARKET</span>
       <span class="online">● ONLINE</span>
     </div>
 
-    <div class="market-icon">🛒</div>
+    <div class="market-icon">
+      🛒
+    </div>
 
     <h2>TUAN4422</h2>
+
     <p>MARKET</p>
 
     <div class="hero-price">
       <span>Ví demo</span>
       <strong id="heroBalance">100.000đ</strong>
     </div>
-  </div>
-
-</section>
-
-
-<!-- SHOP -->
-<section id="shop" class="section">
-
-  <div class="section-heading">
-    <div>
-      <div class="small-title">CỬA HÀNG</div>
-      <h2>Sản phẩm</h2>
-      <p>Chọn sản phẩm bạn muốn mua.</p>
-    </div>
-
-    <div class="search-box">
-      🔎
-      <input id="searchInput" type="text" placeholder="Tìm sản phẩm...">
-    </div>
-  </div>
-
-  <div id="products" class="product-grid"></div>
-
-</section>
-
-
-<!-- SERVER -->
-<section id="server" class="section server-section">
-
-  <div class="section-heading center">
-    <div class="small-title">MINECRAFT SERVER</div>
-    <h2>Server của TUAN4422</h2>
-    <p>Thông tin server — không phải khu vực bán server.</p>
-  </div>
-
-  <div class="server-card">
-
-    <div class="server-logo">⛏</div>
-
-    <div class="server-info">
-      <div class="server-status">
-        <span></span> SERVER ONLINE
-      </div>
-
-      <h3>TUAN4422 NETWORK</h3>
-
-      <p class="server-description">
-        Server Minecraft dành cho cộng đồng của TUAN4422.
-        Tham gia, chơi cùng bạn bè và khám phá thế giới Minecraft.
-      </p>
-
-      <div class="server-data">
-        <div>
-          <span>IP</span>
-          <strong id="serverIp">play.tuan4422.com</strong>
-        </div>
-
-        <div>
-          <span>VERSION</span>
-          <strong>Bedrock / Java</strong>
-        </div>
-
-        <div>
-          <span>PLAYERS</span>
-          <strong>Online</strong>
-        </div>
-      </div>
-
-      <button class="btn primary" onclick="copyServerIP()">
-        Sao chép IP
-      </button>
-    </div>
 
   </div>
 
 </section>
 
 
-<!-- CHAT -->
-<section id="chat" class="section">
+<section class="quick-section">
 
-  <div class="section-heading center">
-    <div class="small-title">COMMUNITY</div>
-    <h2>Chat</h2>
-    <p>Giao diện chat cộng đồng.</p>
+  <div class="section-title">
+    <div class="small-title">KHÁM PHÁ</div>
+    <h2>Các khu vực</h2>
   </div>
 
-  <div class="chat-container">
 
-    <div class="chat-sidebar">
-      <strong>KÊNH CHAT</strong>
+  <div class="quick-grid">
 
-      <button class="active"># chung</button>
-      <button># minecraft</button>
-      <button># shop</button>
-      <button># hỗ-trợ</button>
-    </div>
+    <a href="shop.html" class="quick-card">
+      <div>🛒</div>
+      <h3>Shop</h3>
+      <p>Mua script và tài khoản hợp lệ.</p>
+    </a>
 
-    <div class="chat-main">
+    <a href="server.html" class="quick-card">
+      <div>⛏️</div>
+      <h3>Server</h3>
+      <p>Thông tin server Minecraft.</p>
+    </a>
 
-      <div id="chatMessages" class="chat-messages">
+    <a href="chat.html" class="quick-card">
+      <div>💬</div>
+      <h3>Chat</h3>
+      <p>Trò chuyện cùng cộng đồng.</p>
+    </a>
 
-        <div class="message">
-          <div class="avatar">T</div>
-          <div>
-            <strong>TUAN4422</strong>
-            <p>Chào mừng mọi người đến với TUAN4422 MARKET!</p>
-          </div>
-        </div>
-
-        <div class="message">
-          <div class="avatar blue">U</div>
-          <div>
-            <strong>User</strong>
-            <p>Website nhìn khá đẹp 👍</p>
-          </div>
-        </div>
-
-      </div>
-
-      <form id="chatForm" class="chat-input">
-        <input id="chatInput" placeholder="Nhập tin nhắn..." required>
-        <button>➤</button>
-      </form>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- FORUM -->
-<section id="forum" class="section forum-section">
-
-  <div class="section-heading">
-    <div>
-      <div class="small-title">COMMUNITY</div>
-      <h2>Diễn đàn</h2>
-      <p>Trao đổi và chia sẻ với cộng đồng.</p>
-    </div>
-
-    <button class="btn primary" onclick="createPost()">
-      + Tạo bài viết
-    </button>
-  </div>
-
-  <div id="forumPosts" class="forum-list">
-
-    <article class="forum-post">
-      <div class="forum-icon">💬</div>
-
-      <div>
-        <h3>Chào mừng đến diễn đàn TUAN4422</h3>
-        <p>
-          Đây là nơi mọi người có thể trao đổi về Minecraft,
-          script và các sản phẩm trên shop.
-        </p>
-
-        <div class="post-meta">
-          TUAN4422 · Hôm nay · 12 bình luận
-        </div>
-      </div>
-    </article>
-
-    <article class="forum-post">
-      <div class="forum-icon">⛏</div>
-
-      <div>
-        <h3>Server Minecraft</h3>
-        <p>
-          Cùng chia sẻ những điều thú vị trong server.
-        </p>
-
-        <div class="post-meta">
-          Community · Hôm nay · 5 bình luận
-        </div>
-      </div>
-    </article>
-
-  </div>
-
-</section>
-
-
-<!-- ACCOUNT -->
-<section id="account" class="section">
-
-  <div class="section-heading center">
-    <div class="small-title">ACCOUNT</div>
-    <h2>Tài khoản</h2>
-  </div>
-
-  <div class="account-card">
-
-    <div class="profile-avatar">T</div>
-
-    <div class="profile-info">
-      <span>Tài khoản</span>
-      <h3>tuan4422</h3>
-      <p>Thành viên TUAN4422 MARKET</p>
-    </div>
-
-    <div class="profile-balance">
-      <span>Số dư</span>
-      <strong id="accountBalance">100.000đ</strong>
-    </div>
-
-  </div>
-
-  <div class="order-box">
-
-    <div class="order-header">
-      <h3>Đơn hàng của tôi</h3>
-      <span id="orderCount">0 đơn</span>
-    </div>
-
-    <div id="orders" class="orders">
-      <div class="empty">
-        Chưa có đơn hàng.
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- WALLET -->
-<section id="wallet" class="section wallet-section">
-
-  <div class="section-heading center">
-    <div class="small-title">WALLET</div>
-    <h2>Ví của bạn</h2>
-    <p>Ví hiện tại là dữ liệu demo trên trình duyệt.</p>
-  </div>
-
-  <div class="wallet-card">
-
-    <span>SỐ DƯ HIỆN TẠI</span>
-
-    <strong id="walletBalance">100.000đ</strong>
-
-    <button class="btn primary" onclick="addDemoMoney()">
-      + Nạp tiền demo
-    </button>
-
-  </div>
-
-  <div class="transactions">
-
-    <h3>Lịch sử giao dịch</h3>
-
-    <div id="transactionsList">
-      <div class="empty">
-        Chưa có giao dịch.
-      </div>
-    </div>
+    <a href="forum.html" class="quick-card">
+      <div>🗣️</div>
+      <h3>Diễn đàn</h3>
+      <p>Chia sẻ và thảo luận.</p>
+    </a>
 
   </div>
 
@@ -359,68 +144,18 @@
 </main>
 
 
-<!-- CART MODAL -->
-<div id="cartModal" class="modal">
-
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2>🛒 Giỏ hàng</h2>
-      <button onclick="closeCart()">×</button>
-    </div>
-
-    <div id="cartItems"></div>
-
-    <div class="cart-total">
-      <span>Tổng cộng</span>
-      <strong id="cartTotal">0đ</strong>
-    </div>
-
-    <button class="btn primary full" onclick="checkout()">
-      Thanh toán
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- PRODUCT MODAL -->
-<div id="productModal" class="modal">
-
-  <div class="modal-box product-modal">
-
-    <button class="modal-close" onclick="closeProduct()">×</button>
-
-    <div id="productDetail"></div>
-
-  </div>
-
-</div>
-
-
-<!-- TOAST -->
-<div id="toast"></div>
-
-
 <footer>
-
   <div class="footer-logo">
     TUAN<span>4422</span>
   </div>
 
-  <p>
-    © <span id="year"></span> TUAN4422 MARKET.
-  </p>
+  <p>© <span id="year"></span> TUAN4422 MARKET</p>
 
   <small>
-    Website demo — chưa kết nối hệ thống thanh toán thật.
+    Website demo — chưa kết nối thanh toán thật.
   </small>
-
 </footer>
 
-
-<button id="topBtn">↑</button>
 
 <script src="script.js"></script>
 
