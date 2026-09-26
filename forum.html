@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diễn đàn - TUAN4422</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+  <a class="logo" href="index.html">
+    TUAN<span>4422</span>
+  </a>
+
+  <nav id="nav">
+    <a href="index.html">Trang chủ</a>
+    <a href="shop.html">Shop</a>
+    <a href="server.html">Server</a>
+    <a href="chat.html">Chat</a>
+    <a class="active" href="forum.html">Diễn đàn</a>
+    <a href="account.html">Tài khoản</a>
+    <a href="wallet.html">Ví</a>
+  </nav>
+
+  <div class="header-actions">
+    <button id="themeBtn" class="icon-btn">☾</button>
+    <button id="menuBtn" class="menu-btn">☰</button>
+  </div>
+
+</header>
+
+
+<main class="page">
+
+  <div class="page-heading">
+
+    <div>
+
+      <div class="small-title">
+        COMMUNITY
+      </div>
+
+      <h1>Diễn đàn</h1>
+
+      <p>
+        Trao đổi và chia sẻ cùng cộng đồng.
+      </p>
+
+    </div>
+
+    <button
+      class="btn primary"
+      onclick="createPost()">
+      + Tạo bài viết
+    </button>
+
+  </div>
+
+
+  <div id="forumPosts" class="forum-list">
+
+    <article class="forum-post">
+
+      <div class="forum-icon">
+        💬
+      </div>
+
+      <div>
+
+        <h3>
+          Chào mừng đến diễn đàn TUAN4422
+        </h3>
+
+        <p>
+          Đây là nơi mọi người có thể trao đổi
+          về Minecraft, script và shop.
+        </p>
+
+        <div class="post-meta">
+          TUAN4422 · Hôm nay · 12 bình luận
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="forum-post">
+
+      <div class="forum-icon">
+        ⛏️
+      </div>
+
+      <div>
+
+        <h3>
+          Server Minecraft
+        </h3>
+
+        <p>
+          Cùng chia sẻ những điều thú vị
+          trong server.
+        </p>
+
+        <div class="post-meta">
+          Community · Hôm nay · 5 bình luận
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</main>
+
+
+<div id="toast"></div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
