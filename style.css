@@ -1321,3 +1321,14 @@ footer {
   }
 
 }
+/* ==============================
+   ADMIN MENU
+   ============================== */
+
+.admin-only {
+  display: none !important;
+}
+
+.admin-only.is-visible {
+  display: inline-flex !important;
+}
