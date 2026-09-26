@@ -67,10 +67,6 @@
             color: #55ff55;
         }
 
-        .admin-content {
-            min-width: 0;
-        }
-
         .admin-section {
             display: none;
         }
@@ -276,7 +272,6 @@
         }
 
         @media (max-width: 850px) {
-
             .admin-grid {
                 grid-template-columns: 1fr;
             }
@@ -294,7 +289,6 @@
         }
 
         @media (max-width: 550px) {
-
             .form-grid {
                 grid-template-columns: 1fr;
             }
@@ -317,9 +311,7 @@
 
 <body>
 
-<!-- ================================================= -->
-<!-- ADMIN LOGIN -->
-<!-- ================================================= -->
+<!-- ================= LOGIN ================= -->
 
 <div id="loginScreen" class="login-box">
 
@@ -357,19 +349,17 @@
     </p>
 
     <div class="login-info">
-        Tài khoản mặc định:
-        <strong>admin</strong><br>
-
-        Mật khẩu mặc định:
+        Tài khoản:
+        <strong>admin</strong>
+        <br>
+        Mật khẩu:
         <strong>tuan4422</strong>
     </div>
 
 </div>
 
 
-<!-- ================================================= -->
-<!-- ADMIN PANEL -->
-<!-- ================================================= -->
+<!-- ================= ADMIN PANEL ================= -->
 
 <div id="adminPanel" style="display:none;">
 
@@ -378,13 +368,11 @@
         <div class="admin-header">
 
             <div>
-
                 <h1>⚙ TUAN4422 MARKET ADMIN</h1>
 
                 <p>
                     Bảng điều khiển quản trị website
                 </p>
-
             </div>
 
             <button
@@ -399,9 +387,7 @@
 
         <div class="admin-grid">
 
-            <!-- ========================================= -->
             <!-- SIDEBAR -->
-            <!-- ========================================= -->
 
             <aside class="admin-sidebar">
 
@@ -464,16 +450,9 @@
             </aside>
 
 
-            <!-- ========================================= -->
-            <!-- CONTENT -->
-            <!-- ========================================= -->
-
             <main class="admin-content">
 
-
-                <!-- ===================================== -->
                 <!-- DASHBOARD -->
-                <!-- ===================================== -->
 
                 <section
                     id="dashboard"
@@ -483,7 +462,6 @@
                     <div class="stats-grid">
 
                         <div class="stat-card">
-
                             <div class="stat-title">
                                 Sản phẩm
                             </div>
@@ -494,12 +472,10 @@
                             >
                                 0
                             </div>
-
                         </div>
 
 
                         <div class="stat-card">
-
                             <div class="stat-title">
                                 Tài khoản
                             </div>
@@ -510,12 +486,10 @@
                             >
                                 0
                             </div>
-
                         </div>
 
 
                         <div class="stat-card">
-
                             <div class="stat-title">
                                 Đơn hàng
                             </div>
@@ -526,12 +500,10 @@
                             >
                                 0
                             </div>
-
                         </div>
 
 
                         <div class="stat-card">
-
                             <div class="stat-title">
                                 Tổng số dư
                             </div>
@@ -542,7 +514,6 @@
                             >
                                 0$
                             </div>
-
                         </div>
 
                     </div>
@@ -578,9 +549,7 @@
                 </section>
 
 
-                <!-- ===================================== -->
                 <!-- PRODUCTS -->
-                <!-- ===================================== -->
 
                 <section
                     id="products"
@@ -617,6 +586,7 @@
                                 id="productCategory"
                                 class="admin-select"
                             >
+
                                 <option value="Script">
                                     Script
                                 </option>
@@ -632,6 +602,7 @@
                                 <option value="Khác">
                                     Khác
                                 </option>
+
                             </select>
 
                             <input
@@ -682,14 +653,12 @@
                             <table class="admin-table">
 
                                 <thead>
-
                                     <tr>
                                         <th>Tên</th>
                                         <th>Loại</th>
                                         <th>Giá</th>
                                         <th>Thao tác</th>
                                     </tr>
-
                                 </thead>
 
                                 <tbody id="productTable"></tbody>
@@ -703,9 +672,7 @@
                 </section>
 
 
-                <!-- ===================================== -->
                 <!-- ORDERS -->
-                <!-- ===================================== -->
 
                 <section
                     id="orders"
@@ -723,7 +690,6 @@
                             <table class="admin-table">
 
                                 <thead>
-
                                     <tr>
                                         <th>Mã đơn</th>
                                         <th>Tài khoản</th>
@@ -731,7 +697,6 @@
                                         <th>Số tiền</th>
                                         <th>Thời gian</th>
                                     </tr>
-
                                 </thead>
 
                                 <tbody id="orderTable"></tbody>
@@ -745,9 +710,7 @@
                 </section>
 
 
-                <!-- ===================================== -->
                 <!-- USERS -->
-                <!-- ===================================== -->
 
                 <section
                     id="users"
@@ -777,14 +740,12 @@
                             <table class="admin-table">
 
                                 <thead>
-
                                     <tr>
                                         <th>Tài khoản</th>
                                         <th>Quyền</th>
                                         <th>Số dư</th>
                                         <th>Thao tác</th>
                                     </tr>
-
                                 </thead>
 
                                 <tbody id="userTable"></tbody>
@@ -798,9 +759,7 @@
                 </section>
 
 
-                <!-- ===================================== -->
                 <!-- WALLET -->
-                <!-- ===================================== -->
 
                 <section
                     id="wallet"
@@ -870,12 +829,10 @@
                             <table class="admin-table">
 
                                 <thead>
-
                                     <tr>
                                         <th>Tài khoản</th>
                                         <th>Số dư</th>
                                     </tr>
-
                                 </thead>
 
                                 <tbody id="walletTable"></tbody>
@@ -889,9 +846,7 @@
                 </section>
 
 
-                <!-- ===================================== -->
                 <!-- CHAT -->
-                <!-- ===================================== -->
 
                 <section
                     id="chat"
@@ -913,7 +868,6 @@
 
                     </div>
 
-
                     <div class="admin-card">
 
                         <div id="chatAdminList"></div>
@@ -923,9 +877,7 @@
                 </section>
 
 
-                <!-- ===================================== -->
                 <!-- FORUM -->
-                <!-- ===================================== -->
 
                 <section
                     id="forum"
@@ -947,7 +899,6 @@
 
                     </div>
 
-
                     <div class="admin-card">
 
                         <div id="forumAdminList"></div>
@@ -957,9 +908,7 @@
                 </section>
 
 
-                <!-- ===================================== -->
                 <!-- SERVER -->
-                <!-- ===================================== -->
 
                 <section
                     id="server"
@@ -996,7 +945,6 @@
                                 id="serverStatus"
                                 class="admin-select"
                             >
-
                                 <option value="online">
                                     Online
                                 </option>
@@ -1004,7 +952,6 @@
                                 <option value="offline">
                                     Offline
                                 </option>
-
                             </select>
 
                             <textarea
@@ -1048,18 +995,22 @@
 </div>
 
 
+<!-- ================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================================= -->
+
 <script src="database.js"></script>
 
 <script>
 
-/* ================================================= */
-/* CONFIG */
-/* ================================================= */
+/*
+=================================================
+KHÔNG DÙNG TÊN STORAGE
+ĐỂ TRÁNH ĐỤNG VỚI database.js
+=================================================
+*/
 
-const ADMIN_USER = "admin";
-const ADMIN_PASS = "tuan4422";
-
-const STORAGE = {
+const ADMIN_STORAGE = {
 
     products: "tuan4422_products",
 
@@ -1084,54 +1035,12 @@ const STORAGE = {
 
 
 /* ================================================= */
-/* JSON */
+/* ADMIN LOGIN */
 /* ================================================= */
 
-function getJSON(key, fallback) {
+const ADMIN_USERNAME = "admin";
+const ADMIN_PASSWORD = "tuan4422";
 
-    try {
-
-        const data =
-            localStorage.getItem(key);
-
-        if (!data) return fallback;
-
-        return JSON.parse(data);
-
-    } catch {
-
-        return fallback;
-
-    }
-
-}
-
-
-function setJSON(key, value) {
-
-    localStorage.setItem(
-        key,
-        JSON.stringify(value)
-    );
-
-}
-
-
-/* ================================================= */
-/* MONEY */
-/* ================================================= */
-
-function money(value) {
-
-    return Number(value || 0)
-        .toLocaleString("vi-VN") + "$";
-
-}
-
-
-/* ================================================= */
-/* LOGIN */
-/* ================================================= */
 
 function adminLogin() {
 
@@ -1147,16 +1056,18 @@ function adminLogin() {
             .value;
 
     const error =
-        document.getElementById("loginError");
+        document.getElementById(
+            "loginError"
+        );
 
 
     if (
-        username === ADMIN_USER &&
-        password === ADMIN_PASS
+        username === ADMIN_USERNAME &&
+        password === ADMIN_PASSWORD
     ) {
 
         localStorage.setItem(
-            STORAGE.admin,
+            ADMIN_STORAGE.admin,
             "true"
         );
 
@@ -1174,10 +1085,28 @@ function adminLogin() {
 }
 
 
+/* Enter để đăng nhập */
+
+document
+    .getElementById("adminPassword")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                adminLogin();
+
+            }
+
+        }
+    );
+
+
 function adminLogout() {
 
     localStorage.removeItem(
-        STORAGE.admin
+        ADMIN_STORAGE.admin
     );
 
     location.reload();
@@ -1201,6 +1130,63 @@ function showAdmin() {
 
 
 /* ================================================= */
+/* JSON */
+/* ================================================= */
+
+function getAdminJSON(
+    key,
+    fallback
+) {
+
+    try {
+
+        const value =
+            localStorage.getItem(key);
+
+        if (!value) {
+
+            return fallback;
+
+        }
+
+        return JSON.parse(value);
+
+    } catch {
+
+        return fallback;
+
+    }
+
+}
+
+
+function setAdminJSON(
+    key,
+    value
+) {
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(value)
+    );
+
+}
+
+
+/* ================================================= */
+/* MONEY */
+/* ================================================= */
+
+function adminMoney(value) {
+
+    return Number(value || 0)
+        .toLocaleString("vi-VN") +
+        "$";
+
+}
+
+
+/* ================================================= */
 /* TABS */
 /* ================================================= */
 
@@ -1210,32 +1196,49 @@ document
 
         button.addEventListener(
             "click",
-            () => {
+            function() {
 
                 document
-                    .querySelectorAll(".admin-tab")
+                    .querySelectorAll(
+                        ".admin-tab"
+                    )
                     .forEach(x =>
-                        x.classList.remove("active")
+                        x.classList.remove(
+                            "active"
+                        )
                     );
+
 
                 document
-                    .querySelectorAll(".admin-section")
+                    .querySelectorAll(
+                        ".admin-section"
+                    )
                     .forEach(x =>
-                        x.classList.remove("active")
+                        x.classList.remove(
+                            "active"
+                        )
                     );
 
-                button.classList.add("active");
+
+                this.classList.add(
+                    "active"
+                );
+
 
                 const section =
                     document.getElementById(
-                        button.dataset.tab
+                        this.dataset.tab
                     );
+
 
                 if (section) {
 
-                    section.classList.add("active");
+                    section.classList.add(
+                        "active"
+                    );
 
                 }
+
 
                 renderAll();
 
@@ -1249,10 +1252,10 @@ document
 /* PRODUCTS */
 /* ================================================= */
 
-function getProducts() {
+function getAdminProducts() {
 
-    return getJSON(
-        STORAGE.products,
+    return getAdminJSON(
+        ADMIN_STORAGE.products,
         []
     );
 
@@ -1263,37 +1266,54 @@ function saveProduct() {
 
     const id =
         document
-            .getElementById("productId")
+            .getElementById(
+                "productId"
+            )
             .value
             .trim();
 
+
     const name =
         document
-            .getElementById("productName")
+            .getElementById(
+                "productName"
+            )
             .value
             .trim();
+
 
     const price =
         Number(
             document
-                .getElementById("productPrice")
+                .getElementById(
+                    "productPrice"
+                )
                 .value
         );
 
+
     const category =
         document
-            .getElementById("productCategory")
+            .getElementById(
+                "productCategory"
+            )
             .value;
+
 
     const image =
         document
-            .getElementById("productImage")
+            .getElementById(
+                "productImage"
+            )
             .value
             .trim();
 
+
     const description =
         document
-            .getElementById("productDescription")
+            .getElementById(
+                "productDescription"
+            )
             .value
             .trim();
 
@@ -1310,15 +1330,17 @@ function saveProduct() {
 
 
     const products =
-        getProducts();
+        getAdminProducts();
 
 
     if (id) {
 
         const product =
             products.find(
-                x => x.id === id
+                item =>
+                    item.id === id
             );
+
 
         if (product) {
 
@@ -1326,9 +1348,11 @@ function saveProduct() {
 
             product.price = price;
 
-            product.category = category;
+            product.category =
+                category;
 
-            product.image = image;
+            product.image =
+                image;
 
             product.description =
                 description;
@@ -1360,16 +1384,18 @@ function saveProduct() {
     }
 
 
-    setJSON(
-        STORAGE.products,
+    setAdminJSON(
+        ADMIN_STORAGE.products,
         products
     );
+
 
     clearProductForm();
 
     renderProducts();
 
     renderDashboard();
+
 
     alert(
         "Đã lưu sản phẩm."
@@ -1381,45 +1407,61 @@ function saveProduct() {
 function editProduct(id) {
 
     const product =
-        getProducts().find(
-            x => x.id === id
-        );
+        getAdminProducts()
+            .find(
+                item =>
+                    item.id === id
+            );
+
 
     if (!product) return;
 
 
     document
-        .getElementById("productId")
+        .getElementById(
+            "productId"
+        )
         .value =
         product.id;
 
 
     document
-        .getElementById("productName")
+        .getElementById(
+            "productName"
+        )
         .value =
         product.name || "";
 
 
     document
-        .getElementById("productPrice")
+        .getElementById(
+            "productPrice"
+        )
         .value =
         product.price || "";
 
 
     document
-        .getElementById("productCategory")
+        .getElementById(
+            "productCategory"
+        )
         .value =
-        product.category || "Khác";
+        product.category ||
+        "Khác";
 
 
     document
-        .getElementById("productImage")
+        .getElementById(
+            "productImage"
+        )
         .value =
         product.image || "";
 
 
     document
-        .getElementById("productDescription")
+        .getElementById(
+            "productDescription"
+        )
         .value =
         product.description || "";
 
@@ -1429,15 +1471,6 @@ function editProduct(id) {
             '[data-tab="products"]'
         )
         .click();
-
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
 
 }
 
@@ -1452,14 +1485,15 @@ function deleteProduct(id) {
 
 
     const products =
-        getProducts()
+        getAdminProducts()
             .filter(
-                x => x.id !== id
+                item =>
+                    item.id !== id
             );
 
 
-    setJSON(
-        STORAGE.products,
+    setAdminJSON(
+        ADMIN_STORAGE.products,
         products
     );
 
@@ -1474,23 +1508,33 @@ function deleteProduct(id) {
 function clearProductForm() {
 
     document
-        .getElementById("productId")
+        .getElementById(
+            "productId"
+        )
         .value = "";
 
     document
-        .getElementById("productName")
+        .getElementById(
+            "productName"
+        )
         .value = "";
 
     document
-        .getElementById("productPrice")
+        .getElementById(
+            "productPrice"
+        )
         .value = "";
 
     document
-        .getElementById("productImage")
+        .getElementById(
+            "productImage"
+        )
         .value = "";
 
     document
-        .getElementById("productDescription")
+        .getElementById(
+            "productDescription"
+        )
         .value = "";
 
 }
@@ -1498,28 +1542,31 @@ function clearProductForm() {
 
 function renderProducts() {
 
-    const products =
-        getProducts();
-
     const table =
         document.getElementById(
             "productTable"
         );
 
+
     if (!table) return;
+
+
+    const products =
+        getAdminProducts();
 
 
     if (!products.length) {
 
-        table.innerHTML =
-            `
+        table.innerHTML = `
             <tr>
-                <td colspan="4"
-                    class="empty">
+                <td
+                    colspan="4"
+                    class="empty"
+                >
                     Chưa có sản phẩm.
                 </td>
             </tr>
-            `;
+        `;
 
         return;
 
@@ -1527,54 +1574,60 @@ function renderProducts() {
 
 
     table.innerHTML =
-        products.map(product => `
+        products
+            .map(
+                product => `
 
-            <tr>
+                <tr>
 
-                <td>
-                    ${escapeHTML(
-                        product.name
-                    )}
-                </td>
+                    <td>
+                        ${escapeHTML(
+                            product.name
+                        )}
+                    </td>
 
-                <td>
-                    ${escapeHTML(
-                        product.category ||
-                        "Khác"
-                    )}
-                </td>
+                    <td>
+                        ${escapeHTML(
+                            product.category ||
+                            "Khác"
+                        )}
+                    </td>
 
-                <td>
-                    ${money(
-                        product.price
-                    )}
-                </td>
+                    <td>
+                        ${adminMoney(
+                            product.price
+                        )}
+                    </td>
 
-                <td>
+                    <td>
 
-                    <div class="admin-actions">
-
-                        <button
-                            class="admin-btn yellow"
-                            onclick="editProduct('${escapeAttribute(product.id)}')"
+                        <div
+                            class="admin-actions"
                         >
-                            Sửa
-                        </button>
 
-                        <button
-                            class="admin-btn red"
-                            onclick="deleteProduct('${escapeAttribute(product.id)}')"
-                        >
-                            Xóa
-                        </button>
+                            <button
+                                class="admin-btn yellow"
+                                onclick="editProduct('${escapeAttribute(product.id)}')"
+                            >
+                                Sửa
+                            </button>
 
-                    </div>
+                            <button
+                                class="admin-btn red"
+                                onclick="deleteProduct('${escapeAttribute(product.id)}')"
+                            >
+                                Xóa
+                            </button>
 
-                </td>
+                        </div>
 
-            </tr>
+                    </td>
 
-        `).join("");
+                </tr>
+
+            `
+            )
+            .join("");
 
 }
 
@@ -1585,31 +1638,34 @@ function renderProducts() {
 
 function renderOrders() {
 
-    const orders =
-        getJSON(
-            STORAGE.orders,
-            []
-        );
-
     const table =
         document.getElementById(
             "orderTable"
         );
 
+
     if (!table) return;
+
+
+    const orders =
+        getAdminJSON(
+            ADMIN_STORAGE.orders,
+            []
+        );
 
 
     if (!orders.length) {
 
-        table.innerHTML =
-            `
+        table.innerHTML = `
             <tr>
-                <td colspan="5"
-                    class="empty">
+                <td
+                    colspan="5"
+                    class="empty"
+                >
                     Chưa có đơn hàng.
                 </td>
             </tr>
-            `;
+        `;
 
         return;
 
@@ -1617,71 +1673,77 @@ function renderOrders() {
 
 
     table.innerHTML =
-        orders.map(order => {
+        orders
+            .map(
+                order => {
 
-            const items =
-                Array.isArray(
-                    order.items
-                )
-                    ? order.items
-                        .map(
-                            x =>
-                                x.name ||
-                                x.productName ||
-                                "Sản phẩm"
+                    const items =
+                        Array.isArray(
+                            order.items
                         )
-                        .join(", ")
-                    : "Sản phẩm";
-
-
-            return `
-
-                <tr>
-
-                    <td>
-                        ${escapeHTML(
-                            String(
-                                order.id ||
-                                "—"
+                        ?
+                        order.items
+                            .map(
+                                item =>
+                                    item.name ||
+                                    item.productName ||
+                                    "Sản phẩm"
                             )
-                        )}
-                    </td>
+                            .join(", ")
+                        :
+                        "Sản phẩm";
 
-                    <td>
-                        ${escapeHTML(
-                            order.username ||
-                            order.user ||
-                            "Không rõ"
-                        )}
-                    </td>
 
-                    <td>
-                        ${escapeHTML(
-                            items
-                        )}
-                    </td>
+                    return `
 
-                    <td>
-                        ${money(
-                            order.total ||
-                            order.amount ||
-                            0
-                        )}
-                    </td>
+                        <tr>
 
-                    <td>
-                        ${escapeHTML(
-                            order.date ||
-                            order.createdAt ||
-                            "—"
-                        )}
-                    </td>
+                            <td>
+                                ${escapeHTML(
+                                    String(
+                                        order.id ||
+                                        "—"
+                                    )
+                                )}
+                            </td>
 
-                </tr>
+                            <td>
+                                ${escapeHTML(
+                                    order.username ||
+                                    order.user ||
+                                    "Không rõ"
+                                )}
+                            </td>
 
-            `;
+                            <td>
+                                ${escapeHTML(
+                                    items
+                                )}
+                            </td>
 
-        }).join("");
+                            <td>
+                                ${adminMoney(
+                                    order.total ||
+                                    order.amount ||
+                                    0
+                                )}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(
+                                    order.date ||
+                                    order.createdAt ||
+                                    "—"
+                                )}
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            )
+            .join("");
 
 }
 
@@ -1690,29 +1752,34 @@ function renderOrders() {
 /* USERS */
 /* ================================================= */
 
-function getUsers() {
+function getAdminUsers() {
 
-    return getJSON(
-        STORAGE.users,
+    return getAdminJSON(
+        ADMIN_STORAGE.users,
         []
     );
 
 }
 
 
-function getUserBalance(username) {
+function getUserBalance(
+    username
+) {
 
     const balances =
-        getJSON(
-            STORAGE.balance,
+        getAdminJSON(
+            ADMIN_STORAGE.balance,
             {}
         );
 
 
     if (
         balances &&
-        typeof balances === "object" &&
-        !Array.isArray(balances)
+        typeof balances ===
+            "object" &&
+        !Array.isArray(
+            balances
+        )
     ) {
 
         return Number(
@@ -1720,6 +1787,7 @@ function getUserBalance(username) {
         );
 
     }
+
 
     return 0;
 
@@ -1733,46 +1801,56 @@ function renderUsers() {
             "userTable"
         );
 
+
     if (!table) return;
 
 
     const search =
         (
             document
-                .getElementById("userSearch")
+                .getElementById(
+                    "userSearch"
+                )
                 ?.value || ""
         )
         .toLowerCase();
 
 
     const users =
-        getUsers().filter(user => {
+        getAdminUsers()
+            .filter(
+                user => {
 
-            const username =
-                String(
-                    user.username ||
-                    user.name ||
-                    ""
-                ).toLowerCase();
+                    const username =
+                        String(
+                            user.username ||
+                            user.name ||
+                            ""
+                        )
+                        .toLowerCase();
 
-            return username.includes(
-                search
+
+                    return username
+                        .includes(
+                            search
+                        );
+
+                }
             );
-
-        });
 
 
     if (!users.length) {
 
-        table.innerHTML =
-            `
+        table.innerHTML = `
             <tr>
-                <td colspan="4"
-                    class="empty">
+                <td
+                    colspan="4"
+                    class="empty"
+                >
                     Không có tài khoản.
                 </td>
             </tr>
-            `;
+        `;
 
         return;
 
@@ -1780,77 +1858,89 @@ function renderUsers() {
 
 
     table.innerHTML =
-        users.map(user => {
+        users
+            .map(
+                user => {
 
-            const username =
-                user.username ||
-                user.name ||
-                "Không rõ";
-
-
-            const isAdmin =
-                user.admin === true ||
-                user.role === "admin";
+                    const username =
+                        user.username ||
+                        user.name ||
+                        "Không rõ";
 
 
-            return `
+                    const isAdmin =
+                        user.admin === true ||
+                        user.role ===
+                            "admin";
 
-                <tr>
 
-                    <td>
-                        ${escapeHTML(
-                            username
-                        )}
-                    </td>
+                    return `
 
-                    <td>
+                        <tr>
 
-                        ${
-                            isAdmin
-                            ?
-                            '<span class="status online">Admin</span>'
-                            :
-                            '<span class="status offline">User</span>'
-                        }
+                            <td>
+                                ${escapeHTML(
+                                    username
+                                )}
+                            </td>
 
-                    </td>
+                            <td>
 
-                    <td>
-                        ${money(
-                            getUserBalance(
-                                username
-                            )
-                        )}
-                    </td>
+                                ${
+                                    isAdmin
 
-                    <td>
+                                    ?
 
-                        <button
-                            class="admin-btn red"
-                            onclick="deleteUser('${escapeAttribute(username)}')"
-                        >
-                            Xóa
-                        </button>
+                                    '<span class="status online">Admin</span>'
 
-                    </td>
+                                    :
 
-                </tr>
+                                    '<span class="status offline">User</span>'
+                                }
 
-            `;
+                            </td>
 
-        }).join("");
+                            <td>
+                                ${adminMoney(
+                                    getUserBalance(
+                                        username
+                                    )
+                                )}
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-btn red"
+                                    onclick="deleteUser('${escapeAttribute(username)}')"
+                                >
+                                    Xóa
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            )
+            .join("");
 
 }
 
 
-function deleteUser(username) {
+function deleteUser(
+    username
+) {
 
     if (
-        username === ADMIN_USER
+        username ===
+        ADMIN_USERNAME
     ) {
 
         alert(
-            "Không thể xóa tài khoản Admin chính."
+            "Không thể xóa Admin chính."
         );
 
         return;
@@ -1868,7 +1958,7 @@ function deleteUser(username) {
 
 
     const users =
-        getUsers()
+        getAdminUsers()
             .filter(
                 user =>
                     (
@@ -1878,8 +1968,8 @@ function deleteUser(username) {
             );
 
 
-    setJSON(
-        STORAGE.users,
+    setAdminJSON(
+        ADMIN_STORAGE.users,
         users
     );
 
@@ -1902,48 +1992,59 @@ function renderWallet() {
             "walletTable"
         );
 
+
     if (!table) return;
 
 
     const balances =
-        getJSON(
-            STORAGE.balance,
+        getAdminJSON(
+            ADMIN_STORAGE.balance,
             {}
         );
 
+
     const users =
-        getUsers();
+        getAdminUsers();
 
 
     const names =
         new Set();
 
 
-    users.forEach(user => {
+    users.forEach(
+        user => {
 
-        const username =
-            user.username ||
-            user.name;
+            const username =
+                user.username ||
+                user.name;
 
-        if (username) {
 
-            names.add(username);
+            if (username) {
+
+                names.add(
+                    username
+                );
+
+            }
 
         }
-
-    });
+    );
 
 
     if (
         balances &&
-        typeof balances === "object" &&
-        !Array.isArray(balances)
+        typeof balances ===
+            "object" &&
+        !Array.isArray(
+            balances
+        )
     ) {
 
         Object.keys(
             balances
-        ).forEach(name =>
-            names.add(name)
+        ).forEach(
+            name =>
+                names.add(name)
         );
 
     }
@@ -1951,15 +2052,16 @@ function renderWallet() {
 
     if (!names.size) {
 
-        table.innerHTML =
-            `
+        table.innerHTML = `
             <tr>
-                <td colspan="2"
-                    class="empty">
+                <td
+                    colspan="2"
+                    class="empty"
+                >
                     Chưa có dữ liệu ví.
                 </td>
             </tr>
-            `;
+        `;
 
         return;
 
@@ -1971,36 +2073,40 @@ function renderWallet() {
             .map(
                 username => `
 
-                <tr>
+                    <tr>
 
-                    <td>
-                        ${escapeHTML(
-                            username
-                        )}
-                    </td>
-
-                    <td>
-                        ${money(
-                            getUserBalance(
+                        <td>
+                            ${escapeHTML(
                                 username
-                            )
-                        )}
-                    </td>
+                            )}
+                        </td>
 
-                </tr>
+                        <td>
+                            ${adminMoney(
+                                getUserBalance(
+                                    username
+                                )
+                            )}
+                        </td>
 
-            `
+                    </tr>
+
+                `
             )
             .join("");
 
 }
 
 
-function changeWallet(multiplier) {
+function changeWallet(
+    multiplier
+) {
 
     const username =
         document
-            .getElementById("walletUser")
+            .getElementById(
+                "walletUser"
+            )
             .value
             .trim();
 
@@ -2008,14 +2114,18 @@ function changeWallet(multiplier) {
     const amount =
         Number(
             document
-                .getElementById("walletAmount")
+                .getElementById(
+                    "walletAmount"
+                )
                 .value
         );
 
 
     const reason =
         document
-            .getElementById("walletReason")
+            .getElementById(
+                "walletReason"
+            )
             .value
             .trim();
 
@@ -2036,8 +2146,8 @@ function changeWallet(multiplier) {
 
 
     const balances =
-        getJSON(
-            STORAGE.balance,
+        getAdminJSON(
+            ADMIN_STORAGE.balance,
             {}
         );
 
@@ -2053,10 +2163,12 @@ function changeWallet(multiplier) {
         amount * multiplier;
 
 
-    if (newBalance < 0) {
+    if (
+        newBalance < 0
+    ) {
 
         alert(
-            "Không thể trừ tiền vượt quá số dư."
+            "Không thể trừ vượt quá số dư."
         );
 
         return;
@@ -2068,15 +2180,15 @@ function changeWallet(multiplier) {
         newBalance;
 
 
-    setJSON(
-        STORAGE.balance,
+    setAdminJSON(
+        ADMIN_STORAGE.balance,
         balances
     );
 
 
     const history =
-        getJSON(
-            STORAGE.walletHistory,
+        getAdminJSON(
+            ADMIN_STORAGE.walletHistory,
             []
         );
 
@@ -2105,8 +2217,8 @@ function changeWallet(multiplier) {
     });
 
 
-    setJSON(
-        STORAGE.walletHistory,
+    setAdminJSON(
+        ADMIN_STORAGE.walletHistory,
         history
     );
 
@@ -2136,24 +2248,24 @@ function renderChat() {
             "chatAdminList"
         );
 
+
     if (!box) return;
 
 
     const messages =
-        getJSON(
-            STORAGE.chat,
+        getAdminJSON(
+            ADMIN_STORAGE.chat,
             []
         );
 
 
     if (!messages.length) {
 
-        box.innerHTML =
-            `
+        box.innerHTML = `
             <div class="empty">
                 Chưa có tin nhắn.
             </div>
-            `;
+        `;
 
         return;
 
@@ -2163,58 +2275,63 @@ function renderChat() {
     box.innerHTML =
         messages
             .map(
-                (message, index) => `
-
-                <div
-                    style="
-                        padding:14px 0;
-                        border-bottom:
-                            1px solid #17304d;
-                    "
-                >
-
-                    <strong>
-                        ${escapeHTML(
-                            message.username ||
-                            message.user ||
-                            "Người dùng"
-                        )}
-                    </strong>
+                (
+                    message,
+                    index
+                ) => `
 
                     <div
                         style="
-                            color:#9db0c4;
-                            margin:5px 0;
+                            padding:14px 0;
+                            border-bottom:
+                            1px solid #17304d;
                         "
                     >
-                        ${escapeHTML(
-                            message.text ||
-                            message.message ||
-                            ""
-                        )}
+
+                        <strong>
+                            ${escapeHTML(
+                                message.username ||
+                                message.user ||
+                                "Người dùng"
+                            )}
+                        </strong>
+
+                        <div
+                            style="
+                                color:#9db0c4;
+                                margin:6px 0;
+                            "
+                        >
+                            ${escapeHTML(
+                                message.text ||
+                                message.message ||
+                                ""
+                            )}
+                        </div>
+
+                        <button
+                            class="admin-btn red"
+                            onclick="deleteChatMessage(${index})"
+                        >
+                            Xóa
+                        </button>
+
                     </div>
 
-                    <button
-                        class="admin-btn red"
-                        onclick="deleteChatMessage(${index})"
-                    >
-                        Xóa
-                    </button>
-
-                </div>
-
-            `
+                `
             )
             .join("");
 
 }
 
 
-function deleteChatMessage(index) {
+function deleteChatMessage(
+    index
+) {
 
     const messages =
-        getJSON(
-            STORAGE.chat,
+        getAdminJSON(
+            ADMIN_STORAGE.chat,
             []
         );
 
@@ -2225,8 +2342,8 @@ function deleteChatMessage(index) {
     );
 
 
-    setJSON(
-        STORAGE.chat,
+    setAdminJSON(
+        ADMIN_STORAGE.chat,
         messages
     );
 
@@ -2246,7 +2363,7 @@ function clearChat() {
 
 
     localStorage.removeItem(
-        STORAGE.chat
+        ADMIN_STORAGE.chat
     );
 
 
@@ -2266,24 +2383,24 @@ function renderForum() {
             "forumAdminList"
         );
 
+
     if (!box) return;
 
 
     const posts =
-        getJSON(
-            STORAGE.forum,
+        getAdminJSON(
+            ADMIN_STORAGE.forum,
             []
         );
 
 
     if (!posts.length) {
 
-        box.innerHTML =
-            `
+        box.innerHTML = `
             <div class="empty">
                 Chưa có bài viết.
             </div>
-            `;
+        `;
 
         return;
 
@@ -2293,66 +2410,71 @@ function renderForum() {
     box.innerHTML =
         posts
             .map(
-                (post, index) => `
+                (
+                    post,
+                    index
+                ) => `
 
-                <div
-                    style="
-                        padding:15px 0;
-                        border-bottom:
-                            1px solid #17304d;
-                    "
-                >
-
-                    <h3>
-                        ${escapeHTML(
-                            post.title ||
-                            "Không có tiêu đề"
-                        )}
-                    </h3>
-
-                    <p
+                    <div
                         style="
-                            color:#9db0c4;
+                            padding:15px 0;
+                            border-bottom:
+                            1px solid #17304d;
                         "
                     >
-                        ${escapeHTML(
-                            post.content ||
-                            ""
-                        )}
-                    </p>
 
-                    <small>
-                        Người đăng:
-                        ${escapeHTML(
-                            post.username ||
-                            post.user ||
-                            "Không rõ"
-                        )}
-                    </small>
+                        <h3>
+                            ${escapeHTML(
+                                post.title ||
+                                "Không có tiêu đề"
+                            )}
+                        </h3>
 
-                    <br><br>
+                        <p
+                            style="
+                                color:#9db0c4;
+                            "
+                        >
+                            ${escapeHTML(
+                                post.content ||
+                                ""
+                            )}
+                        </p>
 
-                    <button
-                        class="admin-btn red"
-                        onclick="deleteForumPost(${index})"
-                    >
-                        Xóa bài
-                    </button>
+                        <small>
+                            Người đăng:
+                            ${escapeHTML(
+                                post.username ||
+                                post.user ||
+                                "Không rõ"
+                            )}
+                        </small>
 
-                </div>
+                        <br><br>
 
-            `
+                        <button
+                            class="admin-btn red"
+                            onclick="deleteForumPost(${index})"
+                        >
+                            Xóa bài
+                        </button>
+
+                    </div>
+
+                `
             )
             .join("");
 
 }
 
 
-function deleteForumPost(index) {
+function deleteForumPost(
+    index
+) {
 
     const posts =
-        getJSON(
-            STORAGE.forum,
+        getAdminJSON(
+            ADMIN_STORAGE.forum,
             []
         );
 
@@ -2363,8 +2485,8 @@ function deleteForumPost(index) {
     );
 
 
-    setJSON(
-        STORAGE.forum,
+    setAdminJSON(
+        ADMIN_STORAGE.forum,
         posts
     );
 
@@ -2378,13 +2500,13 @@ function clearForum() {
 
     if (
         !confirm(
-            "Xóa toàn bộ bài viết Forum?"
+            "Xóa toàn bộ bài viết?"
         )
     ) return;
 
 
     localStorage.removeItem(
-        STORAGE.forum
+        ADMIN_STORAGE.forum
     );
 
 
@@ -2394,14 +2516,14 @@ function clearForum() {
 
 
 /* ================================================= */
-/* MINECRAFT SERVER */
+/* SERVER */
 /* ================================================= */
 
 function getServer() {
 
-    return getJSON(
+    return getAdminJSON(
 
-        STORAGE.server,
+        ADMIN_STORAGE.server,
 
         {
 
@@ -2434,33 +2556,45 @@ function loadServer() {
 
 
     document
-        .getElementById("serverName")
+        .getElementById(
+            "serverName"
+        )
         .value =
         server.name || "";
 
 
     document
-        .getElementById("serverIp")
+        .getElementById(
+            "serverIp"
+        )
         .value =
         server.ip || "";
 
 
     document
-        .getElementById("serverPort")
+        .getElementById(
+            "serverPort"
+        )
         .value =
         server.port || "";
 
 
     document
-        .getElementById("serverStatus")
+        .getElementById(
+            "serverStatus"
+        )
         .value =
-        server.status || "online";
+        server.status ||
+        "online";
 
 
     document
-        .getElementById("serverDescription")
+        .getElementById(
+            "serverDescription"
+        )
         .value =
-        server.description || "";
+        server.description ||
+        "";
 
 
     renderServerPreview();
@@ -2474,38 +2608,48 @@ function saveServer() {
 
         name:
             document
-                .getElementById("serverName")
+                .getElementById(
+                    "serverName"
+                )
                 .value
                 .trim(),
 
         ip:
             document
-                .getElementById("serverIp")
+                .getElementById(
+                    "serverIp"
+                )
                 .value
                 .trim(),
 
         port:
             document
-                .getElementById("serverPort")
+                .getElementById(
+                    "serverPort"
+                )
                 .value
                 .trim(),
 
         status:
             document
-                .getElementById("serverStatus")
+                .getElementById(
+                    "serverStatus"
+                )
                 .value,
 
         description:
             document
-                .getElementById("serverDescription")
+                .getElementById(
+                    "serverDescription"
+                )
                 .value
                 .trim()
 
     };
 
 
-    setJSON(
-        STORAGE.server,
+    setAdminJSON(
+        ADMIN_STORAGE.server,
         server
     );
 
@@ -2514,7 +2658,7 @@ function saveServer() {
 
 
     alert(
-        "Đã lưu thông tin Minecraft Server."
+        "Đã lưu thông tin Server."
     );
 
 }
@@ -2562,11 +2706,11 @@ function renderServerPreview() {
         </p>
 
         <p>
-
             Trạng thái:
 
             ${
-                server.status === "online"
+                server.status ===
+                "online"
 
                 ?
 
@@ -2601,20 +2745,20 @@ function renderServerPreview() {
 function renderDashboard() {
 
     const products =
-        getProducts();
+        getAdminProducts();
 
     const users =
-        getUsers();
+        getAdminUsers();
 
     const orders =
-        getJSON(
-            STORAGE.orders,
+        getAdminJSON(
+            ADMIN_STORAGE.orders,
             []
         );
 
     const balances =
-        getJSON(
-            STORAGE.balance,
+        getAdminJSON(
+            ADMIN_STORAGE.balance,
             {}
         );
 
@@ -2624,18 +2768,26 @@ function renderDashboard() {
 
     if (
         balances &&
-        typeof balances === "object" &&
-        !Array.isArray(balances)
+        typeof balances ===
+            "object" &&
+        !Array.isArray(
+            balances
+        )
     ) {
 
         Object.values(
             balances
-        ).forEach(value => {
+        )
+        .forEach(
+            value => {
 
-            totalBalance +=
-                Number(value || 0);
+                totalBalance +=
+                    Number(
+                        value || 0
+                    );
 
-        });
+            }
+        );
 
     }
 
@@ -2669,7 +2821,9 @@ function renderDashboard() {
             "statBalance"
         )
         .textContent =
-        money(totalBalance);
+        adminMoney(
+            totalBalance
+        );
 
 }
 
@@ -2678,7 +2832,9 @@ function renderDashboard() {
 /* ESCAPE */
 /* ================================================= */
 
-function escapeHTML(value) {
+function escapeHTML(
+    value
+) {
 
     return String(
         value ?? ""
@@ -2707,7 +2863,9 @@ function escapeHTML(value) {
 }
 
 
-function escapeAttribute(value) {
+function escapeAttribute(
+    value
+) {
 
     return String(
         value ?? ""
@@ -2725,7 +2883,7 @@ function escapeAttribute(value) {
 
 
 /* ================================================= */
-/* RENDER ALL */
+/* RENDER */
 /* ================================================= */
 
 function renderAll() {
@@ -2755,7 +2913,7 @@ function renderAll() {
 
 if (
     localStorage.getItem(
-        STORAGE.admin
+        ADMIN_STORAGE.admin
     ) === "true"
 ) {
 
