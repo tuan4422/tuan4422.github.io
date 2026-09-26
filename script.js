@@ -2772,3 +2772,23 @@ document.addEventListener(
 
   }
 );
+/* ==============================
+   ADMIN MENU
+   ============================== */
+
+function updateAdminMenu() {
+  const adminMenu = document.getElementById("adminMenu");
+
+  if (!adminMenu) {
+    return;
+  }
+
+  const isAdmin =
+    localStorage.getItem("tuan4422_admin") === "true";
+
+  if (isAdmin) {
+    adminMenu.classList.add("is-visible");
+  } else {
+    adminMenu.classList.remove("is-visible");
+  }
+}
