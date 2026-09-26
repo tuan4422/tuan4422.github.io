@@ -1,120 +1,95 @@
 "use strict";
 
-/* =========================================================
+/* =========================
    TUAN4422 MARKET
-   Account + Cart + Wallet + Orders + Favorites
-   ========================================================= */
+   Demo front-end
+========================= */
 
-const $ = (selector, root = document) =>
-  root.querySelector(selector);
-
-const $$ = (selector, root = document) =>
-  [...root.querySelectorAll(selector)];
-
-
-/* =========================================================
-   STORAGE
-   ========================================================= */
-
-const KEYS = {
+const STORAGE = {
   cart: "tuan4422_cart",
   users: "tuan4422_users",
   currentUser: "tuan4422_current_user",
   balance: "tuan4422_balance",
   orders: "tuan4422_orders",
   favorites: "tuan4422_favorites",
-  theme: "tuan4422_theme",
   chat: "tuan4422_chat",
   forum: "tuan4422_forum"
 };
 
+const PRODUCTS = [
+  {
+    id: "script-ui",
+    name: "Script UI Demo",
+    type: "Script",
+    icon: "UI",
+    price: 49000,
+    description: "Bộ giao diện script mẫu, phù hợp cho mục đích học tập và phát triển."
+  },
+  {
+    id: "script-tool",
+    name: "Script Utility",
+    type: "Script",
+    icon: "JS",
+    price: 69000,
+    description: "Bộ công cụ script demo với giao diện đơn giản, dễ tùy chỉnh."
+  },
+  {
+    id: "account-demo",
+    name: "Tài khoản Demo",
+    type: "Account",
+    icon: "ACC",
+    price: 39000,
+    description: "Tài khoản mẫu dùng để kiểm thử hệ thống. Không phải tài khoản người khác."
+  },
+  {
+    id: "minecraft-pack",
+    name: "Minecraft Setup Pack",
+    type: "Minecraft",
+    icon: "MC",
+    price: 79000,
+    description: "Bộ thiết lập mẫu dành cho server Minecraft cá nhân."
+  },
+  {
+    id: "web-template",
+    name: "Website Template",
+    type: "Script",
+    icon: "WEB",
+    price: 59000,
+    description: "Mẫu website hiện đại có thể dùng làm nền tảng cho dự án cá nhân."
+  },
+  {
+    id: "config-pack",
+    name: "Config Pack",
+    type: "Minecraft",
+    icon: "CFG",
+    price: 29000,
+    description: "Bộ cấu hình mẫu giúp bạn bắt đầu dự án Minecraft nhanh hơn."
+  }
+];
 
-function readStorage(key, fallback) {
+/* =========================
+   HELPERS
+========================= */
+
+function getJSON(key, fallback) {
   try {
-    const data = localStorage.getItem(key);
-
-    if (!data) {
-      return fallback;
-    }
-
-    return JSON.parse(data);
-
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
   } catch {
     return fallback;
   }
 }
 
-
-function writeStorage(key, value) {
+function setJSON(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-
-/* =========================================================
-   PRODUCTS
-   ========================================================= */
-
-const PRODUCTS = [
-
-  {
-    id: "script-ui",
-    name: "Script UI Demo",
-    type: "script",
-    price: 49000,
-    icon: "</>",
-    badge: "HOT",
-    description:
-      "Script giao diện demo dành cho các dự án hợp pháp."
-  },
-
-  {
-    id: "script-tool",
-    name: "Script Utility",
-    type: "script",
-    price: 69000,
-    icon: "⚙",
-    badge: "NEW",
-    description:
-      "Bộ tiện ích script demo có giao diện dễ sử dụng."
-  },
-
-  {
-    id: "account-demo",
-    name: "Tài khoản Demo",
-    type: "account",
-    price: 39000,
-    icon: "👤",
-    badge: "DEMO",
-    description:
-      "Tài khoản demo phục vụ kiểm thử hệ thống."
-  },
-
-  {
-    id: "minecraft-pack",
-    name: "Minecraft Setup Pack",
-    type: "script",
-    price: 79000,
-    icon: "MC",
-    badge: "HOT",
-    description:
-      "Bộ file cấu hình mẫu cho dự án Minecraft."
-  }
-
-];
-
-
-function findProduct(id) {
-  return PRODUCTS.find(product => product.id === id);
+function money(value) {
+  return Number(value || 0).toLocaleString("vi-VN") + "$";
 }
-
-
-function formatMoney(number) {
-  return Number(number || 0).toLocaleString("vi-VN") + "$";
-}
-
 
 function escapeHTML(value) {
-  return String(value ?? "")
+  return String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -122,2208 +97,731 @@ function escapeHTML(value) {
     .replaceAll("'", "&#039;");
 }
 
-
-/* =========================================================
-   TOAST
-   ========================================================= */
-
-let toastTimer;
-
 function toast(message) {
+  let element = document.getElementById("toast");
 
-  const element = $("#toast");
-
-  if (!element) return;
+  if (!element) {
+    element = document.createElement("div");
+    element.id = "toast";
+    document.body.appendChild(element);
+  }
 
   element.textContent = message;
   element.classList.add("show");
 
-  clearTimeout(toastTimer);
+  clearTimeout(window.__toastTimer);
 
-  toastTimer = setTimeout(() => {
+  window.__toastTimer = setTimeout(() => {
     element.classList.remove("show");
-  }, 2400);
+  }, 2200);
 }
 
-
-/* =========================================================
-   THEME
-   ========================================================= */
-
-function updateTheme() {
-
-  const button = $("#themeBtn");
-
-  const light =
-    localStorage.getItem(KEYS.theme) === "light";
-
-  document.body.classList.toggle("light", light);
-
-  if (button) {
-    button.textContent = light ? "☀" : "☾";
-  }
+function currentUser() {
+  return localStorage.getItem(STORAGE.currentUser) || "";
 }
 
+/* =========================
+   THEME / MENU
+========================= */
 
-function initTheme() {
+function initNavigation() {
+  const menuBtn = document.getElementById("menuBtn");
+  const nav = document.getElementById("mainNav");
 
-  updateTheme();
-
-  const button = $("#themeBtn");
-
-  if (!button) return;
-
-  button.addEventListener("click", () => {
-
-    const light =
-      !document.body.classList.contains("light");
-
-    document.body.classList.toggle("light", light);
-
-    localStorage.setItem(
-      KEYS.theme,
-      light ? "light" : "dark"
-    );
-
-    updateTheme();
-  });
-}
-
-
-/* =========================================================
-   MOBILE MENU
-   ========================================================= */
-
-function initMenu() {
-
-  const nav = $("#nav");
-  const menu = $("#menuBtn");
-
-  if (!nav || !menu) return;
-
-  menu.addEventListener("click", event => {
-
-    event.stopPropagation();
-
-    nav.classList.toggle("open");
-
-  });
-
-
-  $$("nav a").forEach(link => {
-
-    link.addEventListener("click", () => {
-      nav.classList.remove("open");
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", () => {
+      nav.classList.toggle("open");
     });
 
-  });
+    document.addEventListener("click", event => {
+      if (
+        nav.classList.contains("open") &&
+        !nav.contains(event.target) &&
+        !menuBtn.contains(event.target)
+      ) {
+        nav.classList.remove("open");
+      }
+    });
+  }
 
+  const page = document.body.dataset.page;
 
-  document.addEventListener("click", event => {
-
-    if (!nav.classList.contains("open")) {
-      return;
+  document.querySelectorAll(".main-nav a[data-page]").forEach(link => {
+    if (link.dataset.page === page) {
+      link.classList.add("active");
     }
-
-    if (
-      !nav.contains(event.target) &&
-      event.target !== menu
-    ) {
-      nav.classList.remove("open");
-    }
-
   });
-
 }
 
-
-/* =========================================================
+/* =========================
    CART
-   ========================================================= */
-
-let lastFocusedElement = null;
-
+========================= */
 
 function getCart() {
-  return readStorage(KEYS.cart, []);
+  return getJSON(STORAGE.cart, []);
 }
-
 
 function saveCart(cart) {
-  writeStorage(KEYS.cart, cart);
+  setJSON(STORAGE.cart, cart);
+  updateCartCount();
 }
-
-
-function getCartCount() {
-
-  return getCart().reduce(
-    (total, item) => total + Number(item.quantity || 0),
-    0
-  );
-
-}
-
 
 function updateCartCount() {
+  const cart = getCart();
 
-  const count = $("#cartCount");
+  const count = cart.reduce((total, item) => {
+    return total + Number(item.quantity || 1);
+  }, 0);
 
-  if (!count) return;
-
-  count.textContent = getCartCount();
-
+  document.querySelectorAll("#cartCount").forEach(el => {
+    el.textContent = count;
+  });
 }
 
-
-function addToCart(productId, quantity = 1) {
-
-  const product = findProduct(productId);
+function addToCart(productId) {
+  const product = PRODUCTS.find(item => item.id === productId);
 
   if (!product) return;
 
   const cart = getCart();
-
-  const existing = cart.find(
-    item => item.id === productId
-  );
-
+  const existing = cart.find(item => item.id === productId);
 
   if (existing) {
-
-    existing.quantity += quantity;
-
+    existing.quantity++;
   } else {
-
     cart.push({
-      id: productId,
-      quantity
+      id: product.id,
+      quantity: 1
     });
-
   }
 
-
   saveCart(cart);
-
-  updateCartCount();
-
   toast("Đã thêm vào giỏ hàng");
-
 }
 
+function cartTotal() {
+  return getCart().reduce((total, item) => {
+    const product = PRODUCTS.find(p => p.id === item.id);
+    if (!product) return total;
+
+    return total + product.price * item.quantity;
+  }, 0);
+}
 
 function removeFromCart(productId) {
-
-  const cart = getCart().filter(
-    item => item.id !== productId
-  );
-
+  const cart = getCart().filter(item => item.id !== productId);
   saveCart(cart);
-
   renderCart();
-
-  updateCartCount();
-
 }
 
-
-function changeCartQuantity(productId, amount) {
-
+function changeQuantity(productId, amount) {
   const cart = getCart();
-
-  const item = cart.find(
-    item => item.id === productId
-  );
+  const item = cart.find(item => item.id === productId);
 
   if (!item) return;
 
   item.quantity += amount;
 
   if (item.quantity <= 0) {
-
-    const newCart = cart.filter(
-      item => item.id !== productId
-    );
-
-    saveCart(newCart);
-
-  } else {
-
-    saveCart(cart);
-
+    const index = cart.indexOf(item);
+    cart.splice(index, 1);
   }
 
+  saveCart(cart);
   renderCart();
-
-  updateCartCount();
-
 }
-
-
-function getCartTotal() {
-
-  return getCart().reduce((total, item) => {
-
-    const product = findProduct(item.id);
-
-    if (!product) return total;
-
-    return total + product.price * item.quantity;
-
-  }, 0);
-
-}
-
 
 function renderCart() {
+  const container = document.getElementById("cartItems");
+  const total = document.getElementById("cartTotal");
 
-  const container = $("#cartItems");
-  const totalElement = $("#cartTotal");
-  const checkout = $("#checkoutBtn");
-
-  if (!container) return;
-
-  const cart = getCart();
-
-  if (cart.length === 0) {
-
-    container.innerHTML = `
-      <div class="empty">
-        <div class="empty-icon">🛒</div>
-        <h3>Giỏ hàng trống</h3>
-        <p>Hãy thêm sản phẩm từ Shop.</p>
-        <a href="shop.html" class="btn primary">
-          Đi đến Shop
-        </a>
-      </div>
-    `;
-
-  } else {
-
-    container.innerHTML = cart.map(item => {
-
-      const product = findProduct(item.id);
-
-      if (!product) return "";
-
-      return `
-        <div class="cart-item">
-
-          <div class="cart-item-icon">
-            ${escapeHTML(product.icon)}
-          </div>
-
-          <div class="cart-item-info">
-
-            <strong>
-              ${escapeHTML(product.name)}
-            </strong>
-
-            <span>
-              ${formatMoney(product.price)}
-            </span>
-
-            <div class="quantity-control">
-
-              <button
-                class="quantity-btn"
-                data-cart-minus="${product.id}"
-              >
-                −
-              </button>
-
-              <span>${item.quantity}</span>
-
-              <button
-                class="quantity-btn"
-                data-cart-plus="${product.id}"
-              >
-                +
-              </button>
-
-            </div>
-
-          </div>
-
-          <button
-            class="remove-cart"
-            data-cart-remove="${product.id}"
-            aria-label="Xóa"
-          >
-            ×
-          </button>
-
-        </div>
-      `;
-
-    }).join("");
-
-  }
-
-
-  if (totalElement) {
-    totalElement.textContent =
-      formatMoney(getCartTotal());
-  }
-
-
-  if (checkout) {
-    checkout.disabled = cart.length === 0;
-  }
-
-}
-
-
-function openCart() {
-
-  const modal = $("#cartModal");
-
-  if (!modal) return;
-
-  lastFocusedElement = document.activeElement;
-
-  renderCart();
-
-  modal.classList.add("show");
-
-  modal.setAttribute("aria-hidden", "false");
-
-  document.documentElement.classList.add("modal-open");
-
-  document.body.classList.add("modal-open");
-
-}
-
-
-function closeCart() {
-
-  const modal = $("#cartModal");
-
-  if (!modal) return;
-
-  modal.classList.remove("show");
-
-  modal.setAttribute("aria-hidden", "true");
-
-  document.documentElement.classList.remove("modal-open");
-
-  document.body.classList.remove("modal-open");
-
-
-  if (
-    lastFocusedElement &&
-    typeof lastFocusedElement.focus === "function"
-  ) {
-
-    try {
-      lastFocusedElement.focus();
-    } catch {}
-
-  }
-
-}
-
-
-function initCart() {
-
-  const cartButton = $("#cartBtn");
-  const modal = $("#cartModal");
-
-  if (cartButton) {
-
-    cartButton.addEventListener("click", event => {
-
-      event.preventDefault();
-
-      openCart();
-
-    });
-
-  }
-
-
-  if (modal) {
-
-    modal.addEventListener("click", event => {
-
-      if (event.target === modal) {
-        closeCart();
-      }
-
-    });
-
-
-    modal.addEventListener("click", event => {
-
-      const closeButton =
-        event.target.closest("[data-close-cart]");
-
-      if (closeButton) {
-        closeCart();
-      }
-
-    });
-
-
-    modal.addEventListener("click", event => {
-
-      const plus =
-        event.target.closest("[data-cart-plus]");
-
-      const minus =
-        event.target.closest("[data-cart-minus]");
-
-      const remove =
-        event.target.closest("[data-cart-remove]");
-
-
-      if (plus) {
-
-        changeCartQuantity(
-          plus.dataset.cartPlus,
-          1
-        );
-
-      }
-
-
-      if (minus) {
-
-        changeCartQuantity(
-          minus.dataset.cartMinus,
-          -1
-        );
-
-      }
-
-
-      if (remove) {
-
-        removeFromCart(
-          remove.dataset.cartRemove
-        );
-
-      }
-
-    });
-
-  }
-
-
-  document.addEventListener("keydown", event => {
-
-    if (
-      event.key === "Escape" &&
-      modal &&
-      modal.classList.contains("show")
-    ) {
-
-      closeCart();
-
-    }
-
-  });
-
-
-  updateCartCount();
-
-  renderCart();
-
-}
-
-
-/* =========================================================
-   CHECKOUT
-   ========================================================= */
-
-function checkout() {
+  if (!container || !total) return;
 
   const cart = getCart();
 
   if (!cart.length) {
+    container.innerHTML = `
+      <div class="empty">
+        Giỏ hàng đang trống.
+      </div>
+    `;
 
-    toast("Giỏ hàng đang trống");
-
+    total.textContent = money(0);
     return;
-
   }
 
+  container.innerHTML = cart.map(item => {
+    const product = PRODUCTS.find(p => p.id === item.id);
 
-  const total = getCartTotal();
-
-  const balance =
-    Number(localStorage.getItem(KEYS.balance) || 100000);
-
-
-  if (balance < total) {
-
-    toast("Số dư không đủ. Hãy vào Ví để nạp demo.");
-
-    setTimeout(() => {
-      window.location.href = "wallet.html";
-    }, 800);
-
-    return;
-
-  }
-
-
-  const currentUser =
-    localStorage.getItem(KEYS.currentUser);
-
-
-  if (!currentUser) {
-
-    toast("Hãy đăng nhập trước khi thanh toán");
-
-    setTimeout(() => {
-      closeCart();
-      window.location.href = "account.html";
-    }, 800);
-
-    return;
-
-  }
-
-
-  const orders =
-    readStorage(KEYS.orders, []);
-
-
-  const orderItems = cart.map(item => {
-
-    const product = findProduct(item.id);
-
-    return {
-      id: item.id,
-      name: product ? product.name : "Sản phẩm",
-      price: product ? product.price : 0,
-      quantity: item.quantity
-    };
-
-  });
-
-
-  const order = {
-
-    id:
-      "TUAN-" +
-      Date.now().toString().slice(-8),
-
-    username: currentUser,
-
-    items: orderItems,
-
-    total,
-
-    status: "Đã đặt",
-
-    createdAt:
-      new Date().toLocaleString("vi-VN")
-
-  };
-
-
-  orders.unshift(order);
-
-  writeStorage(KEYS.orders, orders);
-
-
-  localStorage.setItem(
-    KEYS.balance,
-    String(balance - total)
-  );
-
-
-  saveCart([]);
-
-  updateCartCount();
-
-  renderCart();
-
-  closeCart();
-
-  toast(
-    `Đặt hàng thành công: ${order.id}`
-  );
-
-}
-
-
-function initCheckout() {
-
-  const button = $("#checkoutBtn");
-
-  if (!button) return;
-
-  button.addEventListener(
-    "click",
-    checkout
-  );
-
-}
-
-
-/* =========================================================
-   SHOP
-   ========================================================= */
-
-function renderProducts() {
-
-  const grid = $("#productGrid");
-
-  if (!grid) return;
-
-
-  grid.innerHTML = PRODUCTS.map(product => {
+    if (!product) return "";
 
     return `
-      <article class="product">
+      <div class="cart-item">
+        <div class="cart-item-icon">${escapeHTML(product.icon)}</div>
 
-        <div class="product-top">
-
-          <span class="product-badge">
-            ${escapeHTML(product.badge)}
-          </span>
-
-          <button
-            class="favorite-btn"
-            data-favorite="${product.id}"
-            aria-label="Yêu thích"
-          >
-            ${isFavorite(product.id) ? "♥" : "♡"}
-          </button>
-
+        <div class="cart-item-info">
+          <strong>${escapeHTML(product.name)}</strong>
+          <small>${money(product.price)} × ${item.quantity}</small>
         </div>
 
         <button
-          class="product-icon"
-          data-product-detail="${product.id}"
-        >
-          ${escapeHTML(product.icon)}
+          class="remove-item"
+          data-cart-remove="${escapeHTML(product.id)}"
+          aria-label="Xóa">
+          Xóa
         </button>
-
-        <h3>
-          ${escapeHTML(product.name)}
-        </h3>
-
-        <p class="product-description">
-          ${escapeHTML(product.description)}
-        </p>
-
-        <div class="product-bottom">
-
-          <strong class="price">
-            ${formatMoney(product.price)}
-          </strong>
-
-          <div class="product-buttons">
-
-            <button
-              class="small-btn"
-              data-product-detail="${product.id}"
-            >
-              Xem
-            </button>
-
-            <button
-              class="small-btn buy-btn"
-              data-add-cart="${product.id}"
-            >
-              Thêm
-            </button>
-
-          </div>
-
-        </div>
-
-      </article>
+      </div>
     `;
-
   }).join("");
 
-
-  $$("#productGrid [data-add-cart]")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-          addToCart(button.dataset.addCart);
-        }
-      );
-
-    });
-
-
-  $$("#productGrid [data-product-detail]")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-          openProduct(button.dataset.productDetail);
-        }
-      );
-
-    });
-
-
-  $$("#productGrid [data-favorite]")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          toggleFavorite(
-            button.dataset.favorite
-          );
-
-          renderProducts();
-
-        }
-      );
-
-    });
-
+  total.textContent = money(cartTotal());
 }
 
+function openModal(id) {
+  const modal = document.getElementById(id);
 
-function openProduct(id) {
-
-  const product = findProduct(id);
-
-  const modal = $("#productModal");
-
-  const detail = $("#productDetail");
-
-  if (!product || !modal || !detail) {
-    return;
-  }
-
-
-  detail.innerHTML = `
-
-    <div class="detail-icon">
-      ${escapeHTML(product.icon)}
-    </div>
-
-    <span class="badge">
-      ${escapeHTML(product.badge)}
-    </span>
-
-    <h2 class="detail-title">
-      ${escapeHTML(product.name)}
-    </h2>
-
-    <p class="detail-description">
-      ${escapeHTML(product.description)}
-    </p>
-
-    <strong class="detail-price">
-      ${formatMoney(product.price)}
-    </strong>
-
-    <div class="detail-actions">
-
-      <button
-        class="btn primary"
-        data-detail-add="${product.id}"
-      >
-        🛒 Thêm vào giỏ
-      </button>
-
-      <button
-        class="btn secondary"
-        data-detail-close
-      >
-        Đóng
-      </button>
-
-    </div>
-
-  `;
-
+  if (!modal) return;
 
   modal.classList.add("show");
-
-  modal.setAttribute("aria-hidden", "false");
-
-
-  const addButton =
-    detail.querySelector("[data-detail-add]");
-
-  addButton?.addEventListener(
-    "click",
-    () => {
-
-      addToCart(product.id);
-
-      closeProduct();
-
-    }
-  );
-
-
-  detail
-    .querySelector("[data-detail-close]")
-    ?.addEventListener(
-      "click",
-      closeProduct
-    );
-
+  document.body.classList.add("modal-open");
 }
 
-
-function closeProduct() {
-
-  const modal = $("#productModal");
+function closeModal(id) {
+  const modal = document.getElementById(id);
 
   if (!modal) return;
 
   modal.classList.remove("show");
 
-  modal.setAttribute("aria-hidden", "true");
-
+  if (!document.querySelector(".modal.show")) {
+    document.body.classList.remove("modal-open");
+  }
 }
 
+function initCart() {
+  const cartBtn = document.getElementById("cartBtn");
 
-function initProductModal() {
+  if (cartBtn) {
+    cartBtn.addEventListener("click", () => {
+      renderCart();
+      openModal("cartModal");
+    });
+  }
 
-  const modal = $("#productModal");
+  document.addEventListener("click", event => {
+    const close = event.target.closest("[data-close-modal]");
 
-  if (!modal) return;
-
-  modal.addEventListener("click", event => {
-
-    if (event.target === modal) {
-      closeProduct();
+    if (close) {
+      closeModal(close.dataset.closeModal);
     }
 
+    const remove = event.target.closest("[data-cart-remove]");
+
+    if (remove) {
+      removeFromCart(remove.dataset.cartRemove);
+    }
+
+    const minus = event.target.closest("[data-cart-minus]");
+
+    if (minus) {
+      changeQuantity(minus.dataset.cartMinus, -1);
+    }
+
+    const plus = event.target.closest("[data-cart-plus]");
+
+    if (plus) {
+      changeQuantity(plus.dataset.cartPlus, 1);
+    }
   });
 
-
-  modal
-    .querySelector("[data-close-product]")
-    ?.addEventListener(
-      "click",
-      closeProduct
-    );
-
+  document.querySelectorAll(".modal").forEach(modal => {
+    modal.addEventListener("click", event => {
+      if (event.target === modal) {
+        closeModal(modal.id);
+      }
+    });
+  });
 
   document.addEventListener("keydown", event => {
-
-    if (
-      event.key === "Escape" &&
-      modal.classList.contains("show")
-    ) {
-
-      closeProduct();
-
-    }
-
-  });
-
-}
-
-
-function initShopSearch() {
-
-  const input = $("#searchInput");
-
-  const grid = $("#productGrid");
-
-  if (!input || !grid) return;
-
-
-  input.addEventListener("input", () => {
-
-    const query =
-      input.value.trim().toLowerCase();
-
-
-    const products =
-      PRODUCTS.filter(product => {
-
-        return (
-          product.name.toLowerCase().includes(query) ||
-          product.description
-            .toLowerCase()
-            .includes(query)
-        );
-
+    if (event.key === "Escape") {
+      document.querySelectorAll(".modal.show").forEach(modal => {
+        closeModal(modal.id);
       });
-
-
-    grid.innerHTML =
-      products.map(product => {
-
-        return `
-          <article class="product">
-
-            <div class="product-top">
-
-              <span class="product-badge">
-                ${escapeHTML(product.badge)}
-              </span>
-
-            </div>
-
-            <button
-              class="product-icon"
-              data-product-detail="${product.id}"
-            >
-              ${escapeHTML(product.icon)}
-            </button>
-
-            <h3>${escapeHTML(product.name)}</h3>
-
-            <p class="product-description">
-              ${escapeHTML(product.description)}
-            </p>
-
-            <div class="product-bottom">
-
-              <strong class="price">
-                ${formatMoney(product.price)}
-              </strong>
-
-              <button
-                class="small-btn buy-btn"
-                data-add-cart="${product.id}"
-              >
-                Thêm
-              </button>
-
-            </div>
-
-          </article>
-        `;
-
-      }).join("");
-
-
-    $$("#productGrid [data-add-cart]")
-      .forEach(button => {
-
-        button.addEventListener(
-          "click",
-          () => addToCart(button.dataset.addCart)
-        );
-
-      });
-
-
-    $$("#productGrid [data-product-detail]")
-      .forEach(button => {
-
-        button.addEventListener(
-          "click",
-          () => openProduct(button.dataset.productDetail)
-        );
-
-      });
-
+    }
   });
 
-}
+  const checkout = document.getElementById("checkoutBtn");
 
-
-/* =========================================================
-   FAVORITES
-   ========================================================= */
-
-function getFavorites() {
-  return readStorage(KEYS.favorites, []);
-}
-
-
-function saveFavorites(items) {
-  writeStorage(KEYS.favorites, items);
-}
-
-
-function isFavorite(id) {
-  return getFavorites().includes(id);
-}
-
-
-function toggleFavorite(id) {
-
-  const favorites = getFavorites();
-
-  const index = favorites.indexOf(id);
-
-
-  if (index >= 0) {
-
-    favorites.splice(index, 1);
-
-    toast("Đã bỏ khỏi yêu thích");
-
-  } else {
-
-    favorites.push(id);
-
-    toast("Đã thêm vào yêu thích");
-
+  if (checkout) {
+    checkout.addEventListener("click", checkoutCart);
   }
 
-
-  saveFavorites(favorites);
-
+  updateCartCount();
 }
 
-
-function renderFavorites() {
-
-  const container = $("#favoriteList");
-
-  if (!container) return;
-
-
-  const favorites = getFavorites();
-
-  const products =
-    favorites
-      .map(findProduct)
-      .filter(Boolean);
-
-
-  if (!products.length) {
-
-    container.innerHTML = `
-      <div class="empty">
-        <div class="empty-icon">♡</div>
-        <h3>Chưa có sản phẩm yêu thích</h3>
-        <p>Hãy vào Shop và thêm sản phẩm.</p>
-        <a href="shop.html" class="btn primary">
-          Mở Shop
-        </a>
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  container.innerHTML =
-    products.map(product => {
-
-      return `
-        <div class="favorite-item">
-
-          <div class="favorite-icon">
-            ${escapeHTML(product.icon)}
-          </div>
-
-          <div>
-            <strong>
-              ${escapeHTML(product.name)}
-            </strong>
-
-            <p>
-              ${formatMoney(product.price)}
-            </p>
-          </div>
-
-          <button
-            class="small-btn buy-btn"
-            data-favorite-add="${product.id}"
-          >
-            Thêm giỏ
-          </button>
-
-        </div>
-      `;
-
-    }).join("");
-
-
-  $$("[data-favorite-add]")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => addToCart(button.dataset.favoriteAdd)
-      );
-
-    });
-
-}
-
-
-/* =========================================================
-   ACCOUNT
-   ========================================================= */
-
-function getUsers() {
-  return readStorage(KEYS.users, []);
-}
-
-
-function saveUsers(users) {
-  writeStorage(KEYS.users, users);
-}
-
-
-function getCurrentUser() {
-  return localStorage.getItem(KEYS.currentUser);
-}
-
-
-function initAuthTabs() {
-
-  const loginTab = $("#loginTab");
-  const registerTab = $("#registerTab");
-
-  const loginForm = $("#loginForm");
-  const registerForm = $("#registerForm");
-
-  if (
-    !loginTab ||
-    !registerTab ||
-    !loginForm ||
-    !registerForm
-  ) {
-    return;
-  }
-
-
-  loginTab.addEventListener("click", () => {
-
-    loginTab.classList.add("active");
-    registerTab.classList.remove("active");
-
-    loginForm.classList.remove("hidden");
-    registerForm.classList.add("hidden");
-
-  });
-
-
-  registerTab.addEventListener("click", () => {
-
-    registerTab.classList.add("active");
-    loginTab.classList.remove("active");
-
-    registerForm.classList.remove("hidden");
-    loginForm.classList.add("hidden");
-
-  });
-
-}
-
-
-function initRegister() {
-
-  const form = $("#registerForm");
-
-  if (!form) return;
-
-
-  form.addEventListener("submit", event => {
-
-    event.preventDefault();
-
-
-    const username =
-      $("#registerUsername").value.trim();
-
-    const password =
-      $("#registerPassword").value;
-
-    const password2 =
-      $("#registerPassword2").value;
-
-
-    if (username.length < 3) {
-
-      toast("Tên tài khoản phải có ít nhất 3 ký tự");
-
-      return;
-
-    }
-
-
-    if (password.length < 4) {
-
-      toast("Mật khẩu phải có ít nhất 4 ký tự");
-
-      return;
-
-    }
-
-
-    if (password !== password2) {
-
-      toast("Mật khẩu nhập lại không khớp");
-
-      return;
-
-    }
-
-
-    const users = getUsers();
-
-
-    const exists = users.some(
-      user =>
-        user.username.toLowerCase() ===
-        username.toLowerCase()
-    );
-
-
-    if (exists) {
-
-      toast("Tên tài khoản đã tồn tại");
-
-      return;
-
-    }
-
-
-    users.push({
-
-      username,
-      password,
-      displayName: username,
-      createdAt:
-        new Date().toLocaleString("vi-VN")
-
-    });
-
-
-    saveUsers(users);
-
-
-    localStorage.setItem(
-      KEYS.currentUser,
-      username
-    );
-
-
-    localStorage.setItem(
-      KEYS.balance,
-      "100000"
-    );
-
-
-    toast("Tạo tài khoản thành công");
-
-    setTimeout(() => {
-      renderAccount();
-    }, 500);
-
-  });
-
-}
-
-
-function initLogin() {
-
-  const form = $("#loginForm");
-
-  if (!form) return;
-
-
-  form.addEventListener("submit", event => {
-
-    event.preventDefault();
-
-
-    const username =
-      $("#loginUsername").value.trim();
-
-    const password =
-      $("#loginPassword").value;
-
-
-    const users = getUsers();
-
-
-    const user = users.find(
-      item =>
-        item.username.toLowerCase() ===
-        username.toLowerCase() &&
-        item.password === password
-    );
-
-
-    if (!user) {
-
-      toast("Sai tài khoản hoặc mật khẩu");
-
-      return;
-
-    }
-
-
-    localStorage.setItem(
-      KEYS.currentUser,
-      user.username
-    );
-
-
-    if (
-      localStorage.getItem(KEYS.balance) === null
-    ) {
-
-      localStorage.setItem(
-        KEYS.balance,
-        "100000"
-      );
-
-    }
-
-
-    toast("Đăng nhập thành công");
-
-    setTimeout(() => {
-      renderAccount();
-    }, 500);
-
-  });
-
-}
-
-
-function logout() {
-
-  localStorage.removeItem(
-    KEYS.currentUser
-  );
-
-  toast("Đã đăng xuất");
-
-  setTimeout(() => {
-    renderAccount();
-  }, 500);
-
-}
-
-
-function getUserData() {
-
-  const username = getCurrentUser();
-
-  if (!username) return null;
-
-
-  const users = getUsers();
-
-
-  return users.find(
-    user => user.username === username
-  ) || null;
-
-}
-
-
-function renderAccount() {
-
-  const authSection = $("#authSection");
-  const profileSection = $("#profileSection");
-
-  if (!authSection || !profileSection) {
-    return;
-  }
-
-
-  const user = getUserData();
-
+function checkoutCart() {
+  const user = currentUser();
 
   if (!user) {
-
-    authSection.classList.remove("hidden");
-    profileSection.classList.add("hidden");
-
+    closeModal("cartModal");
+    toast("Bạn cần đăng nhập trước");
+    setTimeout(() => {
+      window.location.href = "account.html";
+    }, 500);
     return;
-
   }
 
+  const cart = getCart();
 
-  authSection.classList.add("hidden");
-  profileSection.classList.remove("hidden");
-
-
-  const username =
-    $("#profileUsername");
-
-  const avatar =
-    $("#profileAvatar");
-
-  const balance =
-    $("#accountBalance");
-
-  const displayName =
-    $("#displayName");
-
-
-  if (username) {
-    username.textContent =
-      user.displayName || user.username;
-  }
-
-
-  if (avatar) {
-
-    avatar.textContent =
-      (
-        user.displayName ||
-        user.username ||
-        "T"
-      )
-      .charAt(0)
-      .toUpperCase();
-
-  }
-
-
-  if (displayName) {
-    displayName.value =
-      user.displayName || user.username;
-  }
-
-
-  if (balance) {
-
-    balance.textContent =
-      formatMoney(
-        Number(
-          localStorage.getItem(
-            KEYS.balance
-          ) || 100000
-        )
-      );
-
-  }
-
-
-  renderOrders();
-  renderFavorites();
-
-
-  $("#logoutBtn")?.addEventListener(
-    "click",
-    logout
-  );
-
-}
-
-
-function initProfileForm() {
-
-  const form = $("#profileForm");
-
-  if (!form) return;
-
-
-  form.addEventListener("submit", event => {
-
-    event.preventDefault();
-
-
-    const user = getUserData();
-
-    if (!user) return;
-
-
-    const name =
-      $("#displayName").value.trim();
-
-
-    if (name.length < 2) {
-
-      toast("Tên hiển thị quá ngắn");
-
-      return;
-
-    }
-
-
-    const users = getUsers();
-
-
-    const target =
-      users.find(
-        item =>
-          item.username === user.username
-      );
-
-
-    if (target) {
-      target.displayName = name;
-    }
-
-
-    saveUsers(users);
-
-    renderAccount();
-
-    toast("Đã lưu thông tin");
-
-  });
-
-}
-
-
-/* =========================================================
-   ORDERS
-   ========================================================= */
-
-function renderOrders() {
-
-  const container = $("#accountOrders");
-
-  if (!container) return;
-
-
-  const username = getCurrentUser();
-
-
-  if (!username) return;
-
-
-  const orders =
-    readStorage(KEYS.orders, [])
-      .filter(
-        order => order.username === username
-      );
-
-
-  if (!orders.length) {
-
-    container.innerHTML = `
-      <div class="empty">
-        <div class="empty-icon">📦</div>
-        <h3>Chưa có đơn hàng</h3>
-        <p>Các đơn hàng của bạn sẽ xuất hiện ở đây.</p>
-      </div>
-    `;
-
+  if (!cart.length) {
+    toast("Giỏ hàng đang trống");
     return;
-
   }
 
+  const total = cartTotal();
+  const balance = Number(localStorage.getItem(STORAGE.balance) || 0);
 
-  container.innerHTML =
-    orders.map(order => {
-
-      const items =
-        order.items
-          .map(
-            item =>
-              `${escapeHTML(item.name)} × ${item.quantity}`
-          )
-          .join(", ");
-
-
-      return `
-        <div class="order-box">
-
-          <div class="order-header">
-
-            <div>
-              <strong>${escapeHTML(order.id)}</strong>
-              <span>${escapeHTML(order.createdAt)}</span>
-            </div>
-
-            <span class="order-status">
-              ${escapeHTML(order.status)}
-            </span>
-
-          </div>
-
-          <p>
-            ${items}
-          </p>
-
-          <strong>
-            Tổng: ${formatMoney(order.total)}
-          </strong>
-
-        </div>
-      `;
-
-    }).join("");
-
-}
-
-
-/* =========================================================
-   WALLET
-   ========================================================= */
-
-function getBalance() {
-
-  return Number(
-    localStorage.getItem(
-      KEYS.balance
-    ) || 100000
-  );
-
-}
-
-
-function setBalance(value) {
+  if (balance < total) {
+    toast("Số dư demo không đủ");
+    return;
+  }
 
   localStorage.setItem(
-    KEYS.balance,
-    String(Math.max(0, value))
+    STORAGE.balance,
+    String(balance - total)
   );
 
-}
+  const orders = getJSON(STORAGE.orders, []);
 
-
-function demoTopup(amount) {
-
-  if (!getCurrentUser()) {
-
-    toast("Hãy đăng nhập trước");
-
-    setTimeout(() => {
-      window.location.href =
-        "account.html";
-    }, 700);
-
-    return;
-
-  }
-
-
-  setBalance(
-    getBalance() + amount
-  );
-
-
-  const transactions =
-    readStorage(
-      "tuan4422_transactions",
-      []
-    );
-
-
-  transactions.unshift({
-
-    type: "Nạp demo",
-
-    amount,
-
-    createdAt:
-      new Date().toLocaleString("vi-VN")
-
+  orders.unshift({
+    id: "DH" + Date.now(),
+    user,
+    total,
+    date: new Date().toLocaleString("vi-VN"),
+    status: "Đã thanh toán"
   });
 
+  setJSON(STORAGE.orders, orders);
+  saveCart([]);
 
-  writeStorage(
-    "tuan4422_transactions",
-    transactions
-  );
+  closeModal("cartModal");
+  toast("Đặt hàng thành công");
 
-
-  renderWallet();
-
-  toast(
-    `Đã cộng ${formatMoney(amount)} vào ví demo`
-  );
-
+  setTimeout(() => {
+    if (document.body.dataset.page === "account") {
+      location.reload();
+    }
+  }, 700);
 }
 
+/* =========================
+   SHOP
+========================= */
 
-function renderWallet() {
+function renderProducts(list = PRODUCTS) {
+  const grid = document.getElementById("productGrid");
 
-  const balance =
-    $("#walletBalance");
+  if (!grid) return;
 
-  if (!balance) return;
-
-
-  balance.textContent =
-    formatMoney(getBalance());
-
-
-  const transactions =
-    readStorage(
-      "tuan4422_transactions",
-      []
-    );
-
-
-  const container =
-    $("#transactions");
-
-
-  if (!container) return;
-
-
-  if (!transactions.length) {
-
-    container.innerHTML = `
+  if (!list.length) {
+    grid.innerHTML = `
       <div class="empty">
-        Chưa có giao dịch.
+        Không tìm thấy sản phẩm.
       </div>
     `;
-
-    return;
-
-  }
-
-
-  container.innerHTML =
-    transactions
-      .slice(0, 20)
-      .map(transaction => {
-
-        return `
-          <div class="transaction">
-
-            <div>
-              <strong>
-                ${escapeHTML(transaction.type)}
-              </strong>
-
-              <span>
-                ${escapeHTML(transaction.createdAt)}
-              </span>
-            </div>
-
-            <strong class="green">
-              +${formatMoney(transaction.amount)}
-            </strong>
-
-          </div>
-        `;
-
-      })
-      .join("");
-
-}
-
-
-function initWallet() {
-
-  $$("[data-topup]")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          demoTopup(
-            Number(button.dataset.topup)
-          );
-
-        }
-      );
-
-    });
-
-
-  renderWallet();
-
-}
-
-
-/* =========================================================
-   CHAT DEMO
-   ========================================================= */
-
-function initChat() {
-
-  const messages =
-    $("#chatMessages");
-
-  const input =
-    $("#chatInput");
-
-  const send =
-    $("#sendChatBtn");
-
-
-  if (!messages || !input || !send) {
     return;
   }
 
+  grid.innerHTML = list.map(product => `
+    <article class="product-card">
 
-  let chat =
-    readStorage(KEYS.chat, []);
-
-
-  function render() {
-
-    if (!chat.length) {
-
-      messages.innerHTML = `
-        <div class="empty">
-          Chưa có tin nhắn.
+      <div class="product-top">
+        <div class="product-icon">
+          ${escapeHTML(product.icon)}
         </div>
-      `;
 
-      return;
+        <div class="product-type">
+          ${escapeHTML(product.type)}
+        </div>
 
+        <h3>${escapeHTML(product.name)}</h3>
+      </div>
+
+      <div class="product-description">
+        ${escapeHTML(product.description)}
+      </div>
+
+      <div class="product-bottom">
+        <div class="price">
+          ${money(product.price)}
+        </div>
+
+        <button
+          class="btn btn-primary btn-small"
+          data-add-cart="${escapeHTML(product.id)}">
+          Thêm
+        </button>
+      </div>
+
+    </article>
+  `).join("");
+}
+
+function initShop() {
+  if (!document.getElementById("productGrid")) return;
+
+  renderProducts();
+
+  const search = document.getElementById("productSearch");
+
+  if (search) {
+    search.addEventListener("input", () => {
+      const keyword = search.value.toLowerCase().trim();
+
+      const result = PRODUCTS.filter(product => {
+        return (
+          product.name.toLowerCase().includes(keyword) ||
+          product.type.toLowerCase().includes(keyword) ||
+          product.description.toLowerCase().includes(keyword)
+        );
+      });
+
+      renderProducts(result);
+    });
+  }
+
+  document.addEventListener("click", event => {
+    const button = event.target.closest("[data-add-cart]");
+
+    if (!button) return;
+
+    addToCart(button.dataset.addCart);
+  });
+}
+
+/* =========================
+   ACCOUNT
+========================= */
+
+function initAccount() {
+  const loginForm = document.getElementById("loginForm");
+  const registerForm = document.getElementById("registerForm");
+
+  const user = currentUser();
+
+  const logged = document.getElementById("loggedAccount");
+  const auth = document.getElementById("authAccount");
+
+  if (user && logged && auth) {
+    logged.style.display = "block";
+    auth.style.display = "none";
+
+    const name = document.getElementById("accountName");
+
+    if (name) {
+      name.textContent = user;
     }
 
+    const balance = document.getElementById("accountBalance");
 
-    messages.innerHTML =
-      chat.map(message => {
+    if (balance) {
+      balance.textContent = money(
+        Number(localStorage.getItem(STORAGE.balance) || 0)
+      );
+    }
 
-        return `
-          <div class="message">
-
-            <div class="avatar">
-              ${escapeHTML(
-                message.name.charAt(0)
-              )}
-            </div>
-
-            <div>
-
-              <strong>
-                ${escapeHTML(message.name)}
-              </strong>
-
-              <p>
-                ${escapeHTML(message.text)}
-              </p>
-
-              <small>
-                ${escapeHTML(message.time)}
-              </small>
-
-            </div>
-
-          </div>
-        `;
-
-      }).join("");
-
-
-    messages.scrollTop =
-      messages.scrollHeight;
-
+    renderOrders();
   }
 
+  if (loginForm) {
+    loginForm.addEventListener("submit", event => {
+      event.preventDefault();
 
-  function sendMessage() {
+      const username =
+        document.getElementById("loginUsername").value.trim();
 
-    const text =
-      input.value.trim();
+      const password =
+        document.getElementById("loginPassword").value;
 
+      if (!username || !password) {
+        toast("Vui lòng nhập đầy đủ");
+        return;
+      }
+
+      const users = getJSON(STORAGE.users, []);
+
+      const found = users.find(user =>
+        user.username === username &&
+        user.password === password
+      );
+
+      if (!found) {
+        toast("Sai tài khoản hoặc mật khẩu demo");
+        return;
+      }
+
+      localStorage.setItem(STORAGE.currentUser, username);
+
+      if (localStorage.getItem(STORAGE.balance) === null) {
+        localStorage.setItem(STORAGE.balance, "100000");
+      }
+
+      toast("Đăng nhập thành công");
+
+      setTimeout(() => {
+        location.reload();
+      }, 500);
+    });
+  }
+
+  if (registerForm) {
+    registerForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const username =
+        document.getElementById("registerUsername").value.trim();
+
+      const password =
+        document.getElementById("registerPassword").value;
+
+      if (username.length < 3 || password.length < 4) {
+        toast("Tên tối thiểu 3 ký tự, mật khẩu 4 ký tự");
+        return;
+      }
+
+      const users = getJSON(STORAGE.users, []);
+
+      if (users.some(user => user.username === username)) {
+        toast("Tên tài khoản đã tồn tại");
+        return;
+      }
+
+      users.push({
+        username,
+        password
+      });
+
+      setJSON(STORAGE.users, users);
+      localStorage.setItem(STORAGE.currentUser, username);
+      localStorage.setItem(STORAGE.balance, "100000");
+
+      toast("Tạo tài khoản thành công");
+
+      setTimeout(() => {
+        location.reload();
+      }, 500);
+    });
+  }
+
+  const logout = document.getElementById("logoutBtn");
+
+  if (logout) {
+    logout.addEventListener("click", () => {
+      localStorage.removeItem(STORAGE.currentUser);
+      location.reload();
+    });
+  }
+}
+
+function renderOrders() {
+  const box = document.getElementById("orderList");
+
+  if (!box) return;
+
+  const user = currentUser();
+
+  const orders = getJSON(STORAGE.orders, [])
+    .filter(order => order.user === user);
+
+  if (!orders.length) {
+    box.innerHTML = `<div class="empty">Chưa có đơn hàng.</div>`;
+    return;
+  }
+
+  box.innerHTML = orders.map(order => `
+    <div class="transaction">
+      <div>
+        <strong>${escapeHTML(order.id)}</strong>
+        <small>${escapeHTML(order.date)}</small>
+      </div>
+
+      <div>
+        <strong>${money(order.total)}</strong>
+        <small class="plus">${escapeHTML(order.status)}</small>
+      </div>
+    </div>
+  `).join("");
+}
+
+/* =========================
+   WALLET
+========================= */
+
+function initWallet() {
+  const balanceElement = document.getElementById("walletBalance");
+
+  if (balanceElement) {
+    balanceElement.textContent = money(
+      Number(localStorage.getItem(STORAGE.balance) || 100000)
+    );
+  }
+
+  const addMoney = document.getElementById("addDemoMoney");
+
+  if (addMoney) {
+    addMoney.addEventListener("click", () => {
+      if (!currentUser()) {
+        toast("Hãy đăng nhập trước");
+        return;
+      }
+
+      const oldBalance =
+        Number(localStorage.getItem(STORAGE.balance) || 0);
+
+      const newBalance = oldBalance + 100000;
+
+      localStorage.setItem(
+        STORAGE.balance,
+        String(newBalance)
+      );
+
+      toast("Đã cộng 100.000$ demo");
+
+      setTimeout(() => location.reload(), 400);
+    });
+  }
+}
+
+/* =========================
+   CHAT
+========================= */
+
+function initChat() {
+  const form = document.getElementById("chatForm");
+  const input = document.getElementById("chatInput");
+  const messages = document.getElementById("chatMessages");
+
+  if (!form || !input || !messages) return;
+
+  function render() {
+    const data = getJSON(STORAGE.chat, [
+      {
+        user: "TUAN4422",
+        text: "Chào mừng đến với TUAN4422 MARKET.",
+        me: false
+      }
+    ]);
+
+    messages.innerHTML = data.map(message => `
+      <div class="message ${message.me ? "me" : ""}">
+        <div class="message-bubble">
+          ${escapeHTML(message.text)}
+        </div>
+        <small>${escapeHTML(message.user)}</small>
+      </div>
+    `).join("");
+
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  render();
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const text = input.value.trim();
 
     if (!text) return;
 
+    const data = getJSON(STORAGE.chat, []);
 
-    const username =
-      getCurrentUser() || "Khách";
-
-
-    chat.push({
-
-      name: username,
-
+    data.push({
+      user: currentUser() || "Khách",
       text,
-
-      time:
-        new Date().toLocaleTimeString(
-          "vi-VN",
-          {
-            hour: "2-digit",
-            minute: "2-digit"
-          }
-        )
-
+      me: true
     });
 
-
-    chat =
-      chat.slice(-100);
-
-
-    writeStorage(
-      KEYS.chat,
-      chat
-    );
-
+    setJSON(STORAGE.chat, data);
 
     input.value = "";
-
     render();
-
-  }
-
-
-  send.addEventListener(
-    "click",
-    sendMessage
-  );
-
-
-  input.addEventListener(
-    "keydown",
-    event => {
-
-      if (
-        event.key === "Enter" &&
-        !event.shiftKey
-      ) {
-
-        event.preventDefault();
-
-        sendMessage();
-
-      }
-
-    }
-  );
-
-
-  render();
-
+  });
 }
 
-
-/* =========================================================
+/* =========================
    FORUM
-   ========================================================= */
+========================= */
 
 function initForum() {
+  const form = document.getElementById("forumForm");
+  const titleInput = document.getElementById("forumTitle");
+  const contentInput = document.getElementById("forumContent");
+  const list = document.getElementById("forumList");
 
-  const form =
-    $("#forumForm");
-
-  const list =
-    $("#forumList");
-
-
-  if (!form || !list) {
-    return;
-  }
-
-
-  let posts =
-    readStorage(KEYS.forum, []);
-
+  if (!form || !list) return;
 
   function render() {
-
-    if (!posts.length) {
-
-      list.innerHTML = `
-        <div class="empty">
-          Chưa có bài viết.
-        </div>
-      `;
-
-      return;
-
-    }
-
-
-    list.innerHTML =
-      posts.map(post => {
-
-        return `
-          <article class="forum-post">
-
-            <div class="forum-icon">
-              💬
-            </div>
-
-            <div>
-
-              <h3>
-                ${escapeHTML(post.title)}
-              </h3>
-
-              <p>
-                ${escapeHTML(post.content)}
-              </p>
-
-              <div class="post-meta">
-                ${escapeHTML(post.author)}
-                ·
-                ${escapeHTML(post.time)}
-              </div>
-
-            </div>
-
-          </article>
-        `;
-
-      }).join("");
-
-  }
-
-
-  form.addEventListener(
-    "submit",
-    event => {
-
-      event.preventDefault();
-
-
-      const title =
-        $("#forumTitle").value.trim();
-
-      const content =
-        $("#forumContent").value.trim();
-
-
-      if (!title || !content) {
-
-        toast("Hãy nhập đầy đủ nội dung");
-
-        return;
-
+    const posts = getJSON(STORAGE.forum, [
+      {
+        title: "Chào mừng đến diễn đàn",
+        content: "Khu vực trao đổi của TUAN4422 MARKET.",
+        user: "TUAN4422"
       }
+    ]);
 
+    list.innerHTML = posts.map(post => `
+      <article class="forum-post">
+        <div class="forum-icon">FOR</div>
 
-      posts.unshift({
-
-        title,
-
-        content,
-
-        author:
-          getCurrentUser() || "Khách",
-
-        time:
-          new Date().toLocaleString("vi-VN")
-
-      });
-
-
-      posts =
-        posts.slice(0, 100);
-
-
-      writeStorage(
-        KEYS.forum,
-        posts
-      );
-
-
-      form.reset();
-
-      render();
-
-      toast("Đã đăng bài");
-
-    }
-  );
-
+        <div class="forum-post-content">
+          <h3>${escapeHTML(post.title)}</h3>
+          <p>${escapeHTML(post.content)}</p>
+          <span class="post-meta">
+            Bởi ${escapeHTML(post.user)}
+          </span>
+        </div>
+      </article>
+    `).join("");
+  }
 
   render();
 
-}
+  form.addEventListener("submit", event => {
+    event.preventDefault();
 
+    if (!titleInput.value.trim() || !contentInput.value.trim()) {
+      toast("Vui lòng nhập đầy đủ");
+      return;
+    }
 
-/* =========================================================
-   SERVER COPY
-   ========================================================= */
+    const posts = getJSON(STORAGE.forum, []);
 
-function initServer() {
-
-  $$("[data-copy-server]")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        async () => {
-
-          const ip =
-            button.dataset.copyServer;
-
-
-          if (!ip || ip === "CHƯA CẬP NHẬT") {
-
-            toast("Bạn chưa cập nhật IP server");
-
-            return;
-
-          }
-
-
-          try {
-
-            await navigator.clipboard.writeText(ip);
-
-            toast("Đã sao chép IP");
-
-          } catch {
-
-            toast("Không thể sao chép");
-
-          }
-
-        }
-      );
-
+    posts.unshift({
+      title: titleInput.value.trim(),
+      content: contentInput.value.trim(),
+      user: currentUser() || "Khách"
     });
 
+    setJSON(STORAGE.forum, posts);
+
+    titleInput.value = "";
+    contentInput.value = "";
+
+    render();
+    toast("Đã đăng bài");
+  });
 }
 
-
-/* =========================================================
-   YEAR
-   ========================================================= */
-
-function initYear() {
-
-  const year = $("#year");
-
-  if (year) {
-    year.textContent =
-      new Date().getFullYear();
-  }
-
-}
-
-
-/* =========================================================
+/* =========================
    START
-   ========================================================= */
+========================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    initTheme();
-
-    initMenu();
-
-    initCart();
-
-    initCheckout();
-
-    initProductModal();
-
-    renderProducts();
-
-    initShopSearch();
-
-    initAuthTabs();
-
-    initRegister();
-
-    initLogin();
-
-    initProfileForm();
-
-    renderAccount();
-
-    initWallet();
-
-    initChat();
-
-    initForum();
-
-    initServer();
-
-    initYear();
-
-    updateCartCount();
-
-  }
-);
+document.addEventListener("DOMContentLoaded", () => {
+  initNavigation();
+  initCart();
+  initShop();
+  initAccount();
+  initWallet();
+  initChat();
+  initForum();
+});
