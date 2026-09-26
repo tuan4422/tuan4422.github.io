@@ -1,166 +1,206 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forum - TUAN4422 MARKET</title>
-  <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Forum - TUAN4422 MARKET</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <header class="header">
 
-  <a href="index.html" class="logo">
-    TUAN<span>4422</span>
-  </a>
+<a class="logo" href="index.html">
+TUAN4422<span>MARKET</span>
+</a>
 
-  <nav id="nav">
-    <a href="index.html">Trang chủ</a>
-    <a href="shop.html">Shop</a>
-    <a href="server.html">Server</a>
-    <a href="chat.html">Chat</a>
-    <a href="forum.html" class="active">Forum</a>
-    <a href="account.html">Tài khoản</a>
-    <a href="wallet.html">Ví</a>
-  </nav>
+<nav id="nav">
 
-  <div class="header-actions">
+<a href="index.html">Trang chủ</a>
+<a href="shop.html">Shop</a>
+<a href="server.html">Server</a>
+<a href="chat.html">Chat</a>
+<a class="active" href="forum.html">Forum</a>
+<a href="account.html">Tài khoản</a>
+<a href="wallet.html">Ví</a>
 
-    <button id="themeBtn" class="icon-btn">☾</button>
+</nav>
 
-    <button id="cartBtn" class="cart-btn">
-      🛒
-      <span id="cartCount">0</span>
-    </button>
+<div class="header-actions">
 
-    <button id="menuBtn" class="menu-btn">☰</button>
+<button id="themeBtn" class="icon-btn">☾</button>
 
-  </div>
+<button id="cartBtn" class="cart-btn">
+🛒
+<span id="cartCount">0</span>
+</button>
+
+<button id="menuBtn" class="menu-btn">☰</button>
+
+</div>
 
 </header>
 
 
 <main class="page">
 
-  <div class="page-heading">
+<div class="page-heading">
 
-    <div>
+<div>
 
-      <div class="small-title">
-        COMMUNITY
-      </div>
+<small class="small-title">
+COMMUNITY
+</small>
 
-      <h1>Forum</h1>
+<h1>Forum</h1>
 
-      <p>
-        Nơi chia sẻ và thảo luận.
-      </p>
+<p>
+Nơi chia sẻ và thảo luận cùng cộng đồng.
+</p>
 
-    </div>
-
-    <button
-      id="newPostBtn"
-      class="btn primary"
-    >
-      + Tạo bài viết
-    </button>
-
-  </div>
-
-
-  <div id="forumList" class="forum-list"></div>
-
-</main>
-
-
-<div id="postModal" class="modal">
-
-  <div class="modal-box">
-
-    <div class="modal-header">
-
-      <h2>Tạo bài viết</h2>
-
-      <button id="closePost">
-        ×
-      </button>
-
-    </div>
-
-    <form id="postForm">
-
-      <input
-        id="postTitle"
-        class="form-input"
-        type="text"
-        placeholder="Tiêu đề"
-        maxlength="100"
-        required
-      >
-
-      <textarea
-        id="postContent"
-        class="form-input"
-        placeholder="Nội dung bài viết..."
-        maxlength="1000"
-        required
-      ></textarea>
-
-      <button class="btn primary full">
-        Đăng bài
-      </button>
-
-    </form>
-
-  </div>
+</div>
 
 </div>
 
 
+<div class="forum-list">
+
+<article class="forum-post">
+
+<div class="forum-icon">
+💬
+</div>
+
+<div>
+
+<h3>Chào mừng đến với TUAN4422 MARKET</h3>
+
+<p>
+Khu vực thảo luận chung của cộng đồng.
+</p>
+
+<div class="post-meta">
+TUAN4422 · Hôm nay · 12 phản hồi
+</div>
+
+</div>
+
+</article>
+
+
+<article class="forum-post">
+
+<div class="forum-icon">
+⛏️
+</div>
+
+<div>
+
+<h3>Thảo luận Minecraft</h3>
+
+<p>
+Chia sẻ kinh nghiệm và thông tin Minecraft.
+</p>
+
+<div class="post-meta">
+Member · Hôm qua · 8 phản hồi
+</div>
+
+</div>
+
+</article>
+
+
+<article class="forum-post">
+
+<div class="forum-icon">
+💻
+</div>
+
+<div>
+
+<h3>Script & sản phẩm số</h3>
+
+<p>
+Trao đổi về các sản phẩm trên shop.
+</p>
+
+<div class="post-meta">
+Member · 2 ngày trước · 5 phản hồi
+</div>
+
+</div>
+
+</article>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="footer-logo">
+TUAN4422<span>MARKET</span>
+</div>
+
+<p>
+© <span id="year"></span> TUAN4422 MARKET
+</p>
+
+</footer>
+
+
+<!-- CART -->
+
 <div id="cartModal" class="modal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div class="modal-header">
-      <h2>🛒 Giỏ hàng</h2>
-      <button id="closeCart">×</button>
-    </div>
+<div class="modal-header">
 
-    <div id="cartItems"></div>
+<h2>🛒 Giỏ hàng</h2>
 
-    <div class="cart-total">
-      <span>Tổng cộng</span>
-      <strong id="cartTotal">0đ</strong>
-    </div>
+<button
+id="cartClose"
+class="modal-close">
+×
+</button>
 
-    <button id="checkoutBtn" class="btn primary full">
-      Thanh toán
-    </button>
+</div>
 
-  </div>
+<div id="cartItems"></div>
+
+<div class="cart-total">
+
+<span>Tổng cộng</span>
+
+<strong id="cartTotal">
+0$
+</strong>
+
+</div>
+
+<button
+id="checkoutBtn"
+class="btn primary full">
+Thanh toán
+</button>
+
+</div>
 
 </div>
 
 
 <div id="toast"></div>
-
-
-<footer>
-
-  <div class="footer-logo">
-    TUAN<span>4422</span>
-  </div>
-
-  <p>TUAN4422 MARKET</p>
-
-  <small>
-    © <span id="year"></span>
-    TUAN4422. All rights reserved.
-  </small>
-
-</footer>
-
 
 <script src="script.js"></script>
 
