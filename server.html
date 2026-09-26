@@ -1,119 +1,103 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Server - TUAN4422 MARKET</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server - TUAN4422</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
-
-    <a href="index.html" class="brand">
-      <div class="brand-logo">T</div>
-      <div class="brand-text">
-        <strong>TUAN4422</strong>
-        <span>MARKET</span>
-      </div>
+<header class="header">
+    <a href="index.html" class="logo">
+        <span>TUAN</span>4422 <small>MARKET</small>
     </a>
 
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html">Trang chủ</a>
-      <a href="shop.html">Shop</a>
-      <a href="server.html" class="active">Server</a>
-      <a href="chat.html">Chat</a>
-      <a href="forum.html">Forum</a>
-      <a href="account.html">Tài khoản</a>
-      <a href="wallet.html">Ví</a>
-      <a href="admin.html" id="adminMenu" class="admin-only">Admin</a>
+    <button class="mobile-menu" id="mobileMenuBtn">☰</button>
+
+    <nav id="mainNav">
+        <a href="index.html">Trang chủ</a>
+        <a href="shop.html">Cửa hàng</a>
+        <a href="server.html" class="active">Minecraft Server</a>
+        <a href="chat.html">Chat</a>
+        <a href="forum.html">Forum</a>
+        <a href="account.html">Tài khoản</a>
+        <a href="wallet.html">Ví</a>
+        <a href="admin.html" class="admin-only">Admin</a>
     </nav>
 
-    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-
-  </div>
+    <button class="theme-btn" id="themeBtn">☾</button>
 </header>
 
-<main>
+<main class="page">
 
-  <section class="page-hero">
-    <div class="eyebrow">MINECRAFT</div>
-    <h1>Server</h1>
-    <p>
-      Thông tin server Minecraft của TUAN4422.
-    </p>
-  </section>
+    <section class="server-hero">
+        <div class="server-logo">T4422</div>
 
-  <section class="section" style="padding-top:20px">
+        <div>
+            <span class="status online">● ONLINE</span>
+            <h1>TUAN4422 Minecraft Server</h1>
+            <p>
+                Đây là khu vực giới thiệu Minecraft Server của TUAN4422.
+            </p>
 
-    <div class="server-card">
+            <div class="server-ip">
+                <span>IP SERVER</span>
+                <strong>your-server-ip</strong>
+                <button id="copyIp">Sao chép</button>
+            </div>
+        </div>
+    </section>
 
-      <div class="server-status">
-        <span class="status-dot"></span>
-        Server Minecraft
-      </div>
+    <div class="server-grid">
 
-      <h2>TUAN4422 Minecraft Server</h2>
+        <div class="panel">
+            <h2>Thông tin Server</h2>
 
-      <p>
-        Đây là khu vực giới thiệu server Minecraft.
-        Người chơi có thể xem thông tin server, phiên bản
-        và các thông tin cần thiết trước khi tham gia.
-      </p>
+            <div class="detail-row">
+                <span>Phiên bản</span>
+                <strong>Bedrock / Java</strong>
+            </div>
 
-      <div class="server-info">
+            <div class="detail-row">
+                <span>Trạng thái</span>
+                <strong class="green-text">Online</strong>
+            </div>
 
-        <div class="server-info-item">
-          <span>Địa chỉ</span>
-          <strong>Đang cập nhật</strong>
+            <div class="detail-row">
+                <span>Chế độ</span>
+                <strong>Survival</strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Website</span>
+                <strong>TUAN4422 MARKET</strong>
+            </div>
         </div>
 
-        <div class="server-info-item">
-          <span>Phiên bản</span>
-          <strong>Bedrock / Java</strong>
+        <div class="panel">
+            <h2>Giới thiệu</h2>
+
+            <p class="description">
+                Server Minecraft của TUAN4422 dành cho cộng đồng.
+                Người chơi có thể tham gia, khám phá thế giới,
+                chơi cùng bạn bè và tham gia các hoạt động trong server.
+            </p>
+
+            <div class="server-tags">
+                <span>Survival</span>
+                <span>Community</span>
+                <span>Minecraft</span>
+            </div>
         </div>
-
-        <div class="server-info-item">
-          <span>Trạng thái</span>
-          <strong style="color:var(--green)">
-            Online
-          </strong>
-        </div>
-
-      </div>
-
-      <div class="hero-buttons">
-        <button
-          class="btn btn-primary"
-          onclick="navigator.clipboard?.writeText('Địa chỉ server đang cập nhật');"
-        >
-          Sao chép địa chỉ
-        </button>
-
-        <a href="forum.html" class="btn btn-secondary">
-          Vào cộng đồng
-        </a>
-      </div>
 
     </div>
-
-  </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <strong>TUAN4422 MARKET</strong>
-      <p>Digital marketplace của TUAN4422.</p>
-    </div>
-  </div>
-</footer>
+<div id="toast" class="toast"></div>
 
-<div class="toast" id="toast"></div>
-
+<script src="database.js"></script>
 <script src="script.js"></script>
 
 </body>
