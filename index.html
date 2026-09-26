@@ -3,210 +3,215 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TUAN4422 MARKET - Shop sản phẩm số">
   <title>TUAN4422 MARKET</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body data-page="home">
 
-<header class="header">
-  <a class="logo" href="index.html">
-    TUAN4422<span>MARKET</span>
-  </a>
+<header class="site-header">
+  <div class="header-inner">
 
-  <nav id="nav">
-    <a class="active" href="index.html">Trang chủ</a>
-    <a href="shop.html">Shop</a>
-    <a href="server.html">Server</a>
-    <a href="chat.html">Chat</a>
-    <a href="forum.html">Forum</a>
-    <a href="account.html">Tài khoản</a>
-    <a href="wallet.html">Ví</a>
-  </nav>
+    <a href="index.html" class="brand">
+      <span class="brand-mark">T</span>
+      <span class="brand-text">
+        <strong>TUAN4422</strong>
+        <small>MARKET</small>
+      </span>
+    </a>
 
-  <div class="header-actions">
-    <button id="themeBtn" class="icon-btn">☾</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-page="home">Trang chủ</a>
+      <a href="shop.html" data-page="shop">Shop</a>
+      <a href="server.html" data-page="server">Server</a>
+      <a href="chat.html" data-page="chat">Chat</a>
+      <a href="forum.html" data-page="forum">Forum</a>
+      <a href="account.html" data-page="account">Tài khoản</a>
+      <a href="wallet.html" data-page="wallet">Ví</a>
+    </nav>
 
-    <button id="cartBtn" class="cart-btn">
-      🛒
-      <span id="cartCount">0</span>
-    </button>
+    <div class="header-tools">
+      <button class="header-btn cart-btn" id="cartBtn">
+        Giỏ hàng
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
 
-    <button id="menuBtn" class="menu-btn">☰</button>
+      <button class="mobile-menu" id="menuBtn">☰</button>
+    </div>
+
   </div>
 </header>
 
 <main>
 
-<section class="home-hero">
+<section class="hero">
+  <div class="container">
 
-  <div class="hero-content">
+    <div class="hero-grid">
 
-    <div class="badge">
-      ● TUAN4422 MARKET
-    </div>
+      <div class="hero-main">
 
-    <h1>
-      MUA & SỬ DỤNG
-      <span>SẢN PHẨM SỐ</span>
-    </h1>
+        <div class="hero-label">
+          TUAN4422 MARKET
+        </div>
 
-    <p>
-      TUAN4422 MARKET là nơi giới thiệu và cung cấp
-      các sản phẩm số, script và dịch vụ của TUAN4422.
-    </p>
+        <h1>
+          Nơi dành cho
+          <span>những sản phẩm số.</span>
+        </h1>
 
-    <div class="hero-buttons">
-      <a class="btn primary" href="shop.html">
-        Xem cửa hàng
-      </a>
+        <p class="hero-description">
+          Shop cá nhân dành cho script, tài khoản demo,
+          tài nguyên Minecraft và các dự án của TUAN4422.
+        </p>
 
-      <a class="btn secondary" href="server.html">
-        Xem server
-      </a>
+        <div class="hero-buttons">
+          <a href="shop.html" class="btn btn-primary">
+            Xem sản phẩm
+          </a>
+
+          <a href="server.html" class="btn btn-secondary">
+            Xem server
+          </a>
+        </div>
+
+      </div>
+
+      <div class="hero-side">
+
+        <div class="info-card">
+          <h3>Ví của bạn</h3>
+          <p>Số dư demo hiện tại</p>
+
+          <div class="balance">
+            <span id="homeBalance">100.000$</span>
+          </div>
+
+          <a href="wallet.html" class="btn btn-secondary btn-small">
+            Mở ví
+          </a>
+        </div>
+
+        <div class="info-card">
+          <h3>Hoạt động</h3>
+          <p>Website đang hoạt động bình thường.</p>
+
+          <div class="status" style="margin-top:15px">
+            <span class="status-dot"></span>
+            Online
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
     <div class="stats">
 
-      <div>
-        <strong>20+</strong>
+      <div class="stat">
+        <strong>06+</strong>
         <span>Sản phẩm</span>
       </div>
 
-      <div>
-        <strong>100+</strong>
-        <span>Thành viên</span>
-      </div>
-
-      <div>
+      <div class="stat">
         <strong>24/7</strong>
-        <span>Hỗ trợ</span>
+        <span>Website</span>
+      </div>
+
+      <div class="stat">
+        <strong>100%</strong>
+        <span>Giao diện cá nhân</span>
       </div>
 
     </div>
 
   </div>
-
-  <div class="hero-card">
-
-    <div class="hero-card-top">
-      <strong>TUAN4422 MARKET</strong>
-      <span class="online">● ONLINE</span>
-    </div>
-
-    <div class="market-icon">
-      🛒
-    </div>
-
-    <h2>TUAN4422 MARKET</h2>
-
-    <p>
-      Nền tảng sản phẩm số
-    </p>
-
-    <div class="hero-price">
-      <span>Trạng thái</span>
-      <strong>ONLINE</strong>
-    </div>
-
-  </div>
-
 </section>
 
+<section class="section">
+  <div class="container">
 
-<section class="quick-section">
-
-  <div class="section-title">
-    <div>
-      <small class="small-title">KHÁM PHÁ</small>
-      <h2>Các khu vực</h2>
+    <div class="section-heading">
+      <div>
+        <h2>Khám phá</h2>
+        <p>Truy cập nhanh các khu vực chính.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="quick-grid">
+    <div class="quick-grid">
 
-    <a class="quick-card" href="shop.html">
-      <div class="market-icon">🛍️</div>
-      <h3>Shop</h3>
-      <p>Xem và mua các sản phẩm số.</p>
-    </a>
+      <a href="shop.html" class="quick-card">
+        <div class="quick-icon">SHOP</div>
+        <h3>Shop</h3>
+        <p>Xem và thêm sản phẩm vào giỏ hàng.</p>
+      </a>
 
-    <a class="quick-card" href="server.html">
-      <div class="market-icon">⛏️</div>
-      <h3>Server</h3>
-      <p>Thông tin server Minecraft.</p>
-    </a>
+      <a href="server.html" class="quick-card">
+        <div class="quick-icon">MC</div>
+        <h3>Minecraft Server</h3>
+        <p>Thông tin và giới thiệu server.</p>
+      </a>
 
-    <a class="quick-card" href="chat.html">
-      <div class="market-icon">💬</div>
-      <h3>Chat</h3>
-      <p>Trò chuyện cùng cộng đồng.</p>
-    </a>
+      <a href="forum.html" class="quick-card">
+        <div class="quick-icon">FOR</div>
+        <h3>Forum</h3>
+        <p>Trao đổi và đăng bài với cộng đồng.</p>
+      </a>
 
-    <a class="quick-card" href="forum.html">
-      <div class="market-icon">💡</div>
-      <h3>Forum</h3>
-      <p>Thảo luận và chia sẻ.</p>
-    </a>
+    </div>
 
   </div>
-
 </section>
 
 </main>
 
-
 <footer>
-  <div class="footer-logo">
-    TUAN4422<span>MARKET</span>
-  </div>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">TUAN4422 MARKET</div>
+      <div>Website cá nhân của TUAN4422.</div>
+    </div>
 
-  <p>
-    © <span id="year"></span> TUAN4422 MARKET
-  </p>
+    <div>© 2026 TUAN4422</div>
+  </div>
 </footer>
 
-
-<!-- CART -->
-
-<div id="cartModal" class="modal">
-
+<div class="modal" id="cartModal">
   <div class="modal-box">
 
     <div class="modal-header">
-      <h2>🛒 Giỏ hàng</h2>
-
-      <button
-        id="cartClose"
-        class="modal-close"
-        type="button">
-        ×
-      </button>
+      <strong>Giỏ hàng</strong>
+      <button class="modal-close" data-close-modal="cartModal">×</button>
     </div>
 
-    <div id="cartItems"></div>
+    <div class="modal-body">
 
-    <div class="cart-total">
-      <span>Tổng cộng</span>
-      <strong id="cartTotal">0$</strong>
+      <div id="cartItems"></div>
+
+      <div class="cart-total">
+        <span>Tổng</span>
+        <span id="cartTotal">0$</span>
+      </div>
+
+      <div class="modal-actions">
+        <button
+          class="btn btn-secondary"
+          data-close-modal="cartModal">
+          Đóng
+        </button>
+
+        <button
+          class="btn btn-primary"
+          id="checkoutBtn">
+          Thanh toán
+        </button>
+      </div>
+
     </div>
-
-    <button
-      id="checkoutBtn"
-      class="btn primary full"
-      type="button">
-      Thanh toán
-    </button>
 
   </div>
-
 </div>
 
-
-<div id="toast"></div>
-
 <script src="script.js"></script>
-
 </body>
 </html>
