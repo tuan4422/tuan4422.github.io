@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat - TUAN4422</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+  <a class="logo" href="index.html">
+    TUAN<span>4422</span>
+  </a>
+
+  <nav id="nav">
+    <a href="index.html">Trang chủ</a>
+    <a href="shop.html">Shop</a>
+    <a href="server.html">Server</a>
+    <a class="active" href="chat.html">Chat</a>
+    <a href="forum.html">Diễn đàn</a>
+    <a href="account.html">Tài khoản</a>
+    <a href="wallet.html">Ví</a>
+  </nav>
+
+  <div class="header-actions">
+    <button id="themeBtn" class="icon-btn">☾</button>
+    <button id="menuBtn" class="menu-btn">☰</button>
+  </div>
+
+</header>
+
+
+<main class="page">
+
+  <div class="page-heading center">
+
+    <div class="small-title">
+      COMMUNITY
+    </div>
+
+    <h1>Chat</h1>
+
+    <p>
+      Giao diện trò chuyện cộng đồng.
+    </p>
+
+  </div>
+
+
+  <div class="chat-container">
+
+    <aside class="chat-sidebar">
+
+      <strong>KÊNH CHAT</strong>
+
+      <button class="active">
+        # chung
+      </button>
+
+      <button>
+        # minecraft
+      </button>
+
+      <button>
+        # shop
+      </button>
+
+      <button>
+        # hỗ-trợ
+      </button>
+
+    </aside>
+
+
+    <section class="chat-main">
+
+      <div id="chatMessages" class="chat-messages">
+
+        <div class="message">
+
+          <div class="avatar">
+            T
+          </div>
+
+          <div>
+            <strong>TUAN4422</strong>
+
+            <p>
+              Chào mừng mọi người đến
+              TUAN4422 MARKET!
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="message">
+
+          <div class="avatar blue">
+            U
+          </div>
+
+          <div>
+            <strong>User</strong>
+
+            <p>
+              Xin chào 👋
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <form id="chatForm" class="chat-input">
+
+        <input
+          id="chatInput"
+          placeholder="Nhập tin nhắn..."
+          required
+        >
+
+        <button>
+          ➤
+        </button>
+
+      </form>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<div id="toast"></div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
