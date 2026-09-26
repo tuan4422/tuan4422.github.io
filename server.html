@@ -7,133 +7,114 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body data-page="server">
+<body>
 
 <header class="site-header">
   <div class="header-inner">
 
     <a href="index.html" class="brand">
-      <span class="brand-mark">T</span>
-      <span class="brand-text">
+      <div class="brand-logo">T</div>
+      <div class="brand-text">
         <strong>TUAN4422</strong>
-        <small>MARKET</small>
-      </span>
+        <span>MARKET</span>
+      </div>
     </a>
 
     <nav class="main-nav" id="mainNav">
-      <a href="index.html" data-page="home">Trang chủ</a>
-      <a href="shop.html" data-page="shop">Shop</a>
-      <a href="server.html" data-page="server">Server</a>
-      <a href="chat.html" data-page="chat">Chat</a>
-      <a href="forum.html" data-page="forum">Forum</a>
-      <a href="account.html" data-page="account">Tài khoản</a>
-      <a href="wallet.html" data-page="wallet">Ví</a>
+      <a href="index.html">Trang chủ</a>
+      <a href="shop.html">Shop</a>
+      <a href="server.html" class="active">Server</a>
+      <a href="chat.html">Chat</a>
+      <a href="forum.html">Forum</a>
+      <a href="account.html">Tài khoản</a>
+      <a href="wallet.html">Ví</a>
+      <a href="admin.html" id="adminMenu" class="admin-only">Admin</a>
     </nav>
 
-    <div class="header-tools">
-      <button class="header-btn cart-btn" id="cartBtn">
-        Giỏ hàng
-        <span class="cart-count" id="cartCount">0</span>
-      </button>
-      <button class="mobile-menu" id="menuBtn">☰</button>
-    </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
 
   </div>
 </header>
 
-<main class="page">
-  <div class="container">
+<main>
 
-    <div class="page-heading">
-      <h1>Minecraft Server</h1>
-      <p>Thông tin giới thiệu server của TUAN4422.</p>
-    </div>
+  <section class="page-hero">
+    <div class="eyebrow">MINECRAFT</div>
+    <h1>Server</h1>
+    <p>
+      Thông tin server Minecraft của TUAN4422.
+    </p>
+  </section>
 
-    <div class="server-panel">
+  <section class="section" style="padding-top:20px">
 
-      <div class="server-header">
+    <div class="server-card">
 
-        <div class="server-title">
-          <div class="server-logo">MC</div>
-
-          <div>
-            <h2>TUAN4422 SERVER</h2>
-            <p style="color:var(--muted)">
-              Minecraft Community Server
-            </p>
-          </div>
-        </div>
-
-        <div class="status">
-          <span class="status-dot"></span>
-          Online
-        </div>
-
+      <div class="server-status">
+        <span class="status-dot"></span>
+        Server Minecraft
       </div>
 
-      <div class="server-grid">
+      <h2>TUAN4422 Minecraft Server</h2>
 
-        <div class="server-data">
+      <p>
+        Đây là khu vực giới thiệu server Minecraft.
+        Người chơi có thể xem thông tin server, phiên bản
+        và các thông tin cần thiết trước khi tham gia.
+      </p>
+
+      <div class="server-info">
+
+        <div class="server-info-item">
+          <span>Địa chỉ</span>
+          <strong>Đang cập nhật</strong>
+        </div>
+
+        <div class="server-info-item">
           <span>Phiên bản</span>
           <strong>Bedrock / Java</strong>
         </div>
 
-        <div class="server-data">
-          <span>Chế độ</span>
-          <strong>Survival</strong>
-        </div>
-
-        <div class="server-data">
+        <div class="server-info-item">
           <span>Trạng thái</span>
-          <strong style="color:var(--green)">Đang hoạt động</strong>
+          <strong style="color:var(--green)">
+            Online
+          </strong>
         </div>
 
       </div>
 
-      <div class="demo-note">
-        Đây là khu vực giới thiệu server, không phải khu vực bán server.
+      <div class="hero-buttons">
+        <button
+          class="btn btn-primary"
+          onclick="navigator.clipboard?.writeText('Địa chỉ server đang cập nhật');"
+        >
+          Sao chép địa chỉ
+        </button>
+
+        <a href="forum.html" class="btn btn-secondary">
+          Vào cộng đồng
+        </a>
       </div>
 
     </div>
 
-  </div>
+  </section>
+
 </main>
 
-<footer>
+<footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-logo">TUAN4422 MARKET</div>
-    <div>© 2026 TUAN4422</div>
+    <div class="footer-brand">
+      <strong>TUAN4422 MARKET</strong>
+      <p>Digital marketplace của TUAN4422.</p>
+    </div>
   </div>
 </footer>
 
-<div class="modal" id="cartModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <strong>Giỏ hàng</strong>
-      <button class="modal-close" data-close-modal="cartModal">×</button>
-    </div>
-
-    <div class="modal-body">
-      <div id="cartItems"></div>
-
-      <div class="cart-total">
-        <span>Tổng</span>
-        <span id="cartTotal">0$</span>
-      </div>
-
-      <div class="modal-actions">
-        <button class="btn btn-secondary" data-close-modal="cartModal">
-          Đóng
-        </button>
-
-        <button class="btn btn-primary" id="checkoutBtn">
-          Thanh toán
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="toast" id="toast"></div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
