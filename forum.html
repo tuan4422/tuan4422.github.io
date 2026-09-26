@@ -1,130 +1,80 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forum - TUAN4422 MARKET</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - TUAN4422</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
-
-    <a href="index.html" class="brand">
-      <div class="brand-logo">T</div>
-      <div class="brand-text">
-        <strong>TUAN4422</strong>
-        <span>MARKET</span>
-      </div>
+<header class="header">
+    <a href="index.html" class="logo">
+        <span>TUAN</span>4422 <small>MARKET</small>
     </a>
 
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html">Trang chủ</a>
-      <a href="shop.html">Shop</a>
-      <a href="server.html">Server</a>
-      <a href="chat.html">Chat</a>
-      <a href="forum.html" class="active">Forum</a>
-      <a href="account.html">Tài khoản</a>
-      <a href="wallet.html">Ví</a>
-      <a href="admin.html" id="adminMenu" class="admin-only">Admin</a>
+    <button class="mobile-menu" id="mobileMenuBtn">☰</button>
+
+    <nav id="mainNav">
+        <a href="index.html">Trang chủ</a>
+        <a href="shop.html">Cửa hàng</a>
+        <a href="server.html">Minecraft Server</a>
+        <a href="chat.html">Chat</a>
+        <a href="forum.html" class="active">Forum</a>
+        <a href="account.html">Tài khoản</a>
+        <a href="wallet.html">Ví</a>
+        <a href="admin.html" class="admin-only">Admin</a>
     </nav>
 
-    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-
-  </div>
+    <button class="theme-btn" id="themeBtn">☾</button>
 </header>
 
-<main>
+<main class="page">
 
-  <section class="page-hero">
-    <div class="eyebrow">COMMUNITY</div>
-    <h1>Forum</h1>
-    <p>
-      Chia sẻ câu hỏi, kinh nghiệm và thông tin với cộng đồng.
-    </p>
-  </section>
+    <section class="page-title">
+        <span class="section-label">COMMUNITY</span>
+        <h1>Forum</h1>
+        <p>Nơi chia sẻ và thảo luận.</p>
+    </section>
 
-  <section class="section" style="padding-top:20px">
+    <div class="forum-layout">
 
-    <div class="panel">
+        <div class="panel">
 
-      <div class="panel-title">
-        <div>
-          <h2>Tạo bài viết</h2>
-          <span>Chia sẻ nội dung với cộng đồng</span>
-        </div>
-      </div>
+            <form id="forumForm">
 
-      <form id="forumForm">
+                <input
+                    id="forumTitle"
+                    class="input"
+                    type="text"
+                    placeholder="Tiêu đề bài viết"
+                    required
+                >
 
-        <div class="form-grid">
+                <textarea
+                    id="forumContent"
+                    class="input textarea"
+                    placeholder="Nội dung..."
+                    required
+                ></textarea>
 
-          <div class="form-group full">
-            <label>Tiêu đề</label>
+                <button class="btn btn-primary" type="submit">
+                    Đăng bài
+                </button>
 
-            <input
-              id="forumTitle"
-              type="text"
-              placeholder="Nhập tiêu đề..."
-              required
-            >
-          </div>
-
-          <div class="form-group full">
-            <label>Nội dung</label>
-
-            <textarea
-              id="forumContent"
-              placeholder="Viết nội dung..."
-              required
-            ></textarea>
-          </div>
+            </form>
 
         </div>
 
-        <div class="form-actions">
-          <button class="btn btn-primary" type="submit">
-            Đăng bài
-          </button>
-        </div>
-
-      </form>
+        <div id="forumList" class="forum-list"></div>
 
     </div>
-
-
-    <div class="panel">
-
-      <div class="panel-title">
-        <div>
-          <h2>Bài viết cộng đồng</h2>
-        </div>
-      </div>
-
-      <div
-        class="forum-list"
-        id="forumList"
-      ></div>
-
-    </div>
-
-  </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <strong>TUAN4422 MARKET</strong>
-      <p>Cộng đồng TUAN4422.</p>
-    </div>
-  </div>
-</footer>
+<div id="toast" class="toast"></div>
 
-<div class="toast" id="toast"></div>
-
+<script src="database.js"></script>
 <script src="script.js"></script>
 
 </body>
