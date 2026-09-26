@@ -5,7 +5,7 @@
 
 
 /* =========================================================
-   HELPERS
+   HELPER
 ========================================================= */
 
 function $(selector) {
@@ -40,7 +40,8 @@ function setJSON(key, value) {
    THEME
 ========================================================= */
 
-const themeBtn = $("#themeBtn");
+const themeBtn =
+  document.getElementById("themeBtn");
 
 function loadTheme() {
 
@@ -69,22 +70,25 @@ function loadTheme() {
 
 if (themeBtn) {
 
-  themeBtn.addEventListener("click", () => {
+  themeBtn.addEventListener(
+    "click",
+    () => {
 
-    document.body.classList.toggle("light");
+      document.body.classList.toggle("light");
 
-    const isLight =
-      document.body.classList.contains("light");
+      const light =
+        document.body.classList.contains("light");
 
-    localStorage.setItem(
-      "theme",
-      isLight ? "light" : "dark"
-    );
+      localStorage.setItem(
+        "theme",
+        light ? "light" : "dark"
+      );
 
-    themeBtn.textContent =
-      isLight ? "☀" : "☾";
+      themeBtn.textContent =
+        light ? "☀" : "☾";
 
-  });
+    }
+  );
 
 }
 
@@ -95,27 +99,58 @@ loadTheme();
    MOBILE MENU
 ========================================================= */
 
-const menuBtn = $("#menuBtn");
-const nav = $("#nav");
+const menuBtn =
+  document.getElementById("menuBtn");
+
+const nav =
+  document.getElementById("nav");
+
 
 if (menuBtn && nav) {
 
-  menuBtn.addEventListener("click", () => {
+  menuBtn.addEventListener(
+    "click",
+    event => {
 
-    nav.classList.toggle("open");
+      event.stopPropagation();
 
-  });
+      nav.classList.toggle("open");
+
+    }
+  );
 
 
-  nav.querySelectorAll("a").forEach(link => {
+  nav.querySelectorAll("a")
+    .forEach(link => {
 
-    link.addEventListener("click", () => {
+      link.addEventListener(
+        "click",
+        () => {
 
-      nav.classList.remove("open");
+          nav.classList.remove("open");
+
+        }
+      );
 
     });
 
-  });
+
+  document.addEventListener(
+    "click",
+    event => {
+
+      if (
+        nav.classList.contains("open") &&
+        !nav.contains(event.target) &&
+        event.target !== menuBtn
+      ) {
+
+        nav.classList.remove("open");
+
+      }
+
+    }
+  );
 
 }
 
@@ -124,67 +159,112 @@ if (menuBtn && nav) {
    PRODUCTS
 ========================================================= */
 
-/*
-   Đây là dữ liệu demo.
-
-   Sau này khi làm shop.html,
-   có thể thay danh sách này bằng dữ liệu
-   sản phẩm thật.
-*/
-
 const PRODUCTS = [
 
   {
     id: "script-001",
+
     name: "Script Premium",
+
     description:
       "Script kỹ thuật số dùng cho mục đích hợp lệ.",
+
     price: 50000,
+
     icon: "📜",
+
     badge: "MỚI"
+
   },
 
   {
     id: "script-002",
+
     name: "Script Pro",
+
     description:
       "Phiên bản nâng cao với nhiều tính năng.",
+
     price: 100000,
+
     icon: "⚡",
+
     badge: "HOT"
+
   },
 
   {
     id: "account-001",
+
     name: "Tài khoản Demo",
+
     description:
       "Tài khoản demo hợp lệ để thử nghiệm.",
+
     price: 30000,
+
     icon: "👤",
+
     badge: "DEMO"
+
   },
 
   {
     id: "minecraft-001",
+
     name: "Minecraft Pack",
+
     description:
       "Gói nội dung Minecraft dành cho server.",
+
     price: 75000,
+
     icon: "⛏️",
+
     badge: "NEW"
+
   }
 
 ];
 
 
 /* =========================================================
-   CART DATA
+   CART
 ========================================================= */
 
-let cart = getJSON(
-  "tuan4422_cart",
-  []
-);
+let cart =
+  getJSON(
+    "tuan4422_cart",
+    []
+  );
+
+
+/* =========================================================
+   FORMAT MONEY
+========================================================= */
+
+function formatMoney(number) {
+
+  return Number(number)
+    .toLocaleString("vi-VN") + "đ";
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
 
 
 /* =========================================================
@@ -193,20 +273,27 @@ let cart = getJSON(
 
 function updateCartCount() {
 
-  const cartCount = $("#cartCount");
+  const cartCount =
+    document.getElementById("cartCount");
 
   if (!cartCount) {
     return;
   }
 
-  const totalItems = cart.reduce(
-    (total, item) => {
-      return total + item.quantity;
-    },
-    0
-  );
 
-  cartCount.textContent = totalItems;
+  const total =
+    cart.reduce(
+      (sum, item) => {
+
+        return sum + item.quantity;
+
+      },
+      0
+    );
+
+
+  cartCount.textContent =
+    total;
 
 }
 
@@ -218,17 +305,33 @@ updateCartCount();
    ADD TO CART
 ========================================================= */
 
-function addToCart(productId, quantity = 1) {
+function addToCart(
+  productId,
+  quantity = 1
+) {
 
   const product =
     PRODUCTS.find(
       item => item.id === productId
     );
 
+
   if (!product) {
-    showToast("Không tìm thấy sản phẩm.");
+
+    showToast(
+      "Không tìm thấy sản phẩm."
+    );
+
     return;
+
   }
+
+
+  quantity =
+    Math.max(
+      1,
+      Math.floor(Number(quantity) || 1)
+    );
 
 
   const existing =
@@ -260,19 +363,29 @@ function addToCart(productId, quantity = 1) {
   }
 
 
+  saveCart();
+
+  renderCart();
+
+  showToast(
+    "Đã thêm vào giỏ hàng."
+  );
+
+}
+
+
+/* =========================================================
+   SAVE CART
+========================================================= */
+
+function saveCart() {
+
   setJSON(
     "tuan4422_cart",
     cart
   );
 
-
   updateCartCount();
-
-  renderCart();
-
-  showToast(
-    `${product.name} đã được thêm vào giỏ hàng.`
-  );
 
 }
 
@@ -289,25 +402,19 @@ function removeFromCart(productId) {
     );
 
 
-  setJSON(
-    "tuan4422_cart",
-    cart
-  );
-
-
-  updateCartCount();
+  saveCart();
 
   renderCart();
 
   showToast(
-    "Đã xóa sản phẩm khỏi giỏ hàng."
+    "Đã xóa sản phẩm."
   );
 
 }
 
 
 /* =========================================================
-   CHANGE CART QUANTITY
+   CHANGE QUANTITY
 ========================================================= */
 
 function changeCartQuantity(
@@ -319,6 +426,7 @@ function changeCartQuantity(
     cart.find(
       product => product.id === productId
     );
+
 
   if (!item) {
     return;
@@ -344,13 +452,7 @@ function changeCartQuantity(
   }
 
 
-  setJSON(
-    "tuan4422_cart",
-    cart
-  );
-
-
-  updateCartCount();
+  saveCart();
 
   renderCart();
 
@@ -377,25 +479,17 @@ function getCartTotal() {
 
 
 /* =========================================================
-   FORMAT MONEY
-========================================================= */
-
-function formatMoney(number) {
-
-  return Number(number)
-    .toLocaleString("vi-VN") + "đ";
-
-}
-
-
-/* =========================================================
    RENDER CART
 ========================================================= */
 
 function renderCart() {
 
-  const cartItems = $("#cartItems");
-  const cartTotal = $("#cartTotal");
+  const cartItems =
+    document.getElementById("cartItems");
+
+  const cartTotal =
+    document.getElementById("cartTotal");
+
 
   if (!cartItems) {
     return;
@@ -413,67 +507,79 @@ function renderCart() {
   } else {
 
     cartItems.innerHTML =
-      cart.map(item => `
+      cart.map(item => {
 
-        <div class="cart-item">
+        return `
 
-          <div class="cart-item-icon">
-            ${item.icon}
-          </div>
+          <div class="cart-item">
 
-          <div class="cart-item-info">
+            <div class="cart-item-icon">
+              ${escapeHTML(item.icon)}
+            </div>
 
-            <strong>
-              ${escapeHTML(item.name)}
-            </strong>
 
-            <span>
-              ${formatMoney(item.price)}
-            </span>
+            <div class="cart-item-info">
 
-            <div class="cart-quantity">
+              <strong>
+                ${escapeHTML(item.name)}
+              </strong>
 
-              <button
-                class="small-btn"
-                onclick="changeCartQuantity(
-                  '${item.id}',
-                  -1
-                )"
-              >
-                −
-              </button>
 
               <span>
-                ${item.quantity}
+                ${formatMoney(item.price)}
               </span>
 
-              <button
-                class="small-btn"
-                onclick="changeCartQuantity(
-                  '${item.id}',
-                  1
-                )"
+
+              <div
+                style="
+                  display:flex;
+                  align-items:center;
+                  gap:8px;
+                  margin-top:8px;
+                "
               >
-                +
-              </button>
+
+                <button
+                  type="button"
+                  class="small-btn"
+                  data-cart-minus="${escapeHTML(item.id)}"
+                >
+                  −
+                </button>
+
+
+                <span>
+                  ${item.quantity}
+                </span>
+
+
+                <button
+                  type="button"
+                  class="small-btn"
+                  data-cart-plus="${escapeHTML(item.id)}"
+                >
+                  +
+                </button>
+
+              </div>
 
             </div>
 
+
+            <button
+              type="button"
+              class="remove-cart"
+              data-cart-remove="${escapeHTML(item.id)}"
+              aria-label="Xóa sản phẩm"
+            >
+              ×
+            </button>
+
           </div>
 
-          <button
-            class="remove-cart"
-            onclick="removeFromCart(
-              '${item.id}'
-            )"
-            aria-label="Xóa sản phẩm"
-          >
-            ×
-          </button>
+        `;
 
-        </div>
-
-      `).join("");
+      }).join("");
 
   }
 
@@ -481,9 +587,88 @@ function renderCart() {
   if (cartTotal) {
 
     cartTotal.textContent =
-      formatMoney(getCartTotal());
+      formatMoney(
+        getCartTotal()
+      );
 
   }
+
+
+  /* Nút giảm */
+
+  cartItems
+    .querySelectorAll(
+      "[data-cart-minus]"
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        event => {
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          changeCartQuantity(
+            button.dataset.cartMinus,
+            -1
+          );
+
+        }
+      );
+
+    });
+
+
+  /* Nút tăng */
+
+  cartItems
+    .querySelectorAll(
+      "[data-cart-plus]"
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        event => {
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          changeCartQuantity(
+            button.dataset.cartPlus,
+            1
+          );
+
+        }
+      );
+
+    });
+
+
+  /* Nút xóa */
+
+  cartItems
+    .querySelectorAll(
+      "[data-cart-remove]"
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        event => {
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          removeFromCart(
+            button.dataset.cartRemove
+          );
+
+        }
+      );
+
+    });
 
 }
 
@@ -492,10 +677,17 @@ function renderCart() {
    CART MODAL
 ========================================================= */
 
-const cartBtn = $("#cartBtn");
-const cartModal = $("#cartModal");
-const closeCart = $("#closeCart");
+const cartBtn =
+  document.getElementById("cartBtn");
 
+const cartModal =
+  document.getElementById("cartModal");
+
+const closeCart =
+  document.getElementById("closeCart");
+
+
+/* MỞ */
 
 function openCart() {
 
@@ -503,12 +695,23 @@ function openCart() {
     return;
   }
 
+
   renderCart();
 
-  cartModal.classList.add("show");
+
+  cartModal.classList.add(
+    "show"
+  );
+
+
+  document.body.classList.add(
+    "cart-open"
+  );
 
 }
 
+
+/* ĐÓNG */
 
 function closeCartModal() {
 
@@ -516,36 +719,93 @@ function closeCartModal() {
     return;
   }
 
-  cartModal.classList.remove("show");
+
+  cartModal.classList.remove(
+    "show"
+  );
+
+
+  document.body.classList.remove(
+    "cart-open"
+  );
 
 }
 
+
+/* MỞ / ĐÓNG */
+
+function toggleCart() {
+
+  if (!cartModal) {
+    return;
+  }
+
+
+  if (
+    cartModal.classList.contains("show")
+  ) {
+
+    closeCartModal();
+
+  } else {
+
+    openCart();
+
+  }
+
+}
+
+
+/* NÚT GIỎ HÀNG */
 
 if (cartBtn) {
 
   cartBtn.addEventListener(
     "click",
-    openCart
+    event => {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      toggleCart();
+
+    }
   );
 
 }
 
+
+/* NÚT X */
 
 if (closeCart) {
 
   closeCart.addEventListener(
     "click",
-    closeCartModal
+    event => {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      closeCartModal();
+
+    }
   );
 
 }
 
+
+/* CLICK NỀN ĐEN */
 
 if (cartModal) {
 
   cartModal.addEventListener(
     "click",
     event => {
+
+      /*
+        Chỉ đóng khi click đúng vào
+        phần nền modal.
+      */
 
       if (
         event.target === cartModal
@@ -558,24 +818,46 @@ if (cartModal) {
     }
   );
 
+
+  /* Không cho click trong hộp
+     truyền ra nền */
+
+  const modalBox =
+    cartModal.querySelector(
+      ".modal-box"
+    );
+
+
+  if (modalBox) {
+
+    modalBox.addEventListener(
+      "click",
+      event => {
+
+        event.stopPropagation();
+
+      }
+    );
+
+  }
+
 }
 
 
 /* =========================================================
-   ESC KEY
+   ESC - ĐÓNG GIỎ HÀNG
 ========================================================= */
 
 document.addEventListener(
   "keydown",
   event => {
 
-    if (event.key === "Escape") {
+    if (
+      event.key === "Escape" ||
+      event.key === "Esc"
+    ) {
 
       closeCartModal();
-
-      if (nav) {
-        nav.classList.remove("open");
-      }
 
     }
 
@@ -584,18 +866,23 @@ document.addEventListener(
 
 
 /* =========================================================
-   CHECKOUT DEMO
+   CHECKOUT
 ========================================================= */
 
 const checkoutBtn =
-  $("#checkoutBtn");
+  document.getElementById(
+    "checkoutBtn"
+  );
 
 
 if (checkoutBtn) {
 
   checkoutBtn.addEventListener(
     "click",
-    () => {
+    event => {
+
+      event.preventDefault();
+
 
       if (cart.length === 0) {
 
@@ -608,13 +895,6 @@ if (checkoutBtn) {
       }
 
 
-      /*
-        Đây chỉ là thanh toán DEMO.
-
-        GitHub Pages không thể tự xử lý
-        thanh toán thật hoặc trừ tiền thật.
-      */
-
       const orders =
         getJSON(
           "tuan4422_orders",
@@ -625,8 +905,7 @@ if (checkoutBtn) {
       const order = {
 
         id:
-          "TT" +
-          Date.now(),
+          "TT" + Date.now(),
 
         items:
           [...cart],
@@ -635,9 +914,10 @@ if (checkoutBtn) {
           getCartTotal(),
 
         date:
-          new Date().toLocaleString(
-            "vi-VN"
-          ),
+          new Date()
+            .toLocaleString(
+              "vi-VN"
+            ),
 
         status:
           "Đang xử lý"
@@ -645,7 +925,9 @@ if (checkoutBtn) {
       };
 
 
-      orders.unshift(order);
+      orders.unshift(
+        order
+      );
 
 
       setJSON(
@@ -657,13 +939,7 @@ if (checkoutBtn) {
       cart = [];
 
 
-      setJSON(
-        "tuan4422_cart",
-        cart
-      );
-
-
-      updateCartCount();
+      saveCart();
 
       renderCart();
 
@@ -682,52 +958,47 @@ if (checkoutBtn) {
    TOAST
 ========================================================= */
 
-let toastTimer;
+let toastTimer = null;
 
 
 function showToast(message) {
 
-  const toast = $("#toast");
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
 
   if (!toast) {
     return;
   }
 
 
-  toast.textContent = message;
-
-  toast.classList.add("show");
-
-
-  clearTimeout(toastTimer);
+  toast.textContent =
+    message;
 
 
-  toastTimer = setTimeout(
-    () => {
-
-      toast.classList.remove(
-        "show"
-      );
-
-    },
-    2500
+  toast.classList.add(
+    "show"
   );
 
-}
+
+  clearTimeout(
+    toastTimer
+  );
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
+  toastTimer =
+    setTimeout(
+      () => {
 
-function escapeHTML(value) {
+        toast.classList.remove(
+          "show"
+        );
 
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+      },
+      2500
+    );
 
 }
 
@@ -737,7 +1008,10 @@ function escapeHTML(value) {
 ========================================================= */
 
 const productStat =
-  $("#productStat");
+  document.getElementById(
+    "productStat"
+  );
+
 
 if (productStat) {
 
@@ -752,7 +1026,10 @@ if (productStat) {
 ========================================================= */
 
 const year =
-  $("#year");
+  document.getElementById(
+    "year"
+  );
+
 
 if (year) {
 
@@ -763,7 +1040,30 @@ if (year) {
 
 
 /* =========================================================
-   GLOBAL FUNCTIONS
+   CLOSE MENU WHEN ESC
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Escape" &&
+      nav
+    ) {
+
+      nav.classList.remove(
+        "open"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   GLOBAL
 ========================================================= */
 
 window.addToCart =
@@ -775,21 +1075,20 @@ window.removeFromCart =
 window.changeCartQuantity =
   changeCartQuantity;
 
+window.openCart =
+  openCart;
+
+window.closeCart =
+  closeCartModal;
+
 window.showToast =
   showToast;
 
 
 /* =========================================================
-   PAGE READY
+   START
 ========================================================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
+renderCart();
 
-    updateCartCount();
-
-    renderCart();
-
-  }
-);
+updateCartCount();
