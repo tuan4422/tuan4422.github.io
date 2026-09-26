@@ -7,106 +7,123 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body data-page="chat">
+<body>
 
 <header class="site-header">
   <div class="header-inner">
 
     <a href="index.html" class="brand">
-      <span class="brand-mark">T</span>
-      <span class="brand-text">
+      <div class="brand-logo">T</div>
+      <div class="brand-text">
         <strong>TUAN4422</strong>
-        <small>MARKET</small>
-      </span>
+        <span>MARKET</span>
+      </div>
     </a>
 
     <nav class="main-nav" id="mainNav">
-      <a href="index.html" data-page="home">Trang chủ</a>
-      <a href="shop.html" data-page="shop">Shop</a>
-      <a href="server.html" data-page="server">Server</a>
-      <a href="chat.html" data-page="chat">Chat</a>
-      <a href="forum.html" data-page="forum">Forum</a>
-      <a href="account.html" data-page="account">Tài khoản</a>
-      <a href="wallet.html" data-page="wallet">Ví</a>
+      <a href="index.html">Trang chủ</a>
+      <a href="shop.html">Shop</a>
+      <a href="server.html">Server</a>
+      <a href="chat.html" class="active">Chat</a>
+      <a href="forum.html">Forum</a>
+      <a href="account.html">Tài khoản</a>
+      <a href="wallet.html">Ví</a>
+      <a href="admin.html" id="adminMenu" class="admin-only">Admin</a>
     </nav>
 
-    <div class="header-tools">
-      <button class="header-btn cart-btn" id="cartBtn">
-        Giỏ hàng
-        <span class="cart-count" id="cartCount">0</span>
-      </button>
-      <button class="mobile-menu" id="menuBtn">☰</button>
-    </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
 
   </div>
 </header>
 
-<main class="page">
-  <div class="container">
+<main>
 
-    <div class="page-heading">
-      <h1>Chat</h1>
-      <p>Khu vực trò chuyện demo.</p>
-    </div>
+  <section class="page-hero">
+    <div class="eyebrow">COMMUNITY</div>
+    <h1>Chat</h1>
+    <p>Trò chuyện cùng cộng đồng TUAN4422.</p>
+  </section>
+
+  <section class="section" style="padding-top:20px">
 
     <div class="chat-layout">
 
-      <aside class="chat-users">
+      <aside class="chat-sidebar">
+        <h3>Kênh</h3>
 
-        <h3>Thành viên</h3>
-
-        <div class="user-row">
-          <div class="avatar">T</div>
-          <div>
-            TUAN4422
-            <small>Online</small>
-          </div>
+        <div class="chat-room active">
+          # chung
         </div>
 
-        <div class="user-row">
-          <div class="avatar">M</div>
-          <div>
-            Member
-            <small>Online</small>
-          </div>
+        <div class="chat-room">
+          # minecraft
         </div>
 
+        <div class="chat-room">
+          # script
+        </div>
       </aside>
 
-      <section class="chat-main">
+      <div class="chat-main">
 
-        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-header">
+          <strong># chung</strong>
+          <span>Kênh trò chuyện cộng đồng</span>
+        </div>
 
-        <form class="chat-form" id="chatForm">
+        <div
+          class="chat-messages"
+          id="chatMessages"
+        ></div>
+
+        <form
+          class="chat-form"
+          id="chatForm"
+        >
 
           <input
             id="chatInput"
+            type="text"
             placeholder="Nhập tin nhắn..."
             autocomplete="off"
+            style="
+              flex:1;
+              min-height:44px;
+              padding:0 13px;
+              border:1px solid var(--border);
+              border-radius:11px;
+              background:#071421;
+              color:white;
+              outline:none;
+            "
           >
 
-          <button class="btn btn-primary">
+          <button class="btn btn-primary" type="submit">
             Gửi
           </button>
 
         </form>
 
-      </section>
+      </div>
 
     </div>
 
-  </div>
+  </section>
+
 </main>
 
-<footer>
+<footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-logo">TUAN4422 MARKET</div>
-    <div>© 2026 TUAN4422</div>
+    <div class="footer-brand">
+      <strong>TUAN4422 MARKET</strong>
+      <p>Cộng đồng TUAN4422.</p>
+    </div>
   </div>
 </footer>
 
-<div id="toast"></div>
+<div class="toast" id="toast"></div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
