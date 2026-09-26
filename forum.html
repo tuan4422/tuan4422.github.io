@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diễn đàn - TUAN4422</title>
+  <title>Forum - TUAN4422 MARKET</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,7 +11,7 @@
 
 <header class="header">
 
-  <a class="logo" href="index.html">
+  <a href="index.html" class="logo">
     TUAN<span>4422</span>
   </a>
 
@@ -20,14 +20,22 @@
     <a href="shop.html">Shop</a>
     <a href="server.html">Server</a>
     <a href="chat.html">Chat</a>
-    <a class="active" href="forum.html">Diễn đàn</a>
+    <a href="forum.html" class="active">Forum</a>
     <a href="account.html">Tài khoản</a>
     <a href="wallet.html">Ví</a>
   </nav>
 
   <div class="header-actions">
+
     <button id="themeBtn" class="icon-btn">☾</button>
+
+    <button id="cartBtn" class="cart-btn">
+      🛒
+      <span id="cartCount">0</span>
+    </button>
+
     <button id="menuBtn" class="menu-btn">☰</button>
+
   </div>
 
 </header>
@@ -43,82 +51,115 @@
         COMMUNITY
       </div>
 
-      <h1>Diễn đàn</h1>
+      <h1>Forum</h1>
 
       <p>
-        Trao đổi và chia sẻ cùng cộng đồng.
+        Nơi chia sẻ và thảo luận.
       </p>
 
     </div>
 
     <button
+      id="newPostBtn"
       class="btn primary"
-      onclick="createPost()">
+    >
       + Tạo bài viết
     </button>
 
   </div>
 
 
-  <div id="forumPosts" class="forum-list">
-
-    <article class="forum-post">
-
-      <div class="forum-icon">
-        💬
-      </div>
-
-      <div>
-
-        <h3>
-          Chào mừng đến diễn đàn TUAN4422
-        </h3>
-
-        <p>
-          Đây là nơi mọi người có thể trao đổi
-          về Minecraft, script và shop.
-        </p>
-
-        <div class="post-meta">
-          TUAN4422 · Hôm nay · 12 bình luận
-        </div>
-
-      </div>
-
-    </article>
-
-
-    <article class="forum-post">
-
-      <div class="forum-icon">
-        ⛏️
-      </div>
-
-      <div>
-
-        <h3>
-          Server Minecraft
-        </h3>
-
-        <p>
-          Cùng chia sẻ những điều thú vị
-          trong server.
-        </p>
-
-        <div class="post-meta">
-          Community · Hôm nay · 5 bình luận
-        </div>
-
-      </div>
-
-    </article>
-
-  </div>
+  <div id="forumList" class="forum-list"></div>
 
 </main>
 
 
+<div id="postModal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h2>Tạo bài viết</h2>
+
+      <button id="closePost">
+        ×
+      </button>
+
+    </div>
+
+    <form id="postForm">
+
+      <input
+        id="postTitle"
+        class="form-input"
+        type="text"
+        placeholder="Tiêu đề"
+        maxlength="100"
+        required
+      >
+
+      <textarea
+        id="postContent"
+        class="form-input"
+        placeholder="Nội dung bài viết..."
+        maxlength="1000"
+        required
+      ></textarea>
+
+      <button class="btn primary full">
+        Đăng bài
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<div id="cartModal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2>🛒 Giỏ hàng</h2>
+      <button id="closeCart">×</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      <span>Tổng cộng</span>
+      <strong id="cartTotal">0đ</strong>
+    </div>
+
+    <button id="checkoutBtn" class="btn primary full">
+      Thanh toán
+    </button>
+
+  </div>
+
+</div>
+
+
 <div id="toast"></div>
+
+
+<footer>
+
+  <div class="footer-logo">
+    TUAN<span>4422</span>
+  </div>
+
+  <p>TUAN4422 MARKET</p>
+
+  <small>
+    © <span id="year"></span>
+    TUAN4422. All rights reserved.
+  </small>
+
+</footer>
 
 
 <script src="script.js"></script>
