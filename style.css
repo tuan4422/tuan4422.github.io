@@ -1,6 +1,7 @@
 /* =========================================================
    TUAN4422 MARKET
    STYLE.CSS - FULL VERSION
+   BẢNG TUAN4422 MARKET ĐÃ ĐƯỢC CHỈNH THẲNG
 ========================================================= */
 
 
@@ -290,7 +291,8 @@ nav a.active::after {
 
 .icon-btn:hover,
 .cart-btn:hover {
-  border-color: rgba(0, 212, 255, 0.35);
+  border-color:
+    rgba(0, 212, 255, 0.35);
 
   transform: translateY(-2px);
 }
@@ -349,12 +351,14 @@ nav a.active::after {
     );
 
   box-shadow:
-    0 12px 30px rgba(0, 212, 255, 0.1);
+    0 12px 30px
+    rgba(0, 212, 255, 0.1);
 }
 
 .btn.primary:hover {
   box-shadow:
-    0 15px 35px rgba(0, 212, 255, 0.18);
+    0 15px 35px
+    rgba(0, 212, 255, 0.18);
 }
 
 .btn.secondary {
@@ -510,7 +514,10 @@ nav a.active::after {
 }
 
 
-/* HERO CARD */
+/* =========================================================
+   HERO CARD
+   ĐÃ SỬA: KHÔNG CÒN rotate(2deg)
+========================================================= */
 
 .hero-card {
   padding: 42px;
@@ -529,16 +536,19 @@ nav a.active::after {
 
   box-shadow: var(--shadow);
 
-  transform: rotate(2deg);
+  /* BẢNG LUÔN THẲNG */
+  transform: none;
 
-  transition: transform 0.3s ease;
+  transition:
+    transform 0.3s ease;
 }
 
 .hero-card:hover {
+  /* Chỉ nâng bảng lên, không xoay */
   transform:
-    rotate(0deg)
     translateY(-5px);
 }
+
 
 .hero-card-top {
   display: flex;
@@ -2042,6 +2052,13 @@ footer small {
     width: 100%;
 
     margin: auto;
+
+    /* Không nghiêng trên tablet */
+    transform: none;
+  }
+
+  .hero-card:hover {
+    transform: translateY(-5px);
   }
 
   .page {
@@ -2195,7 +2212,12 @@ footer small {
   .hero-card {
     padding: 28px 20px;
 
+    /* Luôn thẳng */
     transform: none;
+  }
+
+  .hero-card:hover {
+    transform: translateY(-4px);
   }
 
   .market-icon {
