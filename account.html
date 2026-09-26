@@ -7,289 +7,183 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body data-page="account">
 
-<header class="header">
-  <a class="logo" href="index.html">
-    TUAN4422<span>MARKET</span>
-  </a>
+<header class="site-header">
+  <div class="header-inner">
 
-  <nav id="nav">
-    <a href="index.html">Trang chủ</a>
-    <a href="shop.html">Shop</a>
-    <a href="server.html">Server</a>
-    <a href="chat.html">Chat</a>
-    <a href="forum.html">Forum</a>
-    <a class="active" href="account.html">Tài khoản</a>
-    <a href="wallet.html">Ví</a>
-  </nav>
+    <a href="index.html" class="brand">
+      <span class="brand-mark">T</span>
+      <span class="brand-text">
+        <strong>TUAN4422</strong>
+        <small>MARKET</small>
+      </span>
+    </a>
 
-  <div class="header-actions">
-    <button id="themeBtn" class="icon-btn">☾</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-page="home">Trang chủ</a>
+      <a href="shop.html" data-page="shop">Shop</a>
+      <a href="server.html" data-page="server">Server</a>
+      <a href="chat.html" data-page="chat">Chat</a>
+      <a href="forum.html" data-page="forum">Forum</a>
+      <a href="account.html" data-page="account">Tài khoản</a>
+      <a href="wallet.html" data-page="wallet">Ví</a>
+    </nav>
 
-    <button id="cartBtn" class="cart-btn">
-      🛒 <span id="cartCount">0</span>
-    </button>
+    <div class="header-tools">
+      <button class="header-btn cart-btn" id="cartBtn">
+        Giỏ hàng
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="mobile-menu" id="menuBtn">☰</button>
+    </div>
 
-    <button id="menuBtn" class="menu-btn">☰</button>
   </div>
 </header>
 
 <main class="page">
+  <div class="container">
 
-  <section class="page-heading">
-    <div>
-      <span class="badge">ACCOUNT</span>
+    <div class="page-heading">
       <h1>Tài khoản</h1>
-      <p>Quản lý thông tin, ví tiền và đơn hàng của bạn.</p>
+      <p>Đăng nhập hoặc tạo tài khoản demo.</p>
     </div>
-  </section>
 
-  <!-- CHƯA ĐĂNG NHẬP -->
-  <section id="authSection" class="account-auth">
+    <div id="authAccount" class="dashboard-grid">
 
-    <div class="auth-card">
-
-      <div class="auth-tabs">
-        <button id="loginTab" class="auth-tab active">Đăng nhập</button>
-        <button id="registerTab" class="auth-tab">Đăng ký</button>
-      </div>
-
-      <!-- LOGIN -->
-      <form id="loginForm">
-
-        <h2>Chào mừng trở lại</h2>
-        <p class="muted">Đăng nhập tài khoản TUAN4422 MARKET.</p>
-
-        <label>
-          Tên tài khoản
-          <input
-            id="loginUsername"
-            type="text"
-            placeholder="Nhập tên tài khoản"
-            autocomplete="username"
-            required
-          >
-        </label>
-
-        <label>
-          Mật khẩu
-          <input
-            id="loginPassword"
-            type="password"
-            placeholder="Nhập mật khẩu"
-            autocomplete="current-password"
-            required
-          >
-        </label>
-
-        <button class="btn primary full" type="submit">
-          Đăng nhập
-        </button>
-
-        <p class="auth-note">
-          Đây là hệ thống tài khoản demo lưu trên trình duyệt.
+      <div class="panel">
+        <h2>Đăng nhập</h2>
+        <p class="panel-description">
+          Đăng nhập vào tài khoản của bạn.
         </p>
 
-      </form>
+        <form id="loginForm">
 
-      <!-- REGISTER -->
-      <form id="registerForm" class="hidden">
+          <div class="form-group">
+            <label>Tên tài khoản</label>
+            <input
+              class="form-input"
+              id="loginUsername"
+              required
+            >
+          </div>
 
+          <div class="form-group">
+            <label>Mật khẩu</label>
+            <input
+              class="form-input"
+              id="loginPassword"
+              type="password"
+              required
+            >
+          </div>
+
+          <button class="btn btn-primary" type="submit">
+            Đăng nhập
+          </button>
+
+        </form>
+      </div>
+
+      <div class="panel">
         <h2>Tạo tài khoản</h2>
-        <p class="muted">Tạo tài khoản demo miễn phí.</p>
-
-        <label>
-          Tên tài khoản
-          <input
-            id="registerUsername"
-            type="text"
-            placeholder="Ví dụ: Tuan4422"
-            autocomplete="username"
-            required
-          >
-        </label>
-
-        <label>
-          Mật khẩu
-          <input
-            id="registerPassword"
-            type="password"
-            placeholder="Ít nhất 4 ký tự"
-            autocomplete="new-password"
-            required
-          >
-        </label>
-
-        <label>
-          Nhập lại mật khẩu
-          <input
-            id="registerPassword2"
-            type="password"
-            placeholder="Nhập lại mật khẩu"
-            autocomplete="new-password"
-            required
-          >
-        </label>
-
-        <button class="btn primary full" type="submit">
-          Tạo tài khoản
-        </button>
-
-        <p class="auth-note">
-          Không sử dụng mật khẩu thật hoặc thông tin nhạy cảm.
+        <p class="panel-description">
+          Tạo tài khoản demo mới.
         </p>
 
-      </form>
+        <form id="registerForm">
 
-    </div>
+          <div class="form-group">
+            <label>Tên tài khoản</label>
+            <input
+              class="form-input"
+              id="registerUsername"
+              required
+            >
+          </div>
 
-  </section>
+          <div class="form-group">
+            <label>Mật khẩu</label>
+            <input
+              class="form-input"
+              id="registerPassword"
+              type="password"
+              required
+            >
+          </div>
 
-  <!-- ĐÃ ĐĂNG NHẬP -->
-  <section id="profileSection" class="hidden">
-
-    <div class="account-grid">
-
-      <div class="account-card profile-main">
-
-        <div class="profile-avatar" id="profileAvatar">
-          T
-        </div>
-
-        <div class="profile-info">
-          <span class="muted">Tài khoản</span>
-          <h2 id="profileUsername">Tuan4422</h2>
-          <span class="account-status">
-            ● Đang đăng nhập
-          </span>
-        </div>
-
-        <button id="logoutBtn" class="btn secondary">
-          Đăng xuất
-        </button>
-
-      </div>
-
-      <div class="account-card balance-card">
-
-        <span class="muted">Số dư</span>
-
-        <div class="profile-balance" id="accountBalance">
-          0$
-        </div>
-
-        <a href="wallet.html" class="btn primary">
-          Nạp / quản lý ví
-        </a>
-
-      </div>
-
-    </div>
-
-    <div class="account-section">
-
-      <div class="section-title">
-        <div>
-          <span class="badge">PROFILE</span>
-          <h2>Thông tin tài khoản</h2>
-        </div>
-      </div>
-
-      <div class="account-card">
-
-        <form id="profileForm">
-
-          <label>
-            Tên hiển thị
-            <input id="displayName" type="text" required>
-          </label>
-
-          <button class="btn primary" type="submit">
-            Lưu thay đổi
+          <button class="btn btn-primary" type="submit">
+            Tạo tài khoản
           </button>
 
         </form>
 
-      </div>
-
-    </div>
-
-    <div class="account-section">
-
-      <div class="section-title">
-        <div>
-          <span class="badge">ORDERS</span>
-          <h2>Lịch sử đơn hàng</h2>
+        <div class="demo-note">
+          Đây mới là hệ thống tài khoản demo chạy bằng trình duyệt.
+          Chưa phải hệ thống đăng nhập có máy chủ thực tế.
         </div>
-      </div>
 
-      <div id="accountOrders" class="orders-list"></div>
+      </div>
 
     </div>
 
-    <div class="account-section">
+    <div id="loggedAccount" style="display:none">
 
-      <div class="section-title">
-        <div>
-          <span class="badge">FAVORITES</span>
-          <h2>Sản phẩm yêu thích</h2>
+      <div class="dashboard-grid">
+
+        <div class="panel">
+
+          <h2 id="accountName">---</h2>
+
+          <p class="panel-description">
+            Tài khoản hiện đang đăng nhập.
+          </p>
+
+          <div class="wallet-balance">
+            <span>Số dư</span>
+            <strong id="accountBalance">0$</strong>
+          </div>
+
+          <a href="wallet.html" class="btn btn-primary">
+            Mở ví
+          </a>
+
+          <button
+            class="btn btn-danger"
+            id="logoutBtn"
+            style="margin-left:7px">
+            Đăng xuất
+          </button>
+
         </div>
+
+        <div class="panel">
+
+          <h2>Đơn hàng</h2>
+          <p class="panel-description">
+            Lịch sử đơn hàng của tài khoản.
+          </p>
+
+          <div id="orderList"></div>
+
+        </div>
+
       </div>
 
-      <div id="favoriteList" class="favorite-list"></div>
-
     </div>
-
-  </section>
-
-</main>
-
-<!-- CART -->
-<div id="cartModal" class="modal" aria-hidden="true">
-
-  <div class="modal-box">
-
-    <div class="modal-header">
-
-      <h3>🛒 Giỏ hàng</h3>
-
-      <button
-        class="modal-close"
-        data-close-cart
-        aria-label="Đóng"
-      >
-        ×
-      </button>
-
-    </div>
-
-    <div id="cartItems"></div>
-
-    <div class="cart-total">
-      <span>Tổng</span>
-      <strong id="cartTotal">0$</strong>
-    </div>
-
-    <button id="checkoutBtn" class="btn primary full">
-      Thanh toán demo
-    </button>
 
   </div>
+</main>
 
-</div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">TUAN4422 MARKET</div>
+    <div>© 2026 TUAN4422</div>
+  </div>
+</footer>
 
 <div id="toast"></div>
 
-<footer>
-  <div class="footer-logo">
-    TUAN4422<span>MARKET</span>
-  </div>
-
-  <p>© <span id="year"></span> TUAN4422 MARKET</p>
-</footer>
-
 <script src="script.js"></script>
-
 </body>
 </html>
