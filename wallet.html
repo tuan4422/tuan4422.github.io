@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ví - TUAN4422</title>
+  <title>Ví - TUAN4422 MARKET</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,7 +11,7 @@
 
 <header class="header">
 
-  <a class="logo" href="index.html">
+  <a href="index.html" class="logo">
     TUAN<span>4422</span>
   </a>
 
@@ -20,20 +20,21 @@
     <a href="shop.html">Shop</a>
     <a href="server.html">Server</a>
     <a href="chat.html">Chat</a>
-    <a href="forum.html">Diễn đàn</a>
+    <a href="forum.html">Forum</a>
     <a href="account.html">Tài khoản</a>
-    <a class="active" href="wallet.html">Ví</a>
+    <a href="wallet.html" class="active">Ví</a>
   </nav>
 
   <div class="header-actions">
 
-    <button id="themeBtn" class="icon-btn">
-      ☾
+    <button id="themeBtn" class="icon-btn">☾</button>
+
+    <button id="cartBtn" class="cart-btn">
+      🛒
+      <span id="cartCount">0</span>
     </button>
 
-    <button id="menuBtn" class="menu-btn">
-      ☰
-    </button>
+    <button id="menuBtn" class="menu-btn">☰</button>
 
   </div>
 
@@ -42,17 +43,21 @@
 
 <main class="page">
 
-  <div class="page-heading center">
+  <div class="page-heading">
 
-    <div class="small-title">
-      WALLET
+    <div>
+
+      <div class="small-title">
+        WALLET
+      </div>
+
+      <h1>Ví của tôi</h1>
+
+      <p>
+        Quản lý số dư và giao dịch demo.
+      </p>
+
     </div>
-
-    <h1>Ví của bạn</h1>
-
-    <p>
-      Quản lý số dư và giao dịch.
-    </p>
 
   </div>
 
@@ -68,34 +73,82 @@
     </strong>
 
     <button
+      id="addMoneyBtn"
       class="btn primary"
-      onclick="addDemoMoney()">
+    >
       + Nạp tiền demo
     </button>
 
   </div>
 
 
-  <div class="transactions">
+  <section class="quick-section">
 
-    <h3>
-      Lịch sử giao dịch
-    </h3>
+    <div class="section-title">
 
-    <div id="transactionsList">
-
-      <div class="empty">
-        Chưa có giao dịch.
+      <div class="small-title">
+        GIAO DỊCH
       </div>
+
+      <h2>
+        Lịch sử
+      </h2>
 
     </div>
 
-  </div>
+
+    <div
+      id="transactions"
+      class="transactions"
+    ></div>
+
+  </section>
 
 </main>
 
 
+<div id="cartModal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2>🛒 Giỏ hàng</h2>
+      <button id="closeCart">×</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      <span>Tổng cộng</span>
+      <strong id="cartTotal">0đ</strong>
+    </div>
+
+    <button id="checkoutBtn" class="btn primary full">
+      Thanh toán
+    </button>
+
+  </div>
+
+</div>
+
+
 <div id="toast"></div>
+
+
+<footer>
+
+  <div class="footer-logo">
+    TUAN<span>4422</span>
+  </div>
+
+  <p>TUAN4422 MARKET</p>
+
+  <small>
+    © <span id="year"></span>
+    TUAN4422. All rights reserved.
+  </small>
+
+</footer>
 
 
 <script src="script.js"></script>
