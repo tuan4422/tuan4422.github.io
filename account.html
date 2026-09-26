@@ -1,273 +1,163 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tài khoản - TUAN4422 MARKET</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài khoản - TUAN4422</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
-
-    <a href="index.html" class="brand">
-      <div class="brand-logo">T</div>
-
-      <div class="brand-text">
-        <strong>TUAN4422</strong>
-        <span>MARKET</span>
-      </div>
+<header class="header">
+    <a href="index.html" class="logo">
+        <span>TUAN</span>4422 <small>MARKET</small>
     </a>
 
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html">Trang chủ</a>
-      <a href="shop.html">Shop</a>
-      <a href="server.html">Server</a>
-      <a href="chat.html">Chat</a>
-      <a href="forum.html">Forum</a>
-      <a href="account.html" class="active">Tài khoản</a>
-      <a href="wallet.html">Ví</a>
-      <a href="admin.html" id="adminMenu" class="admin-only">Admin</a>
+    <button class="mobile-menu" id="mobileMenuBtn">☰</button>
+
+    <nav id="mainNav">
+        <a href="index.html">Trang chủ</a>
+        <a href="shop.html">Cửa hàng</a>
+        <a href="server.html">Minecraft Server</a>
+        <a href="chat.html">Chat</a>
+        <a href="forum.html">Forum</a>
+        <a href="account.html" class="active">Tài khoản</a>
+        <a href="wallet.html">Ví</a>
+        <a href="admin.html" class="admin-only">Admin</a>
     </nav>
 
-    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-
-  </div>
+    <button class="theme-btn" id="themeBtn">☾</button>
 </header>
 
-<main>
+<main class="page">
 
-  <section class="page-hero">
-    <div class="eyebrow">ACCOUNT</div>
-    <h1>Tài khoản</h1>
-    <p>Quản lý tài khoản, đơn hàng và sản phẩm yêu thích.</p>
-  </section>
+    <section class="page-title">
+        <span class="section-label">ACCOUNT</span>
+        <h1>Tài khoản</h1>
+        <p>Đăng nhập hoặc tạo tài khoản.</p>
+    </section>
 
-  <section class="section" style="padding-top:20px">
+    <div id="authSection" class="auth-grid">
 
-    <!-- LOGIN -->
+        <div class="panel">
 
-    <div class="panel" id="loginPanel">
+            <h2>Đăng nhập</h2>
 
-      <div class="panel-title">
-        <div>
-          <h2>Đăng nhập</h2>
-          <span>Đăng nhập vào TUAN4422 MARKET</span>
-        </div>
-      </div>
+            <form id="loginForm">
 
-      <form id="loginForm">
+                <input
+                    id="loginUsername"
+                    class="input"
+                    type="text"
+                    placeholder="Tên tài khoản"
+                    required
+                >
 
-        <div class="form-grid">
+                <input
+                    id="loginPassword"
+                    class="input"
+                    type="password"
+                    placeholder="Mật khẩu"
+                    required
+                >
 
-          <div class="form-group">
-            <label>Tên tài khoản</label>
+                <button class="btn btn-primary btn-block">
+                    Đăng nhập
+                </button>
 
-            <input
-              id="loginUsername"
-              type="text"
-              required
-              placeholder="Tên tài khoản"
-            >
-          </div>
-
-          <div class="form-group">
-            <label>Mật khẩu</label>
-
-            <input
-              id="loginPassword"
-              type="password"
-              required
-              placeholder="Mật khẩu"
-            >
-          </div>
+            </form>
 
         </div>
 
-        <div class="form-actions">
-          <button class="btn btn-primary" type="submit">
-            Đăng nhập
-          </button>
-        </div>
+        <div class="panel">
 
-      </form>
+            <h2>Đăng ký</h2>
+
+            <form id="registerForm">
+
+                <input
+                    id="registerUsername"
+                    class="input"
+                    type="text"
+                    placeholder="Tên tài khoản"
+                    required
+                >
+
+                <input
+                    id="registerPassword"
+                    class="input"
+                    type="password"
+                    placeholder="Mật khẩu"
+                    required
+                >
+
+                <button class="btn btn-secondary btn-block">
+                    Tạo tài khoản
+                </button>
+
+            </form>
+
+        </div>
 
     </div>
 
+    <div id="accountDashboard" class="account-dashboard hidden">
 
-    <!-- REGISTER -->
+        <div class="profile-card">
+            <div class="avatar" id="accountAvatar">U</div>
 
-    <div class="panel" id="registerPanel">
+            <div>
+                <span class="section-label">ACCOUNT</span>
+                <h2 id="accountName">User</h2>
+                <p>Tài khoản TUAN4422 MARKET</p>
+            </div>
 
-      <div class="panel-title">
-        <div>
-          <h2>Tạo tài khoản</h2>
-          <span>Tạo tài khoản demo trên trình duyệt</span>
-        </div>
-      </div>
-
-      <form id="registerForm">
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Tên tài khoản</label>
-
-            <input
-              id="registerUsername"
-              type="text"
-              required
-              placeholder="Tên tài khoản"
-            >
-          </div>
-
-          <div class="form-group">
-            <label>Mật khẩu</label>
-
-            <input
-              id="registerPassword"
-              type="password"
-              required
-              placeholder="Mật khẩu"
-            >
-          </div>
-
+            <button id="logoutBtn" class="btn btn-danger">
+                Đăng xuất
+            </button>
         </div>
 
-        <div class="form-actions">
-          <button class="btn btn-secondary" type="submit">
-            Đăng ký
-          </button>
+        <div class="dashboard-grid">
+
+            <div class="panel">
+                <span class="section-label">BALANCE</span>
+                <h2 id="accountBalance">0$</h2>
+                <a href="wallet.html" class="btn btn-primary">
+                    Mở ví
+                </a>
+            </div>
+
+            <div class="panel">
+                <span class="section-label">ORDERS</span>
+                <h2 id="accountOrders">0</h2>
+                <p>Đơn hàng</p>
+            </div>
+
+            <div class="panel">
+                <span class="section-label">FAVORITES</span>
+                <h2 id="accountFavorites">0</h2>
+                <p>Sản phẩm yêu thích</p>
+            </div>
+
         </div>
 
-      </form>
+        <div class="panel">
+            <h2>Sản phẩm yêu thích</h2>
+            <div id="favoriteList" class="product-grid"></div>
+        </div>
+
+        <div class="panel">
+            <h2>Lịch sử đơn hàng</h2>
+            <div id="orderList"></div>
+        </div>
 
     </div>
-
-
-    <!-- ACCOUNT -->
-
-    <div id="accountDashboard" style="display:none">
-
-      <div class="account-layout">
-
-        <aside class="account-sidebar">
-
-          <div class="account-user">
-
-            <div class="avatar" id="accountAvatar">
-              T
-            </div>
-
-            <strong id="accountUsername">
-              Người dùng
-            </strong>
-
-            <span>Tài khoản TUAN4422</span>
-
-          </div>
-
-          <div class="account-menu">
-
-            <button class="active">
-              Tổng quan
-            </button>
-
-            <button onclick="location.href='wallet.html'">
-              Ví
-            </button>
-
-            <button onclick="location.href='shop.html'">
-              Mua hàng
-            </button>
-
-            <button id="logoutBtn">
-              Đăng xuất
-            </button>
-
-          </div>
-
-        </aside>
-
-
-        <div>
-
-          <div class="balance-card">
-
-            <small>Số dư hiện tại</small>
-
-            <strong id="accountBalance">
-              0$
-            </strong>
-
-            <div style="margin-top:15px">
-              <a
-                href="wallet.html"
-                class="btn btn-primary"
-              >
-                Mở ví
-              </a>
-            </div>
-
-          </div>
-
-
-          <div class="panel">
-
-            <div class="panel-title">
-              <div>
-                <h2>Đơn hàng</h2>
-                <span>Lịch sử mua hàng</span>
-              </div>
-            </div>
-
-            <div
-              class="order-list"
-              id="orderList"
-            ></div>
-
-          </div>
-
-
-          <div class="panel">
-
-            <div class="panel-title">
-              <div>
-                <h2>Yêu thích</h2>
-                <span>Sản phẩm bạn đã lưu</span>
-              </div>
-            </div>
-
-            <div
-              class="favorite-list"
-              id="favoriteList"
-            ></div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <strong>TUAN4422 MARKET</strong>
-      <p>Tài khoản người dùng.</p>
-    </div>
-  </div>
-</footer>
+<div id="toast" class="toast"></div>
 
-<div class="toast" id="toast"></div>
-
+<script src="database.js"></script>
 <script src="script.js"></script>
 
 </body>
