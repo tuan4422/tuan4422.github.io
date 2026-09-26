@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop - TUAN4422</title>
+  <title>Shop - TUAN4422 MARKET</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,16 +11,16 @@
 
 <header class="header">
 
-  <a class="logo" href="index.html">
+  <a href="index.html" class="logo">
     TUAN<span>4422</span>
   </a>
 
   <nav id="nav">
     <a href="index.html">Trang chủ</a>
-    <a class="active" href="shop.html">Shop</a>
+    <a href="shop.html" class="active">Shop</a>
     <a href="server.html">Server</a>
     <a href="chat.html">Chat</a>
-    <a href="forum.html">Diễn đàn</a>
+    <a href="forum.html">Forum</a>
     <a href="account.html">Tài khoản</a>
     <a href="wallet.html">Ví</a>
   </nav>
@@ -30,12 +30,11 @@
     <button id="themeBtn" class="icon-btn">☾</button>
 
     <button id="cartBtn" class="cart-btn">
-      🛒 <span id="cartCount">0</span>
+      🛒
+      <span id="cartCount">0</span>
     </button>
 
-    <button id="menuBtn" class="menu-btn">
-      ☰
-    </button>
+    <button id="menuBtn" class="menu-btn">☰</button>
 
   </div>
 
@@ -47,29 +46,93 @@
   <div class="page-heading">
 
     <div>
-      <div class="small-title">TUAN4422 MARKET</div>
+      <div class="small-title">
+        TUAN4422 MARKET
+      </div>
 
-      <h1>Shop</h1>
+      <h1>Cửa hàng</h1>
 
       <p>
-        Script và tài khoản hợp lệ.
+        Chọn sản phẩm bạn muốn mua.
       </p>
-    </div>
-
-    <div class="search-box">
-      🔎
-      <input
-        id="searchInput"
-        placeholder="Tìm sản phẩm..."
-      >
     </div>
 
   </div>
 
 
-  <div id="products" class="product-grid"></div>
+  <div class="search-box">
+
+    <span>🔎</span>
+
+    <input
+      id="shopSearch"
+      type="search"
+      placeholder="Tìm kiếm sản phẩm..."
+    >
+
+  </div>
+
+
+  <section>
+
+    <div class="section-title">
+
+      <div class="small-title">
+        SẢN PHẨM
+      </div>
+
+      <h2>Tất cả sản phẩm</h2>
+
+    </div>
+
+    <div id="productGrid" class="product-grid"></div>
+
+    <div id="noProducts" class="empty">
+      Không tìm thấy sản phẩm.
+    </div>
+
+  </section>
 
 </main>
+
+
+<div id="productModal" class="modal">
+
+  <div class="modal-box product-modal">
+
+    <div class="modal-header">
+
+      <h2>Chi tiết sản phẩm</h2>
+
+      <button id="closeProduct" type="button">
+        ×
+      </button>
+
+    </div>
+
+    <div id="detailIcon" class="detail-icon">
+      📦
+    </div>
+
+    <h2 id="detailTitle" class="detail-title">
+      Sản phẩm
+    </h2>
+
+    <p id="detailDescription" class="detail-description">
+      Mô tả sản phẩm.
+    </p>
+
+    <div id="detailPrice" class="detail-price">
+      0đ
+    </div>
+
+    <button id="detailAdd" class="btn primary full">
+      🛒 Thêm vào giỏ
+    </button>
+
+  </div>
+
+</div>
 
 
 <div id="cartModal" class="modal">
@@ -77,21 +140,23 @@
   <div class="modal-box">
 
     <div class="modal-header">
+
       <h2>🛒 Giỏ hàng</h2>
 
-      <button onclick="closeCart()">×</button>
+      <button id="closeCart" type="button">
+        ×
+      </button>
+
     </div>
 
     <div id="cartItems"></div>
 
     <div class="cart-total">
-      <span>Tổng</span>
+      <span>Tổng cộng</span>
       <strong id="cartTotal">0đ</strong>
     </div>
 
-    <button
-      class="btn primary full"
-      onclick="checkout()">
+    <button id="checkoutBtn" class="btn primary full">
       Thanh toán
     </button>
 
@@ -100,24 +165,23 @@
 </div>
 
 
-<div id="productModal" class="modal">
+<div id="toast"></div>
 
-  <div class="modal-box product-modal">
 
-    <button
-      class="modal-close"
-      onclick="closeProduct()">
-      ×
-    </button>
+<footer>
 
-    <div id="productDetail"></div>
-
+  <div class="footer-logo">
+    TUAN<span>4422</span>
   </div>
 
-</div>
+  <p>TUAN4422 MARKET</p>
 
+  <small>
+    © <span id="year"></span>
+    TUAN4422. All rights reserved.
+  </small>
 
-<div id="toast"></div>
+</footer>
 
 
 <script src="script.js"></script>
