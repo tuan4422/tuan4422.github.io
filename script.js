@@ -1,10 +1,9 @@
-/* =========================================
-   TUAN4422 MARKET
-   Front-end demo
-========================================= */
+/* =====================================
+   TUAN4422 MARKET - MULTI PAGE
+===================================== */
 
 
-/* ---------- DATA ---------- */
+/* ---------- PRODUCTS ---------- */
 
 const products = [
 
@@ -23,7 +22,7 @@ const products = [
     icon:"⚙️",
     price:35000,
     badge:"NEW",
-    description:"Bộ công cụ script tiện ích cho người dùng."
+    description:"Bộ công cụ script tiện ích."
   },
 
   {
@@ -59,7 +58,7 @@ const products = [
     icon:"🌐",
     price:60000,
     badge:"NEW",
-    description:"Mẫu website hiện đại có thể chỉnh sửa."
+    description:"Mẫu website hiện đại."
   },
 
   {
@@ -68,7 +67,7 @@ const products = [
     icon:"🤖",
     price:55000,
     badge:"BOT",
-    description:"Bot mẫu dành cho server cộng đồng."
+    description:"Bot mẫu cho server cộng đồng."
   },
 
   {
@@ -77,13 +76,13 @@ const products = [
     icon:"🎨",
     price:30000,
     badge:"DESIGN",
-    description:"Bộ giao diện mẫu cho dự án cá nhân."
+    description:"Bộ giao diện mẫu."
   }
 
 ];
 
 
-/* ---------- STATE ---------- */
+/* ---------- DATA ---------- */
 
 let cart =
   JSON.parse(
@@ -101,52 +100,7 @@ let balance =
   ) || 100000;
 
 
-/* ---------- ELEMENTS ---------- */
-
-const productsContainer =
-  document.getElementById("products");
-
-const searchInput =
-  document.getElementById("searchInput");
-
-const cartModal =
-  document.getElementById("cartModal");
-
-const productModal =
-  document.getElementById("productModal");
-
-const cartCount =
-  document.getElementById("cartCount");
-
-const cartItems =
-  document.getElementById("cartItems");
-
-const cartTotal =
-  document.getElementById("cartTotal");
-
-const walletBalance =
-  document.getElementById("walletBalance");
-
-const accountBalance =
-  document.getElementById("accountBalance");
-
-const heroBalance =
-  document.getElementById("heroBalance");
-
-const orderCount =
-  document.getElementById("orderCount");
-
-const ordersContainer =
-  document.getElementById("orders");
-
-const transactionsList =
-  document.getElementById("transactionsList");
-
-const toast =
-  document.getElementById("toast");
-
-
-/* ---------- FORMAT MONEY ---------- */
+/* ---------- FORMAT ---------- */
 
 function money(value){
 
@@ -179,21 +133,119 @@ function save(){
 }
 
 
-/* ---------- PRODUCTS ---------- */
+/* ---------- THEME ---------- */
 
-function renderProducts(list = products){
+const themeBtn =
+  document.getElementById("themeBtn");
 
-  productsContainer.innerHTML = "";
+if(
+  localStorage.getItem(
+    "tuan4422_theme"
+  ) === "light"
+){
+
+  document.body.classList.add("light");
+
+  if(themeBtn){
+    themeBtn.textContent="☀";
+  }
+
+}
+
+if(themeBtn){
+
+  themeBtn.addEventListener(
+    "click",
+    () => {
+
+      document.body.classList.toggle(
+        "light"
+      );
+
+      const light =
+        document.body.classList.contains(
+          "light"
+        );
+
+      themeBtn.textContent =
+        light ? "☀" : "☾";
+
+      localStorage.setItem(
+        "tuan4422_theme",
+        light ? "light" : "dark"
+      );
+
+    }
+  );
+
+}
+
+
+/* ---------- MOBILE MENU ---------- */
+
+const menuBtn =
+  document.getElementById("menuBtn");
+
+const nav =
+  document.getElementById("nav");
+
+if(menuBtn && nav){
+
+  menuBtn.addEventListener(
+    "click",
+    () => {
+
+      nav.classList.toggle("open");
+
+    }
+  );
+
+}
+
+
+/* ---------- CART COUNT ---------- */
+
+function updateCartCount(){
+
+  const element =
+    document.getElementById("cartCount");
+
+  if(!element) return;
+
+  element.textContent =
+    cart.reduce(
+      (sum,item) =>
+        sum + item.quantity,
+      0
+    );
+
+}
+
+updateCartCount();
+
+
+/* ---------- SHOP ---------- */
+
+const productsContainer =
+  document.getElementById("products");
+
+function renderProducts(list=products){
+
+  if(!productsContainer) return;
+
+  productsContainer.innerHTML="";
+
 
   if(!list.length){
 
-    productsContainer.innerHTML = `
+    productsContainer.innerHTML=`
       <div class="empty">
         Không tìm thấy sản phẩm.
       </div>
     `;
 
     return;
+
   }
 
 
@@ -211,7 +263,9 @@ function renderProducts(list = products){
           ${product.icon}
         </div>
 
-        <h3>${product.name}</h3>
+        <h3>
+          ${product.name}
+        </h3>
 
         <p class="product-description">
           ${product.description}
@@ -250,31 +304,40 @@ function renderProducts(list = products){
 }
 
 
+renderProducts();
+
+
 /* ---------- SEARCH ---------- */
 
-searchInput.addEventListener(
-  "input",
-  function(){
+const searchInput =
+  document.getElementById("searchInput");
 
-    const keyword =
-      this.value
-        .trim()
-        .toLowerCase();
+if(searchInput){
 
-    const result =
-      products.filter(product =>
-        product.name
+  searchInput.addEventListener(
+    "input",
+    function(){
+
+      const keyword =
+        this.value
           .toLowerCase()
-          .includes(keyword)
+          .trim();
+
+      renderProducts(
+        products.filter(product =>
+          product.name
+            .toLowerCase()
+            .includes(keyword)
+        )
       );
 
-    renderProducts(result);
+    }
+  );
 
-  }
-);
+}
 
 
-/* ---------- PRODUCT DETAIL ---------- */
+/* ---------- PRODUCT ---------- */
 
 function viewProduct(id){
 
@@ -285,9 +348,22 @@ function viewProduct(id){
 
   if(!product) return;
 
-  document.getElementById(
-    "productDetail"
-  ).innerHTML = `
+
+  const detail =
+    document.getElementById(
+      "productDetail"
+    );
+
+  const modal =
+    document.getElementById(
+      "productModal"
+    );
+
+
+  if(!detail || !modal) return;
+
+
+  detail.innerHTML=`
 
     <div class="detail-icon">
       ${product.icon}
@@ -307,25 +383,36 @@ function viewProduct(id){
 
     <button
       class="btn primary full"
-      onclick="addToCart(${product.id}); closeProduct();">
+      onclick="
+        addToCart(${product.id});
+        closeProduct();
+      ">
       Thêm vào giỏ
     </button>
 
   `;
 
-  productModal.classList.add("show");
+
+  modal.classList.add("show");
 
 }
 
 
 function closeProduct(){
 
-  productModal.classList.remove("show");
+  const modal =
+    document.getElementById(
+      "productModal"
+    );
+
+  if(modal){
+    modal.classList.remove("show");
+  }
 
 }
 
 
-/* ---------- CART ---------- */
+/* ---------- ADD CART ---------- */
 
 function addToCart(id){
 
@@ -337,15 +424,15 @@ function addToCart(id){
   if(!product) return;
 
 
-  const exists =
+  const existing =
     cart.find(
       item => item.id === id
     );
 
 
-  if(exists){
+  if(existing){
 
-    exists.quantity++;
+    existing.quantity++;
 
   }else{
 
@@ -359,59 +446,99 @@ function addToCart(id){
 
   save();
 
-  updateCart();
+  updateCartCount();
 
   showToast(
-    "Đã thêm sản phẩm vào giỏ."
+    "Đã thêm vào giỏ hàng."
   );
 
 }
 
 
-function removeFromCart(id){
+/* ---------- OPEN CART ---------- */
 
-  cart =
-    cart.filter(
-      item => item.id !== id
-    );
+const cartBtn =
+  document.getElementById("cartBtn");
 
-  save();
+if(cartBtn){
 
-  updateCart();
+  cartBtn.addEventListener(
+    "click",
+    openCart
+  );
 
 }
 
 
-function updateCart(){
+function openCart(){
 
-  cartCount.textContent =
-    cart.reduce(
-      (total,item) =>
-        total + item.quantity,
-      0
+  renderCart();
+
+  const modal =
+    document.getElementById(
+      "cartModal"
     );
+
+  if(modal){
+    modal.classList.add("show");
+  }
+
+}
+
+
+function closeCart(){
+
+  const modal =
+    document.getElementById(
+      "cartModal"
+    );
+
+  if(modal){
+    modal.classList.remove("show");
+  }
+
+}
+
+
+/* ---------- CART ---------- */
+
+function renderCart(){
+
+  const container =
+    document.getElementById(
+      "cartItems"
+    );
+
+  const totalElement =
+    document.getElementById(
+      "cartTotal"
+    );
+
+
+  if(!container) return;
 
 
   if(!cart.length){
 
-    cartItems.innerHTML = `
+    container.innerHTML=`
       <div class="empty">
         Giỏ hàng đang trống.
       </div>
     `;
 
-    cartTotal.textContent =
-      money(0);
+    if(totalElement){
+      totalElement.textContent=
+        money(0);
+    }
 
     return;
 
   }
 
 
-  let total = 0;
+  let total=0;
 
-
-  cartItems.innerHTML = "";
+  container.innerHTML="";
 
 
   cart.forEach(item => {
@@ -432,7 +559,7 @@ function updateCart(){
     total += itemTotal;
 
 
-    cartItems.innerHTML += `
+    container.innerHTML += `
 
       <div class="cart-item">
 
@@ -466,24 +593,26 @@ function updateCart(){
   });
 
 
-  cartTotal.textContent =
-    money(total);
+  if(totalElement){
+    totalElement.textContent=
+      money(total);
+  }
 
 }
 
 
-function openCart(){
+function removeFromCart(id){
 
-  updateCart();
+  cart =
+    cart.filter(
+      item => item.id !== id
+    );
 
-  cartModal.classList.add("show");
+  save();
 
-}
+  updateCartCount();
 
-
-function closeCart(){
-
-  cartModal.classList.remove("show");
+  renderCart();
 
 }
 
@@ -503,7 +632,7 @@ function checkout(){
   }
 
 
-  let total = 0;
+  let total=0;
 
 
   cart.forEach(item => {
@@ -527,7 +656,7 @@ function checkout(){
   if(balance < total){
 
     showToast(
-      "Số dư demo không đủ."
+      "Số dư không đủ."
     );
 
     return;
@@ -538,7 +667,7 @@ function checkout(){
   balance -= total;
 
 
-  const order = {
+  orders.unshift({
 
     id:
       "TT" +
@@ -548,22 +677,17 @@ function checkout(){
       new Date()
         .toLocaleString("vi-VN"),
 
-    total:total,
+    total:total
 
-    items:
-      [...cart]
-
-  };
+  });
 
 
-  orders.unshift(order);
-
-  cart = [];
+  cart=[];
 
 
   save();
 
-  updateAll();
+  updateCartCount();
 
   closeCart();
 
@@ -572,17 +696,44 @@ function checkout(){
     "Thanh toán thành công!"
   );
 
-
-  document
-    .getElementById("account")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-
 }
 
 
 /* ---------- BALANCE ---------- */
+
+function updateBalance(){
+
+  const elements = [
+
+    document.getElementById(
+      "walletBalance"
+    ),
+
+    document.getElementById(
+      "accountBalance"
+    ),
+
+    document.getElementById(
+      "heroBalance"
+    )
+
+  ];
+
+
+  elements.forEach(element => {
+
+    if(element){
+      element.textContent=
+        money(balance);
+    }
+
+  });
+
+}
+
+
+updateBalance();
+
 
 function addDemoMoney(){
 
@@ -590,10 +741,10 @@ function addDemoMoney(){
 
   save();
 
-  updateAll();
+  updateBalance();
 
   showToast(
-    "Đã cộng 100.000đ demo."
+    "Đã nạp 100.000đ demo."
   );
 
 }
@@ -603,13 +754,31 @@ function addDemoMoney(){
 
 function renderOrders(){
 
-  orderCount.textContent =
-    `${orders.length} đơn`;
+  const container =
+    document.getElementById(
+      "orders"
+    );
+
+  const count =
+    document.getElementById(
+      "orderCount"
+    );
+
+
+  if(!container) return;
+
+
+  if(count){
+
+    count.textContent =
+      `${orders.length} đơn`;
+
+  }
 
 
   if(!orders.length){
 
-    ordersContainer.innerHTML = `
+    container.innerHTML=`
       <div class="empty">
         Chưa có đơn hàng.
       </div>
@@ -620,12 +789,12 @@ function renderOrders(){
   }
 
 
-  ordersContainer.innerHTML = "";
+  container.innerHTML="";
 
 
   orders.forEach(order => {
 
-    ordersContainer.innerHTML += `
+    container.innerHTML += `
 
       <div class="cart-item">
 
@@ -657,14 +826,25 @@ function renderOrders(){
 
 }
 
+renderOrders();
+
 
 /* ---------- TRANSACTIONS ---------- */
 
 function renderTransactions(){
 
+  const container =
+    document.getElementById(
+      "transactionsList"
+    );
+
+
+  if(!container) return;
+
+
   if(!orders.length){
 
-    transactionsList.innerHTML = `
+    container.innerHTML=`
       <div class="empty">
         Chưa có giao dịch.
       </div>
@@ -675,12 +855,12 @@ function renderTransactions(){
   }
 
 
-  transactionsList.innerHTML = "";
+  container.innerHTML="";
 
 
   orders.forEach(order => {
 
-    transactionsList.innerHTML += `
+    container.innerHTML += `
 
       <div class="cart-item">
 
@@ -691,7 +871,7 @@ function renderTransactions(){
         <div class="cart-item-info">
 
           <strong>
-            Thanh toán đơn ${order.id}
+            Thanh toán ${order.id}
           </strong>
 
           <span>
@@ -708,48 +888,22 @@ function renderTransactions(){
 
 }
 
-
-/* ---------- UPDATE ---------- */
-
-function updateBalance(){
-
-  walletBalance.textContent =
-    money(balance);
-
-  accountBalance.textContent =
-    money(balance);
-
-  heroBalance.textContent =
-    money(balance);
-
-}
-
-
-function updateAll(){
-
-  updateBalance();
-
-  updateCart();
-
-  renderOrders();
-
-  renderTransactions();
-
-  document.getElementById(
-    "productCount"
-  ).textContent =
-    products.length;
-
-}
+renderTransactions();
 
 
 /* ---------- CHAT ---------- */
 
-document
-  .getElementById("chatForm")
-  .addEventListener(
+const chatForm =
+  document.getElementById(
+    "chatForm"
+  );
+
+
+if(chatForm){
+
+  chatForm.addEventListener(
     "submit",
-    function(event){
+    event => {
 
       event.preventDefault();
 
@@ -760,17 +914,17 @@ document
         );
 
 
+      const messages =
+        document.getElementById(
+          "chatMessages"
+        );
+
+
       const text =
         input.value.trim();
 
 
       if(!text) return;
-
-
-      const messages =
-        document.getElementById(
-          "chatMessages"
-        );
 
 
       messages.innerHTML += `
@@ -798,14 +952,12 @@ document
       `;
 
 
-      input.value = "";
-
-
-      messages.scrollTop =
-        messages.scrollHeight;
+      input.value="";
 
     }
   );
+
+}
 
 
 /* ---------- FORUM ---------- */
@@ -825,6 +977,9 @@ function createPost(){
     document.getElementById(
       "forumPosts"
     );
+
+
+  if(!forum) return;
 
 
   forum.insertAdjacentHTML(
@@ -870,10 +1025,17 @@ function createPost(){
 
 function copyServerIP(){
 
-  const ip =
+  const element =
     document.getElementById(
       "serverIp"
-    ).textContent;
+    );
+
+
+  if(!element) return;
+
+
+  const ip =
+    element.textContent.trim();
 
 
   navigator.clipboard
@@ -881,14 +1043,14 @@ function copyServerIP(){
     .then(() => {
 
       showToast(
-        "Đã sao chép IP server."
+        "Đã sao chép IP."
       );
 
     })
     .catch(() => {
 
       showToast(
-        "Không thể sao chép tự động."
+        "Không thể sao chép."
       );
 
     });
@@ -903,10 +1065,21 @@ let toastTimer;
 
 function showToast(message){
 
-  toast.textContent =
+  const element =
+    document.getElementById(
+      "toast"
+    );
+
+
+  if(!element) return;
+
+
+  element.textContent =
     message;
 
-  toast.classList.add("show");
+  element.classList.add(
+    "show"
+  );
 
 
   clearTimeout(
@@ -917,7 +1090,7 @@ function showToast(message){
   toastTimer =
     setTimeout(() => {
 
-      toast.classList.remove(
+      element.classList.remove(
         "show"
       );
 
@@ -940,190 +1113,16 @@ function escapeHTML(text){
 }
 
 
-/* ---------- THEME ---------- */
-
-const themeBtn =
-  document.getElementById(
-    "themeBtn"
-  );
-
-
-if(
-  localStorage.getItem(
-    "tuan4422_theme"
-  ) === "light"
-){
-
-  document.body.classList.add(
-    "light"
-  );
-
-  themeBtn.textContent = "☀";
-
-}
-
-
-themeBtn.addEventListener(
-  "click",
-  () => {
-
-    document.body.classList.toggle(
-      "light"
-    );
-
-
-    const light =
-      document.body.classList.contains(
-        "light"
-      );
-
-
-    themeBtn.textContent =
-      light ? "☀" : "☾";
-
-
-    localStorage.setItem(
-      "tuan4422_theme",
-      light ? "light" : "dark"
-    );
-
-  }
-);
-
-
-/* ---------- MOBILE MENU ---------- */
-
-const menuBtn =
-  document.getElementById(
-    "menuBtn"
-  );
-
-const nav =
-  document.getElementById(
-    "nav"
-  );
-
-
-menuBtn.addEventListener(
-  "click",
-  () => {
-
-    nav.classList.toggle(
-      "open"
-    );
-
-  }
-);
-
-
-document
-  .querySelectorAll("nav a")
-  .forEach(link => {
-
-    link.addEventListener(
-      "click",
-      () => {
-
-        nav.classList.remove(
-          "open"
-        );
-
-      }
-    );
-
-  });
-
-
-/* ---------- CART BUTTON ---------- */
-
-document
-  .getElementById("cartBtn")
-  .addEventListener(
-    "click",
-    openCart
-  );
-
-
-/* ---------- MODAL BACKGROUND ---------- */
-
-cartModal.addEventListener(
-  "click",
-  event => {
-
-    if(
-      event.target ===
-      cartModal
-    ){
-
-      closeCart();
-
-    }
-
-  }
-);
-
-
-productModal.addEventListener(
-  "click",
-  event => {
-
-    if(
-      event.target ===
-      productModal
-    ){
-
-      closeProduct();
-
-    }
-
-  }
-);
-
-
-/* ---------- TOP BUTTON ---------- */
-
-const topBtn =
-  document.getElementById(
-    "topBtn"
-  );
-
-
-window.addEventListener(
-  "scroll",
-  () => {
-
-    topBtn.style.display =
-      window.scrollY > 500
-        ? "block"
-        : "none";
-
-  }
-);
-
-
-topBtn.addEventListener(
-  "click",
-  () => {
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-
-  }
-);
-
-
 /* ---------- YEAR ---------- */
 
-document.getElementById(
-  "year"
-).textContent =
-  new Date().getFullYear();
+const year =
+  document.getElementById(
+    "year"
+  );
 
+if(year){
 
-/* ---------- START ---------- */
+  year.textContent =
+    new Date().getFullYear();
 
-renderProducts();
-
-updateAll();
+}
