@@ -1,148 +1,107 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop - TUAN4422 MARKET</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cửa hàng - TUAN4422 MARKET</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
-
-    <a href="index.html" class="brand">
-      <div class="brand-logo">T</div>
-      <div class="brand-text">
-        <strong>TUAN4422</strong>
-        <span>MARKET</span>
-      </div>
+<header class="header">
+    <a href="index.html" class="logo">
+        <span>TUAN</span>4422 <small>MARKET</small>
     </a>
 
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html">Trang chủ</a>
-      <a href="shop.html" class="active">Shop</a>
-      <a href="server.html">Server</a>
-      <a href="chat.html">Chat</a>
-      <a href="forum.html">Forum</a>
-      <a href="account.html">Tài khoản</a>
-      <a href="wallet.html">Ví</a>
-      <a href="admin.html" id="adminMenu" class="admin-only">Admin</a>
+    <button class="mobile-menu" id="mobileMenuBtn">☰</button>
+
+    <nav id="mainNav">
+        <a href="index.html">Trang chủ</a>
+        <a href="shop.html" class="active">Cửa hàng</a>
+        <a href="server.html">Minecraft Server</a>
+        <a href="chat.html">Chat</a>
+        <a href="forum.html">Forum</a>
+        <a href="account.html">Tài khoản</a>
+        <a href="wallet.html">Ví</a>
+        <a href="admin.html" class="admin-only" id="adminMenu">Admin</a>
     </nav>
 
-    <div class="header-actions">
-      <button class="header-icon" id="cartBtn">🛒</button>
-      <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-    </div>
-
-  </div>
+    <button class="theme-btn" id="themeBtn">☾</button>
 </header>
 
-<main>
+<main class="page">
 
-  <section class="page-hero">
-    <div class="eyebrow">MARKETPLACE</div>
-    <h1>Shop</h1>
-    <p>
-      Chọn sản phẩm bạn cần và thêm vào giỏ hàng.
-    </p>
-  </section>
-
-  <section class="section" style="padding-top:20px">
+    <section class="page-title">
+        <span class="section-label">MARKET</span>
+        <h1>Cửa hàng</h1>
+        <p>Khám phá các sản phẩm của TUAN4422 MARKET.</p>
+    </section>
 
     <div class="shop-toolbar">
 
-      <div class="search-box">
-        <input
-          id="searchInput"
-          type="search"
-          placeholder="Tìm kiếm sản phẩm..."
-        >
-      </div>
+        <div class="search-box">
+            <span>⌕</span>
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Tìm kiếm sản phẩm..."
+            >
+        </div>
 
-      <button class="btn btn-secondary" id="cartBtn2">
-        🛒 Giỏ hàng
-      </button>
+        <button class="btn btn-secondary" id="cartBtn">
+            🛒 Giỏ hàng
+            <span id="cartCount" class="cart-count">0</span>
+        </button>
 
     </div>
 
-    <div class="product-grid" id="productGrid"></div>
+    <div class="category-bar">
+        <button class="category active" data-category="all">Tất cả</button>
+        <button class="category" data-category="Script">Script</button>
+        <button class="category" data-category="Account">Account</button>
+        <button class="category" data-category="Minecraft">Minecraft</button>
+    </div>
 
-  </section>
+    <div class="product-grid large-grid" id="productGrid"></div>
 
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <strong>TUAN4422 MARKET</strong>
-      <p>Digital marketplace của TUAN4422.</p>
-    </div>
-
-    <div class="footer-links">
-      <a href="index.html">Trang chủ</a>
-      <a href="server.html">Server</a>
-      <a href="forum.html">Forum</a>
-    </div>
-  </div>
-</footer>
-
-
-<!-- PRODUCT MODAL -->
-
 <div class="modal" id="productModal">
+    <div class="modal-content">
 
-  <div class="modal-content">
+        <button class="modal-close" data-close-modal>×</button>
 
-    <button class="modal-close" data-close-modal>×</button>
+        <h2 id="detailTitle">Sản phẩm</h2>
 
-    <h2 class="modal-title" id="detailTitle">
-      Sản phẩm
-    </h2>
+        <div id="detailContent"></div>
 
-    <div id="detailContent" style="margin-top:20px"></div>
-
-  </div>
-
+    </div>
 </div>
-
-
-<!-- CART MODAL -->
 
 <div class="modal" id="cartModal">
+    <div class="modal-content">
 
-  <div class="modal-content">
+        <button class="modal-close" data-close-modal>×</button>
 
-    <button class="modal-close" data-close-modal>×</button>
+        <h2>Giỏ hàng</h2>
 
-    <h2 class="modal-title">Giỏ hàng</h2>
+        <div id="cartItems" class="cart-items"></div>
 
-    <div
-      class="cart-items"
-      id="cartItems"
-      style="margin-top:20px"
-    ></div>
+        <div class="cart-total">
+            <span>Tổng cộng</span>
+            <strong id="cartTotal">0$</strong>
+        </div>
 
-    <div class="cart-total">
-      <span>Tổng cộng</span>
-      <strong id="cartTotal">0$</strong>
+        <button class="btn btn-primary btn-block" id="checkoutBtn">
+            Thanh toán
+        </button>
+
     </div>
-
-    <button
-      class="btn btn-primary btn-block"
-      id="checkoutBtn"
-      style="margin-top:16px"
-    >
-      Thanh toán
-    </button>
-
-  </div>
-
 </div>
 
-<div class="toast" id="toast"></div>
+<div id="toast" class="toast"></div>
 
+<script src="database.js"></script>
 <script src="script.js"></script>
 
 </body>
