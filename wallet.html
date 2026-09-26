@@ -1,169 +1,108 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Ví - TUAN4422 MARKET</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ví - TUAN4422 MARKET</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body data-page="wallet">
 
-<header class="header">
+<header class="site-header">
+  <div class="header-inner">
 
-<a class="logo" href="index.html">
-TUAN4422<span>MARKET</span>
-</a>
+    <a href="index.html" class="brand">
+      <span class="brand-mark">T</span>
+      <span class="brand-text">
+        <strong>TUAN4422</strong>
+        <small>MARKET</small>
+      </span>
+    </a>
 
-<nav id="nav">
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-page="home">Trang chủ</a>
+      <a href="shop.html" data-page="shop">Shop</a>
+      <a href="server.html" data-page="server">Server</a>
+      <a href="chat.html" data-page="chat">Chat</a>
+      <a href="forum.html" data-page="forum">Forum</a>
+      <a href="account.html" data-page="account">Tài khoản</a>
+      <a href="wallet.html" data-page="wallet">Ví</a>
+    </nav>
 
-<a href="index.html">Trang chủ</a>
-<a href="shop.html">Shop</a>
-<a href="server.html">Server</a>
-<a href="chat.html">Chat</a>
-<a href="forum.html">Forum</a>
-<a href="account.html">Tài khoản</a>
-<a class="active" href="wallet.html">Ví</a>
+    <div class="header-tools">
+      <button class="header-btn cart-btn" id="cartBtn">
+        Giỏ hàng
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="mobile-menu" id="menuBtn">☰</button>
+    </div>
 
-</nav>
-
-<div class="header-actions">
-
-<button id="themeBtn" class="icon-btn">☾</button>
-
-<button id="cartBtn" class="cart-btn">
-🛒
-<span id="cartCount">0</span>
-</button>
-
-<button id="menuBtn" class="menu-btn">☰</button>
-
-</div>
-
+  </div>
 </header>
 
-
 <main class="page">
+  <div class="container">
 
-<div class="page-heading">
+    <div class="page-heading">
+      <h1>Ví</h1>
+      <p>Quản lý số dư demo của bạn.</p>
+    </div>
 
-<div>
+    <div class="dashboard-grid">
 
-<small class="small-title">
-WALLET
-</small>
+      <div class="panel">
 
-<h1>Ví của tôi</h1>
+        <div class="wallet-balance">
+          <span>Số dư hiện tại</span>
+          <strong id="walletBalance">100.000$</strong>
+        </div>
 
-<p>
-Quản lý số dư và lịch sử giao dịch.
-</p>
+        <button
+          class="btn btn-primary"
+          id="addDemoMoney">
+          +100.000$ Demo
+        </button>
 
-</div>
+        <div class="demo-note">
+          Chức năng cộng tiền ở đây chỉ là demo.
+          Website chưa kết nối thanh toán thật.
+        </div>
 
-</div>
+      </div>
 
+      <div class="panel">
 
-<div class="wallet-card">
+        <h2>Giao dịch</h2>
+        <p class="panel-description">
+          Các giao dịch sẽ được kết nối với hệ thống thật sau.
+        </p>
 
-<span>Số dư hiện tại</span>
+        <div class="transaction">
+          <div>
+            <strong>Số dư ban đầu</strong>
+            <small>Demo</small>
+          </div>
 
-<strong id="walletBalance">
-100.000$
-</strong>
+          <strong class="plus">+100.000$</strong>
+        </div>
 
-<button
-id="addMoneyBtn"
-class="btn primary">
-Nạp tiền demo
-</button>
+      </div>
 
-</div>
+    </div>
 
-
-<div class="transactions">
-
-<div class="order-header">
-
-<h2>Lịch sử giao dịch</h2>
-
-</div>
-
-<div id="transactionsList">
-
-<div class="empty">
-Chưa có giao dịch.
-</div>
-
-</div>
-
-</div>
-
+  </div>
 </main>
 
-
 <footer>
-
-<div class="footer-logo">
-TUAN4422<span>MARKET</span>
-</div>
-
-<p>
-© <span id="year"></span> TUAN4422 MARKET
-</p>
-
+  <div class="footer-inner">
+    <div class="footer-logo">TUAN4422 MARKET</div>
+    <div>© 2026 TUAN4422</div>
+  </div>
 </footer>
-
-
-<div id="cartModal" class="modal">
-
-<div class="modal-box">
-
-<div class="modal-header">
-
-<h2>🛒 Giỏ hàng</h2>
-
-<button
-id="cartClose"
-class="modal-close">
-×
-</button>
-
-</div>
-
-<div id="cartItems"></div>
-
-<div class="cart-total">
-
-<span>Tổng cộng</span>
-
-<strong id="cartTotal">
-0$
-</strong>
-
-</div>
-
-<button
-id="checkoutBtn"
-class="btn primary full">
-Thanh toán
-</button>
-
-</div>
-
-</div>
-
 
 <div id="toast"></div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
