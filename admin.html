@@ -3,214 +3,1915 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - TUAN4422</title>
+    <title>TUAN4422 MARKET - Admin</title>
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .admin-wrap {
+            max-width: 1250px;
+            margin: 40px auto;
+            padding: 0 20px 60px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .admin-header h1 {
+            margin: 0;
+        }
+
+        .admin-header p {
+            color: #8ea4bd;
+            margin-top: 6px;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 20px;
+        }
+
+        .admin-sidebar {
+            background: #0b1625;
+            border: 1px solid #17304d;
+            border-radius: 16px;
+            padding: 12px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .admin-tab {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            color: #a9bdd2;
+            padding: 13px 14px;
+            border-radius: 10px;
+            text-align: left;
+            cursor: pointer;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .admin-tab:hover,
+        .admin-tab.active {
+            background: #102b46;
+            color: #55ff55;
+        }
+
+        .admin-content {
+            min-width: 0;
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #0b1625;
+            border: 1px solid #17304d;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .stat-title {
+            color: #8ea4bd;
+            font-size: 13px;
+        }
+
+        .stat-value {
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 8px;
+            color: #fff;
+        }
+
+        .admin-card {
+            background: #0b1625;
+            border: 1px solid #17304d;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .admin-card h2 {
+            margin-top: 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .form-grid .full {
+            grid-column: 1 / -1;
+        }
+
+        .admin-input,
+        .admin-textarea,
+        .admin-select {
+            width: 100%;
+            box-sizing: border-box;
+            background: #07111e;
+            border: 1px solid #1b3857;
+            color: white;
+            padding: 12px;
+            border-radius: 9px;
+            outline: none;
+        }
+
+        .admin-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .admin-input:focus,
+        .admin-textarea:focus,
+        .admin-select:focus {
+            border-color: #299cff;
+        }
+
+        .admin-btn {
+            border: 0;
+            padding: 10px 15px;
+            border-radius: 9px;
+            cursor: pointer;
+            background: #299cff;
+            color: white;
+            font-weight: 600;
+        }
+
+        .admin-btn:hover {
+            opacity: .85;
+        }
+
+        .admin-btn.green {
+            background: #178c45;
+        }
+
+        .admin-btn.red {
+            background: #b82d40;
+        }
+
+        .admin-btn.yellow {
+            background: #8c7117;
+        }
+
+        .admin-btn.gray {
+            background: #26384b;
+        }
+
+        .admin-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .admin-table-wrap {
+            overflow-x: auto;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #17304d;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .admin-table th {
+            color: #55ff55;
+            font-size: 13px;
+        }
+
+        .admin-table td {
+            color: #d9e6f2;
+            font-size: 14px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .status.online {
+            background: #103b28;
+            color: #55ff55;
+        }
+
+        .status.offline {
+            background: #40202a;
+            color: #ff7c89;
+        }
+
+        .login-box {
+            max-width: 420px;
+            margin: 100px auto;
+            background: #0b1625;
+            border: 1px solid #17304d;
+            border-radius: 18px;
+            padding: 30px;
+        }
+
+        .login-box h1 {
+            text-align: center;
+            color: #55ff55;
+        }
+
+        .login-box .admin-input {
+            margin-bottom: 12px;
+        }
+
+        .login-box .admin-btn {
+            width: 100%;
+        }
+
+        .empty {
+            padding: 25px;
+            text-align: center;
+            color: #71869c;
+        }
+
+        @media (max-width: 850px) {
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 5px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid .full {
+                grid-column: auto;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<header class="header">
-    <a href="index.html" class="logo">
-        <span>TUAN</span>4422 <small>MARKET</small>
-    </a>
+<!-- ================= LOGIN ================= -->
 
-    <button class="mobile-menu" id="mobileMenuBtn">☰</button>
+<div id="loginScreen" class="login-box">
+    <h1>⚙ ADMIN</h1>
 
-    <nav id="mainNav">
-        <a href="index.html">Trang chủ</a>
-        <a href="shop.html">Cửa hàng</a>
-        <a href="server.html">Minecraft Server</a>
-        <a href="chat.html">Chat</a>
-        <a href="forum.html">Forum</a>
-        <a href="account.html">Tài khoản</a>
-        <a href="wallet.html">Ví</a>
-        <a href="admin.html" class="active">Admin</a>
-    </nav>
+    <input
+        id="adminUsername"
+        class="admin-input"
+        type="text"
+        placeholder="Tên tài khoản"
+    >
 
-    <button class="theme-btn" id="themeBtn">☾</button>
-</header>
+    <input
+        id="adminPassword"
+        class="admin-input"
+        type="password"
+        placeholder="Mật khẩu"
+    >
 
-<main class="page">
+    <button class="admin-btn green" onclick="adminLogin()">
+        Đăng nhập Admin
+    </button>
 
-    <section class="page-title">
-        <span class="section-label">CONTROL PANEL</span>
-        <h1>Admin</h1>
-        <p>Quản lý TUAN4422 MARKET.</p>
-    </section>
+    <p id="loginError" style="color:#ff6675;text-align:center;"></p>
+</div>
 
-    <section id="adminLoginSection" class="admin-login panel">
 
-        <h2>Đăng nhập Admin</h2>
+<!-- ================= ADMIN ================= -->
 
-        <p class="description">
-            Demo Admin: <strong>admin</strong> /
-            <strong>tuan4422</strong>
-        </p>
+<div id="adminPanel" style="display:none;">
 
-        <form id="adminLoginForm">
+    <div class="admin-wrap">
 
-            <input
-                id="adminUsername"
-                class="input"
-                type="text"
-                placeholder="Tên Admin"
-                required
-            >
+        <div class="admin-header">
+            <div>
+                <h1>⚙ TUAN4422 MARKET ADMIN</h1>
+                <p>Quản lý toàn bộ website</p>
+            </div>
 
-            <input
-                id="adminPassword"
-                class="input"
-                type="password"
-                placeholder="Mật khẩu"
-                required
-            >
-
-            <button class="btn btn-primary">
-                Đăng nhập
+            <button class="admin-btn red" onclick="adminLogout()">
+                Đăng xuất
             </button>
+        </div>
 
-        </form>
+        <div class="admin-grid">
 
-    </section>
+            <!-- SIDEBAR -->
 
-    <section id="adminDashboard" class="hidden">
+            <aside class="admin-sidebar">
 
-        <div class="admin-stats">
+                <button class="admin-tab active" data-tab="dashboard">
+                    📊 Tổng quan
+                </button>
 
-            <div class="stat-card">
-                <span>SẢN PHẨM</span>
-                <strong id="adminProductCount">0</strong>
-            </div>
+                <button class="admin-tab" data-tab="products">
+                    🛒 Sản phẩm
+                </button>
 
-            <div class="stat-card">
-                <span>ĐƠN HÀNG</span>
-                <strong id="adminOrderCount">0</strong>
-            </div>
+                <button class="admin-tab" data-tab="orders">
+                    📦 Đơn hàng
+                </button>
 
-            <div class="stat-card">
-                <span>USER</span>
-                <strong id="adminUserCount">0</strong>
-            </div>
+                <button class="admin-tab" data-tab="users">
+                    👤 Tài khoản
+                </button>
+
+                <button class="admin-tab" data-tab="wallet">
+                    💰 Quản lý ví
+                </button>
+
+                <button class="admin-tab" data-tab="chat">
+                    💬 Chat
+                </button>
+
+                <button class="admin-tab" data-tab="forum">
+                    📝 Forum
+                </button>
+
+                <button class="admin-tab" data-tab="server">
+                    ⛏ Minecraft Server
+                </button>
+
+            </aside>
+
+
+            <!-- CONTENT -->
+
+            <main class="admin-content">
+
+                <!-- ================= DASHBOARD ================= -->
+
+                <section id="dashboard" class="admin-section active">
+
+                    <div class="stats-grid">
+
+                        <div class="stat-card">
+                            <div class="stat-title">Sản phẩm</div>
+                            <div id="statProducts" class="stat-value">0</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-title">Tài khoản</div>
+                            <div id="statUsers" class="stat-value">0</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-title">Đơn hàng</div>
+                            <div id="statOrders" class="stat-value">0</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-title">Tổng số dư</div>
+                            <div id="statBalance" class="stat-value">0$</div>
+                        </div>
+
+                    </div>
+
+                    <div class="admin-card">
+                        <h2>Trạng thái hệ thống</h2>
+
+                        <p>
+                            Website:
+                            <span class="status online">Đang hoạt động</span>
+                        </p>
+
+                        <p>
+                            Admin:
+                            <span class="status online">Đã đăng nhập</span>
+                        </p>
+
+                        <p>
+                            Database:
+                            <span class="status offline">
+                                LocalStorage Demo
+                            </span>
+                        </p>
+                    </div>
+
+                </section>
+
+
+                <!-- ================= PRODUCTS ================= -->
+
+                <section id="products" class="admin-section">
+
+                    <div class="admin-card">
+
+                        <h2>➕ Thêm / sửa sản phẩm</h2>
+
+                        <input type="hidden" id="productId">
+
+                        <div class="form-grid">
+
+                            <input
+                                id="productName"
+                                class="admin-input"
+                                placeholder="Tên sản phẩm"
+                            >
+
+                            <input
+                                id="productPrice"
+                                class="admin-input"
+                                type="number"
+                                placeholder="Giá"
+                            >
+
+                            <select id="productCategory" class="admin-select">
+                                <option>Script</option>
+                                <option>Account</option>
+                                <option>Minecraft</option>
+                                <option>Khác</option>
+                            </select>
+
+                            <input
+                                id="productImage"
+                                class="admin-input"
+                                placeholder="images/products/example.png"
+                            >
+
+                            <textarea
+                                id="productDescription"
+                                class="admin-textarea full"
+                                placeholder="Mô tả sản phẩm"
+                            ></textarea>
+
+                        </div>
+
+                        <br>
+
+                        <div class="admin-actions">
+
+                            <button
+                                class="admin-btn green"
+                                onclick="saveProduct()"
+                            >
+                                Lưu sản phẩm
+                            </button>
+
+                            <button
+                                class="admin-btn gray"
+                                onclick="clearProductForm()"
+                            >
+                                Làm mới
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="admin-card">
+
+                        <h2>Danh sách sản phẩm</h2>
+
+                        <div class="admin-table-wrap">
+                            <table class="admin-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Tên</th>
+                                        <th>Loại</th>
+                                        <th>Giá</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="productTable"></tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= ORDERS ================= -->
+
+                <section id="orders" class="admin-section">
+
+                    <div class="admin-card">
+
+                        <h2>📦 Quản lý đơn hàng</h2>
+
+                        <div class="admin-table-wrap">
+
+                            <table class="admin-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Mã đơn</th>
+                                        <th>Tài khoản</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Số tiền</th>
+                                        <th>Thời gian</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="orderTable"></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= USERS ================= -->
+
+                <section id="users" class="admin-section">
+
+                    <div class="admin-card">
+
+                        <h2>👤 Quản lý tài khoản</h2>
+
+                        <input
+                            id="userSearch"
+                            class="admin-input"
+                            placeholder="Tìm tài khoản..."
+                            oninput="renderUsers()"
+                        >
+
+                    </div>
+
+                    <div class="admin-card">
+
+                        <div class="admin-table-wrap">
+
+                            <table class="admin-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Tài khoản</th>
+                                        <th>Quyền</th>
+                                        <th>Số dư</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="userTable"></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= WALLET ================= -->
+
+                <section id="wallet" class="admin-section">
+
+                    <div class="admin-card">
+
+                        <h2>💰 Quản lý ví người dùng</h2>
+
+                        <div class="form-grid">
+
+                            <input
+                                id="walletUser"
+                                class="admin-input"
+                                placeholder="Tên tài khoản"
+                            >
+
+                            <input
+                                id="walletAmount"
+                                class="admin-input"
+                                type="number"
+                                placeholder="Số tiền"
+                            >
+
+                            <input
+                                id="walletReason"
+                                class="admin-input full"
+                                placeholder="Lý do thay đổi số dư"
+                            >
+
+                        </div>
+
+                        <br>
+
+                        <div class="admin-actions">
+
+                            <button
+                                class="admin-btn green"
+                                onclick="changeWallet(1)"
+                            >
+                                + Cộng tiền
+                            </button>
+
+                            <button
+                                class="admin-btn red"
+                                onclick="changeWallet(-1)"
+                            >
+                                - Trừ tiền
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="admin-card">
+
+                        <h2>Danh sách ví</h2>
+
+                        <div class="admin-table-wrap">
+
+                            <table class="admin-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Tài khoản</th>
+                                        <th>Số dư</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="walletTable"></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= CHAT ================= -->
+
+                <section id="chat" class="admin-section">
+
+                    <div class="admin-card">
+
+                        <h2>💬 Quản lý Chat</h2>
+
+                        <div class="admin-actions">
+
+                            <button
+                                class="admin-btn red"
+                                onclick="clearChat()"
+                            >
+                                Xóa toàn bộ tin nhắn
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="admin-card">
+
+                        <div id="chatAdminList"></div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= FORUM ================= -->
+
+                <section id="forum" class="admin-section">
+
+                    <div class="admin-card">
+
+                        <h2>📝 Quản lý Forum</h2>
+
+                        <div class="admin-actions">
+
+                            <button
+                                class="admin-btn red"
+                                onclick="clearForum()"
+                            >
+                                Xóa toàn bộ bài viết
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="admin-card">
+
+                        <div id="forumAdminList"></div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= SERVER ================= -->
+
+                <section id="server" class="admin-section">
+
+                    <div class="admin-card">
+
+                        <h2>⛏ Minecraft Server</h2>
+
+                        <div class="form-grid">
+
+                            <input
+                                id="serverName"
+                                class="admin-input"
+                                placeholder="Tên server"
+                            >
+
+                            <input
+                                id="serverIp"
+                                class="admin-input"
+                                placeholder="IP server"
+                            >
+
+                            <input
+                                id="serverPort"
+                                class="admin-input"
+                                placeholder="Port"
+                            >
+
+                            <select id="serverStatus" class="admin-select">
+                                <option value="online">Online</option>
+                                <option value="offline">Offline</option>
+                            </select>
+
+                            <textarea
+                                id="serverDescription"
+                                class="admin-textarea full"
+                                placeholder="Mô tả server"
+                            ></textarea>
+
+                        </div>
+
+                        <br>
+
+                        <button
+                            class="admin-btn green"
+                            onclick="saveServer()"
+                        >
+                            Lưu thông tin Server
+                        </button>
+
+                    </div>
+
+                    <div class="admin-card">
+
+                        <h2>Xem trước</h2>
+
+                        <div id="serverPreview"></div>
+
+                    </div>
+
+                </section>
+
+            </main>
 
         </div>
 
-        <div class="panel">
+    </div>
 
-            <div class="panel-head">
-                <h2>Thêm / chỉnh sửa sản phẩm</h2>
-            </div>
+</div>
 
-            <form id="productForm" class="admin-form">
 
-                <input type="hidden" id="productId">
+<script src="database.js"></script>
 
-                <input
-                    id="productName"
-                    class="input"
-                    placeholder="Tên sản phẩm"
-                    required
-                >
+<script>
 
-                <select id="productCategory" class="input">
-                    <option value="Script">Script</option>
-                    <option value="Account">Account</option>
-                    <option value="Minecraft">Minecraft</option>
-                </select>
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "tuan4422";
 
-                <input
-                    id="productPrice"
-                    class="input"
-                    type="number"
-                    placeholder="Giá"
-                    required
-                >
+const STORAGE = {
+    products: "tuan4422_products",
+    users: "tuan4422_users",
+    orders: "tuan4422_orders",
+    balance: "tuan4422_balance",
+    chat: "tuan4422_chat",
+    forum: "tuan4422_forum",
+    admin: "tuan4422_admin",
+    server: "tuan4422_server"
+};
 
-                <input
-                    id="productImage"
-                    class="input"
-                    placeholder="Ảnh sản phẩm, ví dụ: images/products/script-ui.png"
-                >
 
-                <textarea
-                    id="productDescription"
-                    class="input textarea"
-                    placeholder="Mô tả sản phẩm"
-                ></textarea>
+/* ================= BASIC ================= */
 
-                <label class="checkbox">
-                    <input type="checkbox" id="productFeatured">
-                    Sản phẩm nổi bật
-                </label>
+function getJSON(key, fallback) {
 
-                <div class="form-buttons">
+    try {
+
+        const data = localStorage.getItem(key);
+
+        if (!data) return fallback;
+
+        return JSON.parse(data);
+
+    } catch {
+
+        return fallback;
+
+    }
+
+}
+
+
+function setJSON(key, value) {
+
+    localStorage.setItem(key, JSON.stringify(value));
+
+}
+
+
+function money(value) {
+
+    return Number(value || 0).toLocaleString("vi-VN") + "$";
+
+}
+
+
+/* ================= LOGIN ================= */
+
+function adminLogin() {
+
+    const username =
+        document.getElementById("adminUsername").value.trim();
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    if (
+        username === ADMIN_USER &&
+        password === ADMIN_PASS
+    ) {
+
+        localStorage.setItem(STORAGE.admin, "true");
+
+        showAdmin();
+
+    } else {
+
+        document.getElementById("loginError").textContent =
+            "Sai tài khoản hoặc mật khẩu.";
+
+    }
+
+}
+
+
+function adminLogout() {
+
+    localStorage.removeItem(STORAGE.admin);
+
+    location.reload();
+
+}
+
+
+function showAdmin() {
+
+    document.getElementById("loginScreen").style.display = "none";
+
+    document.getElementById("adminPanel").style.display = "block";
+
+    renderAll();
+
+}
+
+
+/* ================= TABS ================= */
+
+document.querySelectorAll(".admin-tab").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document.querySelectorAll(".admin-tab")
+            .forEach(x => x.classList.remove("active"));
+
+        document.querySelectorAll(".admin-section")
+            .forEach(x => x.classList.remove("active"));
+
+        button.classList.add("active");
+
+        const section =
+            document.getElementById(button.dataset.tab);
+
+        if (section) {
+
+            section.classList.add("active");
+
+        }
+
+        renderAll();
+
+    });
+
+});
+
+
+/* ================= PRODUCTS ================= */
+
+function getProducts() {
+
+    return getJSON(STORAGE.products, []);
+
+}
+
+
+function saveProduct() {
+
+    const id =
+        document.getElementById("productId").value.trim();
+
+    const name =
+        document.getElementById("productName").value.trim();
+
+    const price =
+        Number(document.getElementById("productPrice").value);
+
+    const category =
+        document.getElementById("productCategory").value;
+
+    const image =
+        document.getElementById("productImage").value.trim();
+
+    const description =
+        document.getElementById("productDescription").value.trim();
+
+    if (!name || !price) {
+
+        alert("Hãy nhập tên và giá sản phẩm.");
+
+        return;
+
+    }
+
+    const products = getProducts();
+
+    if (id) {
+
+        const product =
+            products.find(x => x.id === id);
+
+        if (product) {
+
+            product.name = name;
+            product.price = price;
+            product.category = category;
+            product.image = image;
+            product.description = description;
+
+        }
+
+    } else {
+
+        products.push({
+
+            id:
+                "product-" +
+                Date.now(),
+
+            name,
+            price,
+            category,
+            image,
+            description,
+            featured: false
+
+        });
+
+    }
+
+    setJSON(STORAGE.products, products);
+
+    clearProductForm();
+
+    renderProducts();
+
+    alert("Đã lưu sản phẩm.");
+
+}
+
+
+function editProduct(id) {
+
+    const product =
+        getProducts().find(x => x.id === id);
+
+    if (!product) return;
+
+    document.getElementById("productId").value = product.id;
+
+    document.getElementById("productName").value =
+        product.name || "";
+
+    document.getElementById("productPrice").value =
+        product.price || "";
+
+    document.getElementById("productCategory").value =
+        product.category || "Khác";
+
+    document.getElementById("productImage").value =
+        product.image || "";
+
+    document.getElementById("productDescription").value =
+        product.description || "";
+
+    document.querySelector('[data-tab="products"]').click();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+function deleteProduct(id) {
+
+    if (!confirm("Xóa sản phẩm này?")) return;
+
+    const products =
+        getProducts().filter(x => x.id !== id);
+
+    setJSON(STORAGE.products, products);
+
+    renderProducts();
+
+}
+
+
+function clearProductForm() {
+
+    document.getElementById("productId").value = "";
+
+    document.getElementById("productName").value = "";
+
+    document.getElementById("productPrice").value = "";
+
+    document.getElementById("productImage").value = "";
+
+    document.getElementById("productDescription").value = "";
+
+}
+
+
+function renderProducts() {
+
+    const products = getProducts();
+
+    const table =
+        document.getElementById("productTable");
+
+    if (!table) return;
+
+    if (!products.length) {
+
+        table.innerHTML =
+            `<tr><td colspan="4" class="empty">Chưa có sản phẩm.</td></tr>`;
+
+        return;
+
+    }
+
+    table.innerHTML = products.map(product => `
+
+        <tr>
+
+            <td>${escapeHTML(product.name)}</td>
+
+            <td>${escapeHTML(product.category || "Khác")}</td>
+
+            <td>${money(product.price)}</td>
+
+            <td>
+
+                <div class="admin-actions">
 
                     <button
-                        type="submit"
-                        class="btn btn-primary"
-                        id="saveProductBtn"
+                        class="admin-btn yellow"
+                        onclick="editProduct('${product.id}')"
                     >
-                        Lưu sản phẩm
+                        Sửa
                     </button>
 
                     <button
-                        type="button"
-                        class="btn btn-secondary hidden"
-                        id="cancelEditBtn"
+                        class="admin-btn red"
+                        onclick="deleteProduct('${product.id}')"
                     >
-                        Hủy chỉnh sửa
+                        Xóa
                     </button>
 
                 </div>
 
-            </form>
+            </td>
 
-        </div>
+        </tr>
 
-        <div class="panel">
+    `).join("");
 
-            <div class="panel-head">
-                <h2>Quản lý sản phẩm</h2>
+}
 
-                <button
-                    class="btn btn-secondary"
-                    id="refreshProductsBtn"
-                >
-                    Làm mới
-                </button>
+
+/* ================= ORDERS ================= */
+
+function renderOrders() {
+
+    const orders =
+        getJSON(STORAGE.orders, []);
+
+    const table =
+        document.getElementById("orderTable");
+
+    if (!table) return;
+
+    if (!orders.length) {
+
+        table.innerHTML =
+            `<tr><td colspan="5" class="empty">Chưa có đơn hàng.</td></tr>`;
+
+        return;
+
+    }
+
+    table.innerHTML = orders.map(order => {
+
+        const items =
+            Array.isArray(order.items)
+                ? order.items
+                    .map(x => x.name || x.productName || "Sản phẩm")
+                    .join(", ")
+                : "Sản phẩm";
+
+        return `
+
+            <tr>
+
+                <td>${escapeHTML(String(order.id || "—"))}</td>
+
+                <td>${escapeHTML(
+                    order.username ||
+                    order.user ||
+                    "Không rõ"
+                )}</td>
+
+                <td>${escapeHTML(items)}</td>
+
+                <td>${money(
+                    order.total ||
+                    order.amount ||
+                    0
+                )}</td>
+
+                <td>${escapeHTML(
+                    order.date ||
+                    order.createdAt ||
+                    "—"
+                )}</td>
+
+            </tr>
+
+        `;
+
+    }).join("");
+
+}
+
+
+/* ================= USERS ================= */
+
+function getUsers() {
+
+    return getJSON(STORAGE.users, []);
+
+}
+
+
+function getUserBalance(username) {
+
+    const balances =
+        getJSON(STORAGE.balance, {});
+
+    if (
+        typeof balances === "object" &&
+        !Array.isArray(balances)
+    ) {
+
+        return Number(balances[username] || 0);
+
+    }
+
+    return 0;
+
+}
+
+
+function renderUsers() {
+
+    const table =
+        document.getElementById("userTable");
+
+    if (!table) return;
+
+    const search =
+        (document.getElementById("userSearch")?.value || "")
+            .toLowerCase();
+
+    const users =
+        getUsers().filter(user => {
+
+            const username =
+                String(
+                    user.username ||
+                    user.name ||
+                    ""
+                ).toLowerCase();
+
+            return username.includes(search);
+
+        });
+
+    if (!users.length) {
+
+        table.innerHTML =
+            `<tr><td colspan="4" class="empty">Không có tài khoản.</td></tr>`;
+
+        return;
+
+    }
+
+    table.innerHTML = users.map(user => {
+
+        const username =
+            user.username ||
+            user.name ||
+            "Không rõ";
+
+        const isAdmin =
+            user.admin === true ||
+            user.role === "admin";
+
+        return `
+
+            <tr>
+
+                <td>${escapeHTML(username)}</td>
+
+                <td>
+                    ${
+                        isAdmin
+                        ? '<span class="status online">Admin</span>'
+                        : '<span class="status offline">User</span>'
+                    }
+                </td>
+
+                <td>${money(getUserBalance(username))}</td>
+
+                <td>
+
+                    <div class="admin-actions">
+
+                        <button
+                            class="admin-btn red"
+                            onclick="deleteUser('${escapeAttribute(username)}')"
+                        >
+                            Xóa
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }).join("");
+
+}
+
+
+function deleteUser(username) {
+
+    if (
+        username === ADMIN_USER
+    ) {
+
+        alert("Không thể xóa tài khoản Admin chính.");
+
+        return;
+
+    }
+
+    if (!confirm(
+        "Xóa tài khoản " + username + "?"
+    )) return;
+
+    const users =
+        getUsers().filter(user =>
+            (user.username || user.name) !== username
+        );
+
+    setJSON(STORAGE.users, users);
+
+    renderUsers();
+
+}
+
+
+/* ================= WALLET ================= */
+
+function renderWallet() {
+
+    const table =
+        document.getElementById("walletTable");
+
+    if (!table) return;
+
+    const balances =
+        getJSON(STORAGE.balance, {});
+
+    const users =
+        getUsers();
+
+    const names = new Set();
+
+    users.forEach(user => {
+
+        const username =
+            user.username ||
+            user.name;
+
+        if (username) names.add(username);
+
+    });
+
+    if (
+        balances &&
+        typeof balances === "object" &&
+        !Array.isArray(balances)
+    ) {
+
+        Object.keys(balances).forEach(name =>
+            names.add(name)
+        );
+
+    }
+
+    if (!names.size) {
+
+        table.innerHTML =
+            `<tr><td colspan="2" class="empty">Chưa có dữ liệu ví.</td></tr>`;
+
+        return;
+
+    }
+
+    table.innerHTML =
+        [...names].map(username => `
+
+            <tr>
+
+                <td>${escapeHTML(username)}</td>
+
+                <td>${money(getUserBalance(username))}</td>
+
+            </tr>
+
+        `).join("");
+
+}
+
+
+function changeWallet(multiplier) {
+
+    const username =
+        document.getElementById("walletUser")
+            .value.trim();
+
+    const amount =
+        Number(
+            document.getElementById("walletAmount")
+                .value
+        );
+
+    const reason =
+        document.getElementById("walletReason")
+            .value.trim();
+
+    if (!username || !amount || amount <= 0) {
+
+        alert("Nhập tài khoản và số tiền hợp lệ.");
+
+        return;
+
+    }
+
+    const balances =
+        getJSON(STORAGE.balance, {});
+
+    const oldBalance =
+        Number(balances[username] || 0);
+
+    const newBalance =
+        oldBalance + amount * multiplier;
+
+    if (newBalance < 0) {
+
+        alert("Không thể trừ tiền vượt quá số dư.");
+
+        return;
+
+    }
+
+    balances[username] = newBalance;
+
+    setJSON(STORAGE.balance, balances);
+
+    let history =
+        getJSON("tuan4422_wallet_history", []);
+
+    history.push({
+
+        username,
+
+        amount:
+            amount * multiplier,
+
+        oldBalance,
+
+        newBalance,
+
+        reason:
+            reason || "Admin thay đổi số dư",
+
+        time:
+            new Date().toLocaleString("vi-VN")
+
+    });
+
+    setJSON(
+        "tuan4422_wallet_history",
+        history
+    );
+
+    renderWallet();
+
+    renderDashboard();
+
+    alert(
+        multiplier > 0
+            ? "Đã cộng tiền."
+            : "Đã trừ tiền."
+    );
+
+}
+
+
+/* ================= CHAT ================= */
+
+function renderChat() {
+
+    const box =
+        document.getElementById("chatAdminList");
+
+    if (!box) return;
+
+    const messages =
+        getJSON(STORAGE.chat, []);
+
+    if (!messages.length) {
+
+        box.innerHTML =
+            `<div class="empty">Chưa có tin nhắn.</div>`;
+
+        return;
+
+    }
+
+    box.innerHTML = messages.map((message, index) => `
+
+        <div
+            style="
+                padding:14px 0;
+                border-bottom:1px solid #17304d;
+            "
+        >
+
+            <strong>
+                ${escapeHTML(
+                    message.username ||
+                    message.user ||
+                    "Người dùng"
+                )}
+            </strong>
+
+            <div style="color:#9db0c4;margin:5px 0;">
+                ${escapeHTML(
+                    message.text ||
+                    message.message ||
+                    ""
+                )}
             </div>
 
-            <div id="adminProductList"></div>
+            <button
+                class="admin-btn red"
+                onclick="deleteChatMessage(${index})"
+            >
+                Xóa
+            </button>
 
         </div>
 
-        <div class="panel">
+    `).join("");
 
-            <div class="panel-head">
-                <h2>Đơn hàng</h2>
+}
 
-                <button
-                    class="btn btn-secondary"
-                    id="refreshOrdersBtn"
-                >
-                    Làm mới
-                </button>
-            </div>
 
-            <div id="adminOrderList"></div>
+function deleteChatMessage(index) {
+
+    const messages =
+        getJSON(STORAGE.chat, []);
+
+    messages.splice(index, 1);
+
+    setJSON(STORAGE.chat, messages);
+
+    renderChat();
+
+}
+
+
+function clearChat() {
+
+    if (!confirm(
+        "Xóa toàn bộ tin nhắn?"
+    )) return;
+
+    localStorage.removeItem(STORAGE.chat);
+
+    renderChat();
+
+}
+
+
+/* ================= FORUM ================= */
+
+function renderForum() {
+
+    const box =
+        document.getElementById("forumAdminList");
+
+    if (!box) return;
+
+    const posts =
+        getJSON(STORAGE.forum, []);
+
+    if (!posts.length) {
+
+        box.innerHTML =
+            `<div class="empty">Chưa có bài viết.</div>`;
+
+        return;
+
+    }
+
+    box.innerHTML = posts.map((post, index) => `
+
+        <div
+            style="
+                padding:15px 0;
+                border-bottom:1px solid #17304d;
+            "
+        >
+
+            <h3>
+                ${escapeHTML(
+                    post.title ||
+                    "Không có tiêu đề"
+                )}
+            </h3>
+
+            <p style="color:#9db0c4;">
+                ${escapeHTML(
+                    post.content ||
+                    ""
+                )}
+            </p>
+
+            <small>
+                Người đăng:
+                ${escapeHTML(
+                    post.username ||
+                    post.user ||
+                    "Không rõ"
+                )}
+            </small>
+
+            <br><br>
+
+            <button
+                class="admin-btn red"
+                onclick="deleteForumPost(${index})"
+            >
+                Xóa bài
+            </button>
 
         </div>
 
-        <button id="adminLogoutBtn" class="btn btn-danger">
-            Đăng xuất Admin
-        </button>
+    `).join("");
 
-    </section>
+}
 
-</main>
 
-<div id="toast" class="toast"></div>
+function deleteForumPost(index) {
 
-<script src="database.js"></script>
-<script src="script.js"></script>
+    const posts =
+        getJSON(STORAGE.forum, []);
+
+    posts.splice(index, 1);
+
+    setJSON(STORAGE.forum, posts);
+
+    renderForum();
+
+}
+
+
+function clearForum() {
+
+    if (!confirm(
+        "Xóa toàn bộ bài viết Forum?"
+    )) return;
+
+    localStorage.removeItem(STORAGE.forum);
+
+    renderForum();
+
+}
+
+
+/* ================= SERVER ================= */
+
+function getServer() {
+
+    return getJSON(
+        STORAGE.server,
+        {
+            name: "TUAN4422 Minecraft Server",
+            ip: "play.example.com",
+            port: "25565",
+            status: "online",
+            description:
+                "Server Minecraft của TUAN4422."
+        }
+    );
+
+}
+
+
+function loadServer() {
+
+    const server =
+        getServer();
+
+    document.getElementById("serverName").value =
+        server.name || "";
+
+    document.getElementById("serverIp").value =
+        server.ip || "";
+
+    document.getElementById("serverPort").value =
+        server.port || "";
+
+    document.getElementById("serverStatus").value =
+        server.status || "online";
+
+    document.getElementById("serverDescription").value =
+        server.description || "";
+
+    renderServerPreview();
+
+}
+
+
+function saveServer() {
+
+    const server = {
+
+        name:
+            document.getElementById("serverName")
+                .value.trim(),
+
+        ip:
+            document.getElementById("serverIp")
+                .value.trim(),
+
+        port:
+            document.getElementById("serverPort")
+                .value.trim(),
+
+        status:
+            document.getElementById("serverStatus")
+                .value,
+
+        description:
+            document.getElementById("serverDescription")
+                .value.trim()
+
+    };
+
+    setJSON(STORAGE.server, server);
+
+    renderServerPreview();
+
+    alert("Đã lưu thông tin Minecraft Server.");
+
+}
+
+
+function renderServerPreview() {
+
+    const server =
+        getServer();
+
+    const box =
+        document.getElementById("serverPreview");
+
+    if (!box) return;
+
+    box.innerHTML = `
+
+        <h2>${escapeHTML(server.name)}</h2>
+
+        <p>
+            IP:
+            <strong>${escapeHTML(server.ip)}</strong>
+        </p>
+
+        <p>
+            Port:
+            <strong>${escapeHTML(server.port)}</strong>
+        </p>
+
+        <p>
+            Trạng thái:
+            ${
+                server.status === "online"
+                ? '<span class="status online">ONLINE</span>'
+                : '<span class="status offline">OFFLINE</span>'
+            }
+        </p>
+
+        <p style="color:#9db0c4;">
+            ${escapeHTML(server.description)}
+        </p>
+
+    `;
+
+}
+
+
+/* ================= DASHBOARD ================= */
+
+function renderDashboard() {
+
+    const products =
+        getProducts();
+
+    const users =
+        getUsers();
+
+    const orders =
+        getJSON(STORAGE.orders, []);
+
+    const balances =
+        getJSON(STORAGE.balance, {});
+
+    let totalBalance = 0;
+
+    if (
+        balances &&
+        typeof balances === "object" &&
+        !Array.isArray(balances)
+    ) {
+
+        Object.values(balances)
+            .forEach(value => {
+                totalBalance += Number(value || 0);
+            });
+
+    }
+
+    document.getElementById("statProducts")
+        .textContent = products.length;
+
+    document.getElementById("statUsers")
+        .textContent = users.length;
+
+    document.getElementById("statOrders")
+        .textContent = orders.length;
+
+    document.getElementById("statBalance")
+        .textContent = money(totalBalance);
+
+}
+
+
+/* ================= SECURITY HELPERS ================= */
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+function escapeAttribute(value) {
+
+    return String(value ?? "")
+        .replaceAll("\\", "\\\\")
+        .replaceAll("'", "\\'");
+
+}
+
+
+/* ================= RENDER ================= */
+
+function renderAll() {
+
+    renderDashboard();
+    renderProducts();
+    renderOrders();
+    renderUsers();
+    renderWallet();
+    renderChat();
+    renderForum();
+    loadServer();
+
+}
+
+
+/* ================= START ================= */
+
+if (
+    localStorage.getItem(STORAGE.admin) === "true"
+) {
+
+    showAdmin();
+
+}
+
+</script>
 
 </body>
 </html>
