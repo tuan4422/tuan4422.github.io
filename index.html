@@ -2,512 +2,234 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="TUAN4422 MARKET - Nơi mua script và sản phẩm số"
-  >
-
-  <meta
-    name="theme-color"
-    content="#070b14"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TUAN4422 MARKET - Marketplace sản phẩm số">
   <title>TUAN4422 MARKET</title>
-
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- =====================================================
-       HEADER
-  ====================================================== -->
+<header class="header">
 
-  <header class="header">
+  <a href="index.html" class="logo">
+    TUAN<span>4422</span>
+  </a>
 
-    <a
-      href="index.html"
-      class="logo"
-    >
-      TUAN<span>4422</span>
-    </a>
+  <nav id="nav">
+    <a href="index.html" class="active">Trang chủ</a>
+    <a href="shop.html">Shop</a>
+    <a href="server.html">Server</a>
+    <a href="chat.html">Chat</a>
+    <a href="forum.html">Forum</a>
+    <a href="account.html">Tài khoản</a>
+    <a href="wallet.html">Ví</a>
+  </nav>
 
+  <div class="header-actions">
+    <button id="themeBtn" class="icon-btn">☾</button>
 
-    <!-- NAVIGATION -->
+    <button id="cartBtn" class="cart-btn">
+      🛒
+      <span id="cartCount">0</span>
+    </button>
 
-    <nav id="nav">
+    <button id="menuBtn" class="menu-btn">☰</button>
+  </div>
 
-      <a
-        href="index.html"
-        class="active"
-      >
-        Trang chủ
-      </a>
-
-      <a href="shop.html">
-        Shop
-      </a>
-
-      <a href="server.html">
-        Server
-      </a>
-
-      <a href="chat.html">
-        Chat
-      </a>
-
-      <a href="forum.html">
-        Forum
-      </a>
-
-      <a href="account.html">
-        Tài khoản
-      </a>
-
-      <a href="wallet.html">
-        Ví
-      </a>
-
-    </nav>
+</header>
 
 
-    <!-- HEADER ACTIONS -->
+<main>
 
-    <div class="header-actions">
+  <section class="home-hero">
 
-      <!-- DARK / LIGHT -->
+    <div class="hero-content">
 
-      <button
-        id="themeBtn"
-        class="icon-btn"
-        aria-label="Đổi giao diện"
-        title="Đổi giao diện"
-      >
-        ☾
-      </button>
+      <div class="badge">
+        ● TUAN4422 MARKET
+      </div>
+
+      <h1>
+        Mua sắm
+        <span>đơn giản.</span>
+      </h1>
+
+      <p>
+        Marketplace của TUAN4422 dành cho script,
+        sản phẩm số và cộng đồng Minecraft.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="shop.html" class="btn primary">
+          🛒 Xem cửa hàng
+        </a>
+
+        <a href="server.html" class="btn secondary">
+          🖥️ Xem Server
+        </a>
+
+      </div>
+
+      <div class="stats">
+
+        <div>
+          <strong>4+</strong>
+          <span>Sản phẩm</span>
+        </div>
+
+        <div>
+          <strong>1K+</strong>
+          <span>Thành viên</span>
+        </div>
+
+        <div>
+          <strong>24/7</strong>
+          <span>Hỗ trợ</span>
+        </div>
+
+      </div>
+
+    </div>
 
 
-      <!-- CART -->
+    <div class="hero-card">
 
-      <button
-        id="cartBtn"
-        class="cart-btn"
-        aria-label="Giỏ hàng"
-        title="Giỏ hàng"
-      >
+      <div class="hero-card-top">
+        <span>TUAN4422 MARKET</span>
+        <span class="online">● ONLINE</span>
+      </div>
+
+      <div class="market-icon">
         🛒
-        <span id="cartCount">0</span>
-      </button>
+      </div>
 
+      <h2>TUAN4422</h2>
 
-      <!-- MOBILE MENU -->
+      <p>Digital Marketplace</p>
 
-      <button
-        id="menuBtn"
-        class="menu-btn"
-        aria-label="Mở menu"
-        title="Menu"
-      >
-        ☰
-      </button>
+      <div class="hero-price">
+        <span>Trạng thái</span>
+        <strong>HOẠT ĐỘNG</strong>
+      </div>
 
     </div>
 
-  </header>
+  </section>
 
 
-  <!-- =====================================================
-       MAIN
-  ====================================================== -->
+  <section class="quick-section">
 
-  <main>
+    <div class="section-title">
 
+      <div class="small-title">
+        KHÁM PHÁ
+      </div>
 
-    <!-- ===================================================
-         HERO
-    ==================================================== -->
+      <h2>
+        Bạn muốn làm gì?
+      </h2>
 
-    <section class="home-hero">
-
-
-      <!-- LEFT -->
-
-      <div class="hero-content">
-
-        <div class="badge">
-          ● TUAN4422 MARKET
-        </div>
+    </div>
 
 
-        <h1>
-          Mua sắm
-          <span>đơn giản.</span>
-        </h1>
+    <div class="quick-grid">
 
-
+      <a href="shop.html" class="quick-card">
+        <div>🛒</div>
+        <h3>Mua sản phẩm</h3>
         <p>
-          Chào mừng bạn đến với TUAN4422 MARKET —
-          nơi cung cấp script và các sản phẩm số
-          với giao diện đơn giản, hiện đại và dễ sử dụng.
+          Xem và mua các sản phẩm số
+          trong cửa hàng.
         </p>
+      </a>
 
 
-        <!-- BUTTONS -->
-
-        <div class="hero-buttons">
-
-          <a
-            href="shop.html"
-            class="btn primary"
-          >
-            🛒 Xem cửa hàng
-          </a>
-
-          <a
-            href="server.html"
-            class="btn secondary"
-          >
-            🖥️ Xem Server
-          </a>
-
-        </div>
-
-
-        <!-- STATS -->
-
-        <div class="stats">
-
-          <div>
-
-            <strong id="productStat">
-              0
-            </strong>
-
-            <span>
-              Sản phẩm
-            </span>
-
-          </div>
-
-
-          <div>
-
-            <strong>
-              1K+
-            </strong>
-
-            <span>
-              Thành viên
-            </span>
-
-          </div>
-
-
-          <div>
-
-            <strong>
-              24/7
-            </strong>
-
-            <span>
-              Hỗ trợ
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- =================================================
-           RIGHT - MARKET CARD
-      ================================================== -->
-
-      <div class="hero-card">
-
-
-        <div class="hero-card-top">
-
-          <span>
-            TUAN4422 MARKET
-          </span>
-
-          <span class="online">
-            ● ONLINE
-          </span>
-
-        </div>
-
-
-        <!-- ICON -->
-
-        <div class="market-icon">
-          🛒
-        </div>
-
-
-        <!-- TITLE -->
-
-        <h2>
-          TUAN4422
-        </h2>
-
-
+      <a href="server.html" class="quick-card">
+        <div>🖥️</div>
+        <h3>Server Minecraft</h3>
         <p>
-          Digital Marketplace
+          Xem thông tin và trạng thái
+          server của TUAN4422.
         </p>
+      </a>
 
 
-        <!-- PRICE -->
-
-        <div class="hero-price">
-
-          <span>
-            Trạng thái
-          </span>
-
-          <strong>
-            HOẠT ĐỘNG
-          </strong>
-
-        </div>
-
-      </div>
-
-    </section>
+      <a href="chat.html" class="quick-card">
+        <div>💬</div>
+        <h3>Chat</h3>
+        <p>
+          Trò chuyện cùng cộng đồng.
+        </p>
+      </a>
 
 
+      <a href="forum.html" class="quick-card">
+        <div>📢</div>
+        <h3>Forum</h3>
+        <p>
+          Đọc và tạo bài viết.
+        </p>
+      </a>
 
-    <!-- ===================================================
-         QUICK ACCESS
-    ==================================================== -->
-
-    <section class="quick-section">
-
-
-      <div class="section-title">
-
-        <div class="small-title">
-          KHÁM PHÁ
-        </div>
-
-        <h2>
-          Bạn muốn làm gì?
-        </h2>
-
-      </div>
-
-
-      <div class="quick-grid">
-
-
-        <!-- SHOP -->
-
-        <a
-          href="shop.html"
-          class="quick-card"
-        >
-
-          <div>
-            🛒
-          </div>
-
-          <h3>
-            Mua sản phẩm
-          </h3>
-
-          <p>
-            Xem và mua các script,
-            tài khoản hợp lệ và sản phẩm số.
-          </p>
-
-        </a>
-
-
-        <!-- SERVER -->
-
-        <a
-          href="server.html"
-          class="quick-card"
-        >
-
-          <div>
-            🖥️
-          </div>
-
-          <h3>
-            Xem Server
-          </h3>
-
-          <p>
-            Xem thông tin và trạng thái
-            server TUAN4422.
-          </p>
-
-        </a>
-
-
-        <!-- CHAT -->
-
-        <a
-          href="chat.html"
-          class="quick-card"
-        >
-
-          <div>
-            💬
-          </div>
-
-          <h3>
-            Chat
-          </h3>
-
-          <p>
-            Tham gia trò chuyện
-            cùng cộng đồng.
-          </p>
-
-        </a>
-
-
-        <!-- FORUM -->
-
-        <a
-          href="forum.html"
-          class="quick-card"
-        >
-
-          <div>
-            💬
-          </div>
-
-          <h3>
-            Forum
-          </h3>
-
-          <p>
-            Đọc bài viết và
-            thảo luận cùng mọi người.
-          </p>
-
-        </a>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-
-  <!-- =====================================================
-       FOOTER
-  ====================================================== -->
-
-  <footer>
-
-    <div class="footer-logo">
-      TUAN<span>4422</span>
     </div>
 
-    <p>
-      TUAN4422 MARKET
-    </p>
+  </section>
 
-    <small>
-      © <span id="year"></span>
-      TUAN4422. All rights reserved.
-    </small>
-
-  </footer>
+</main>
 
 
+<div id="cartModal" class="modal">
 
-  <!-- =====================================================
-       CART MODAL
-  ====================================================== -->
+  <div class="modal-box">
 
-  <div
-    id="cartModal"
-    class="modal"
-  >
+    <div class="modal-header">
 
-    <div class="modal-box">
+      <h2>🛒 Giỏ hàng</h2>
 
-      <div class="modal-header">
-
-        <h2>
-          🛒 Giỏ hàng
-        </h2>
-
-        <button
-          id="closeCart"
-          aria-label="Đóng"
-        >
-          ×
-        </button>
-
-      </div>
-
-
-      <div id="cartItems">
-
-        <div class="empty">
-          Giỏ hàng đang trống.
-        </div>
-
-      </div>
-
-
-      <div class="cart-total">
-
-        <span>
-          Tổng cộng
-        </span>
-
-        <strong id="cartTotal">
-          0đ
-        </strong>
-
-      </div>
-
-
-      <button
-        id="checkoutBtn"
-        class="btn primary full"
-      >
-        Thanh toán
+      <button id="closeCart" type="button">
+        ×
       </button>
 
     </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      <span>Tổng cộng</span>
+      <strong id="cartTotal">0đ</strong>
+    </div>
+
+    <button id="checkoutBtn" class="btn primary full">
+      Thanh toán
+    </button>
 
   </div>
 
+</div>
 
 
-  <!-- =====================================================
-       TOAST
-  ====================================================== -->
-
-  <div id="toast"></div>
+<div id="toast"></div>
 
 
+<footer>
 
-  <!-- =====================================================
-       SCRIPT
-  ====================================================== -->
+  <div class="footer-logo">
+    TUAN<span>4422</span>
+  </div>
 
-  <script src="script.js"></script>
+  <p>TUAN4422 MARKET</p>
+
+  <small>
+    © <span id="year"></span>
+    TUAN4422. All rights reserved.
+  </small>
+
+</footer>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
