@@ -1,1 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - TUAN4422</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+
+<header class="header">
+
+  <a class="logo" href="index.html">
+    TUAN<span>4422</span>
+  </a>
+
+  <nav id="nav">
+    <a href="index.html">Trang chủ</a>
+    <a class="active" href="shop.html">Shop</a>
+    <a href="server.html">Server</a>
+    <a href="chat.html">Chat</a>
+    <a href="forum.html">Diễn đàn</a>
+    <a href="account.html">Tài khoản</a>
+    <a href="wallet.html">Ví</a>
+  </nav>
+
+  <div class="header-actions">
+
+    <button id="themeBtn" class="icon-btn">☾</button>
+
+    <button id="cartBtn" class="cart-btn">
+      🛒 <span id="cartCount">0</span>
+    </button>
+
+    <button id="menuBtn" class="menu-btn">
+      ☰
+    </button>
+
+  </div>
+
+</header>
+
+
+<main class="page">
+
+  <div class="page-heading">
+
+    <div>
+      <div class="small-title">TUAN4422 MARKET</div>
+
+      <h1>Shop</h1>
+
+      <p>
+        Script và tài khoản hợp lệ.
+      </p>
+    </div>
+
+    <div class="search-box">
+      🔎
+      <input
+        id="searchInput"
+        placeholder="Tìm sản phẩm..."
+      >
+    </div>
+
+  </div>
+
+
+  <div id="products" class="product-grid"></div>
+
+</main>
+
+
+<div id="cartModal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2>🛒 Giỏ hàng</h2>
+
+      <button onclick="closeCart()">×</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      <span>Tổng</span>
+      <strong id="cartTotal">0đ</strong>
+    </div>
+
+    <button
+      class="btn primary full"
+      onclick="checkout()">
+      Thanh toán
+    </button>
+
+  </div>
+
+</div>
+
+
+<div id="productModal" class="modal">
+
+  <div class="modal-box product-modal">
+
+    <button
+      class="modal-close"
+      onclick="closeProduct()">
+      ×
+    </button>
+
+    <div id="productDetail"></div>
+
+  </div>
+
+</div>
+
+
+<div id="toast"></div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
