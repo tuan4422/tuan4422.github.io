@@ -1,235 +1,182 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Server - TUAN4422 MARKET</title>
-  <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Server - TUAN4422 MARKET</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <header class="header">
 
-  <a href="index.html" class="logo">
-    TUAN<span>4422</span>
-  </a>
+<a class="logo" href="index.html">
+TUAN4422<span>MARKET</span>
+</a>
 
-  <nav id="nav">
-    <a href="index.html">Trang chủ</a>
-    <a href="shop.html">Shop</a>
-    <a href="server.html" class="active">Server</a>
-    <a href="chat.html">Chat</a>
-    <a href="forum.html">Forum</a>
-    <a href="account.html">Tài khoản</a>
-    <a href="wallet.html">Ví</a>
-  </nav>
+<nav id="nav">
 
-  <div class="header-actions">
-    <button id="themeBtn" class="icon-btn">☾</button>
+<a href="index.html">Trang chủ</a>
+<a href="shop.html">Shop</a>
+<a class="active" href="server.html">Server</a>
+<a href="chat.html">Chat</a>
+<a href="forum.html">Forum</a>
+<a href="account.html">Tài khoản</a>
+<a href="wallet.html">Ví</a>
 
-    <button id="cartBtn" class="cart-btn">
-      🛒
-      <span id="cartCount">0</span>
-    </button>
+</nav>
 
-    <button id="menuBtn" class="menu-btn">☰</button>
-  </div>
+<div class="header-actions">
+
+<button id="themeBtn" class="icon-btn">☾</button>
+
+<button id="cartBtn" class="cart-btn">
+🛒
+<span id="cartCount">0</span>
+</button>
+
+<button id="menuBtn" class="menu-btn">☰</button>
+
+</div>
 
 </header>
 
 
 <main class="page">
 
-  <div class="page-heading center">
+<div class="page-heading center">
 
-    <div class="small-title">
-      MINECRAFT SERVER
-    </div>
+<small class="small-title">
+MINECRAFT
+</small>
 
-    <h1>
-      TUAN4422 SERVER
-    </h1>
+<h1>Server Minecraft</h1>
 
-    <p>
-      Thông tin server Minecraft của cộng đồng.
-    </p>
+<p>
+Thông tin giới thiệu về server của TUAN4422.
+</p>
 
-  </div>
+</div>
 
 
-  <div class="server-card">
+<div class="server-card">
 
-    <div class="server-logo">
-      ⛏️
-    </div>
+<div class="server-logo">
+⛏️
+</div>
 
-    <h2>
-      TUAN4422 Minecraft
-    </h2>
+<div class="server-info">
 
-    <div class="server-status">
-      <span></span>
-      ONLINE
-    </div>
+<h2>TUAN4422 SERVER</h2>
 
-    <p>
-      Server Minecraft dành cho cộng đồng
-      TUAN4422. Tham gia, xây dựng và
-      chơi cùng bạn bè.
-    </p>
+<div class="server-status">
+● ONLINE
+</div>
 
+<p>
+Server Minecraft dành cho cộng đồng.
+</p>
 
-    <div class="server-data">
+</div>
 
-      <div>
-        <span>IP</span>
-        <strong id="serverIP">
-          play.tuan4422.com
-        </strong>
-      </div>
+<div class="server-data">
 
-      <div>
-        <span>Phiên bản</span>
-        <strong>
-          Minecraft 1.26+
-        </strong>
-      </div>
+<div>
+<span>IP</span>
+<strong id="serverIP">
+play.tuan4422.xyz
+</strong>
+</div>
 
-      <div>
-        <span>Chế độ</span>
-        <strong>
-          Survival
-        </strong>
-      </div>
+<div>
+<span>Phiên bản</span>
+<strong>1.21+</strong>
+</div>
 
-    </div>
+<div>
+<span>Trạng thái</span>
+<strong class="green">ONLINE</strong>
+</div>
 
+</div>
 
-    <div class="hero-buttons">
+<button
+id="copyIP"
+class="btn primary">
 
-      <button
-        id="copyIP"
-        class="btn primary"
-      >
-        📋 Sao chép IP
-      </button>
+Sao chép IP
 
-      <a
-        href="chat.html"
-        class="btn secondary"
-      >
-        💬 Vào cộng đồng
-      </a>
+</button>
 
-    </div>
-
-  </div>
-
-
-  <section class="quick-section">
-
-    <div class="section-title center">
-
-      <div class="small-title">
-        THÔNG TIN
-      </div>
-
-      <h2>
-        Về server
-      </h2>
-
-    </div>
-
-
-    <div class="quick-grid">
-
-      <div class="quick-card">
-        <div>🌍</div>
-        <h3>Cộng đồng</h3>
-        <p>
-          Nơi người chơi có thể giao lưu
-          và cùng chơi Minecraft.
-        </p>
-      </div>
-
-      <div class="quick-card">
-        <div>⚙️</div>
-        <h3>Ổn định</h3>
-        <p>
-          Hệ thống được quản lý và
-          cập nhật thường xuyên.
-        </p>
-      </div>
-
-      <div class="quick-card">
-        <div>🛡️</div>
-        <h3>An toàn</h3>
-        <p>
-          Các quy định được xây dựng
-          để giữ cộng đồng văn minh.
-        </p>
-      </div>
-
-      <div class="quick-card">
-        <div>🎮</div>
-        <h3>Giải trí</h3>
-        <p>
-          Chơi Minecraft cùng bạn bè
-          và cộng đồng.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
+</div>
 
 </main>
 
 
+<footer>
+
+<div class="footer-logo">
+TUAN4422<span>MARKET</span>
+</div>
+
+<p>
+© <span id="year"></span> TUAN4422 MARKET
+</p>
+
+</footer>
+
+
+<!-- CART -->
+
 <div id="cartModal" class="modal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div class="modal-header">
-      <h2>🛒 Giỏ hàng</h2>
-      <button id="closeCart">×</button>
-    </div>
+<div class="modal-header">
 
-    <div id="cartItems"></div>
+<h2>🛒 Giỏ hàng</h2>
 
-    <div class="cart-total">
-      <span>Tổng cộng</span>
-      <strong id="cartTotal">0đ</strong>
-    </div>
+<button
+id="cartClose"
+class="modal-close"
+type="button">
+×
+</button>
 
-    <button id="checkoutBtn" class="btn primary full">
-      Thanh toán
-    </button>
+</div>
 
-  </div>
+<div id="cartItems"></div>
+
+<div class="cart-total">
+
+<span>Tổng cộng</span>
+
+<strong id="cartTotal">
+0$
+</strong>
+
+</div>
+
+<button
+id="checkoutBtn"
+class="btn primary full">
+Thanh toán
+</button>
+
+</div>
 
 </div>
 
 
 <div id="toast"></div>
-
-
-<footer>
-
-  <div class="footer-logo">
-    TUAN<span>4422</span>
-  </div>
-
-  <p>TUAN4422 MARKET</p>
-
-  <small>
-    © <span id="year"></span>
-    TUAN4422. All rights reserved.
-  </small>
-
-</footer>
-
 
 <script src="script.js"></script>
 
