@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat - TUAN4422</title>
+  <title>Chat - TUAN4422 MARKET</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,7 +11,7 @@
 
 <header class="header">
 
-  <a class="logo" href="index.html">
+  <a href="index.html" class="logo">
     TUAN<span>4422</span>
   </a>
 
@@ -19,15 +19,23 @@
     <a href="index.html">Trang chủ</a>
     <a href="shop.html">Shop</a>
     <a href="server.html">Server</a>
-    <a class="active" href="chat.html">Chat</a>
-    <a href="forum.html">Diễn đàn</a>
+    <a href="chat.html" class="active">Chat</a>
+    <a href="forum.html">Forum</a>
     <a href="account.html">Tài khoản</a>
     <a href="wallet.html">Ví</a>
   </nav>
 
   <div class="header-actions">
+
     <button id="themeBtn" class="icon-btn">☾</button>
+
+    <button id="cartBtn" class="cart-btn">
+      🛒
+      <span id="cartCount">0</span>
+    </button>
+
     <button id="menuBtn" class="menu-btn">☰</button>
+
   </div>
 
 </header>
@@ -35,17 +43,21 @@
 
 <main class="page">
 
-  <div class="page-heading center">
+  <div class="page-heading">
 
-    <div class="small-title">
-      COMMUNITY
+    <div>
+
+      <div class="small-title">
+        COMMUNITY
+      </div>
+
+      <h1>Chat</h1>
+
+      <p>
+        Khu vực trò chuyện của TUAN4422.
+      </p>
+
     </div>
-
-    <h1>Chat</h1>
-
-    <p>
-      Giao diện trò chuyện cộng đồng.
-    </p>
 
   </div>
 
@@ -54,22 +66,22 @@
 
     <aside class="chat-sidebar">
 
-      <strong>KÊNH CHAT</strong>
+      <h3>Kênh chat</h3>
 
-      <button class="active">
-        # chung
+      <button class="chat-channel active">
+        💬 Chung
       </button>
 
-      <button>
-        # minecraft
+      <button class="chat-channel">
+        🎮 Minecraft
       </button>
 
-      <button>
-        # shop
+      <button class="chat-channel">
+        🛒 Shop
       </button>
 
-      <button>
-        # hỗ-trợ
+      <button class="chat-channel">
+        💡 Hỗ trợ
       </button>
 
     </aside>
@@ -77,7 +89,7 @@
 
     <section class="chat-main">
 
-      <div id="chatMessages" class="chat-messages">
+      <div class="chat-messages" id="chatMessages">
 
         <div class="message">
 
@@ -86,12 +98,16 @@
           </div>
 
           <div>
-            <strong>TUAN4422</strong>
+
+            <strong>
+              TUAN4422
+            </strong>
 
             <p>
-              Chào mừng mọi người đến
+              Chào mừng bạn đến với
               TUAN4422 MARKET!
             </p>
+
           </div>
 
         </div>
@@ -100,15 +116,20 @@
         <div class="message">
 
           <div class="avatar blue">
-            U
+            A
           </div>
 
           <div>
-            <strong>User</strong>
+
+            <strong>
+              Admin
+            </strong>
 
             <p>
-              Xin chào 👋
+              Hãy giữ cuộc trò chuyện
+              văn minh nhé.
             </p>
+
           </div>
 
         </div>
@@ -116,16 +137,24 @@
       </div>
 
 
-      <form id="chatForm" class="chat-input">
+      <form
+        id="chatForm"
+        class="chat-input"
+      >
 
         <input
           id="chatInput"
+          type="text"
           placeholder="Nhập tin nhắn..."
-          required
+          maxlength="300"
+          autocomplete="off"
         >
 
-        <button>
-          ➤
+        <button
+          type="submit"
+          class="btn primary"
+        >
+          Gửi
         </button>
 
       </form>
@@ -137,7 +166,48 @@
 </main>
 
 
+<div id="cartModal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2>🛒 Giỏ hàng</h2>
+      <button id="closeCart">×</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      <span>Tổng cộng</span>
+      <strong id="cartTotal">0đ</strong>
+    </div>
+
+    <button id="checkoutBtn" class="btn primary full">
+      Thanh toán
+    </button>
+
+  </div>
+
+</div>
+
+
 <div id="toast"></div>
+
+
+<footer>
+
+  <div class="footer-logo">
+    TUAN<span>4422</span>
+  </div>
+
+  <p>TUAN4422 MARKET</p>
+
+  <small>
+    © <span id="year"></span>
+    TUAN4422. All rights reserved.
+  </small>
+
+</footer>
 
 
 <script src="script.js"></script>
