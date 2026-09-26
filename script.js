@@ -1,947 +1,380 @@
+"use strict";
+
 /* =========================================================
    TUAN4422 MARKET
    MAIN JAVASCRIPT
-========================================================= */
+   ========================================================= */
 
 
 /* =========================================================
-   HELPERS
-========================================================= */
+   BASIC HELPERS
+   ========================================================= */
 
-function $(selector) {
+const $ = (selector) => {
   return document.querySelector(selector);
+};
+
+const $$ = (selector) => {
+  return document.querySelectorAll(selector);
+};
+
+
+function showToast(message){
+
+  const toast = $("#toast");
+
+  if(!toast) return;
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(window.__toastTimer);
+
+  window.__toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2200);
 }
 
 
-function getJSON(key, fallback) {
+/* =========================================================
+   YEAR
+   ========================================================= */
 
-  try {
+const year = $("#year");
 
-    const value =
-      localStorage.getItem(key);
-
-    if (!value) {
-      return fallback;
-    }
-
-    return JSON.parse(value);
-
-  } catch {
-
-    return fallback;
-
-  }
-
-}
-
-
-function setJSON(key, value) {
-
-  localStorage.setItem(
-    key,
-    JSON.stringify(value)
-  );
-
-}
-
-
-function escapeHTML(value) {
-
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-
-}
-
-
-function formatMoney(number) {
-
-  return Number(number)
-    .toLocaleString("vi-VN") + "đ";
-
+if(year){
+  year.textContent = new Date().getFullYear();
 }
 
 
 /* =========================================================
    THEME
-========================================================= */
+   ========================================================= */
 
-const themeBtn =
-  $("#themeBtn");
+const themeBtn = $("#themeBtn");
 
+function updateThemeButton(){
 
-function loadTheme() {
+  if(!themeBtn) return;
 
-  const theme =
-    localStorage.getItem("theme") || "dark";
+  const light =
+    document.body.classList.contains("light");
 
-  if (theme === "light") {
-
-    document.body.classList.add("light");
-
-    if (themeBtn) {
-      themeBtn.textContent = "☀";
-    }
-
-  } else {
-
-    document.body.classList.remove("light");
-
-    if (themeBtn) {
-      themeBtn.textContent = "☾";
-    }
-
-  }
-
+  themeBtn.textContent =
+    light ? "☀" : "☾";
 }
 
 
-loadTheme();
+if(localStorage.getItem("theme") === "light"){
+
+  document.body.classList.add("light");
+
+}
+
+updateThemeButton();
 
 
-if (themeBtn) {
+if(themeBtn){
 
-  themeBtn.addEventListener(
-    "click",
-    () => {
+  themeBtn.addEventListener("click", () => {
 
-      document.body.classList.toggle(
-        "light"
-      );
+    document.body.classList.toggle("light");
 
-      const light =
-        document.body.classList.contains(
-          "light"
-        );
+    const light =
+      document.body.classList.contains("light");
 
-      localStorage.setItem(
-        "theme",
-        light ? "light" : "dark"
-      );
+    localStorage.setItem(
+      "theme",
+      light ? "light" : "dark"
+    );
 
-      themeBtn.textContent =
-        light ? "☀" : "☾";
+    updateThemeButton();
 
-    }
-  );
+  });
 
 }
 
 
 /* =========================================================
    MOBILE MENU
-========================================================= */
+   ========================================================= */
 
-const menuBtn =
-  $("#menuBtn");
-
-const nav =
-  $("#nav");
+const menuBtn = $("#menuBtn");
+const nav = $("#nav");
 
 
-if (menuBtn && nav) {
+if(menuBtn && nav){
 
-  menuBtn.addEventListener(
-    "click",
-    event => {
+  menuBtn.addEventListener("click", (event) => {
 
-      event.stopPropagation();
+    event.stopPropagation();
 
-      nav.classList.toggle("open");
+    nav.classList.toggle("open");
 
-    }
-  );
+  });
 
 
-  nav.querySelectorAll("a")
-    .forEach(link => {
+  $$("#nav a").forEach(link => {
 
-      link.addEventListener(
-        "click",
-        () => {
+    link.addEventListener("click", () => {
 
-          nav.classList.remove("open");
-
-        }
-      );
+      nav.classList.remove("open");
 
     });
 
+  });
 
-  document.addEventListener(
-    "click",
-    event => {
 
-      if (
-        nav.classList.contains("open") &&
-        !nav.contains(event.target) &&
-        event.target !== menuBtn
-      ) {
+  document.addEventListener("click", (event) => {
 
-        nav.classList.remove("open");
+    if(
+      nav.classList.contains("open") &&
+      !nav.contains(event.target) &&
+      !menuBtn.contains(event.target)
+    ){
 
-      }
+      nav.classList.remove("open");
 
     }
-  );
+
+  });
 
 }
 
 
 /* =========================================================
    PRODUCTS
-========================================================= */
+   ========================================================= */
 
 const PRODUCTS = [
 
   {
-    id: "script-001",
-
-    name: "Script Premium",
-
+    id: "script-basic",
+    name: "Script Basic",
     description:
-      "Script kỹ thuật số dùng cho mục đích hợp lệ.",
-
-    price: 50000,
-
-    icon: "📜",
-
-    badge: "MỚI"
-
+      "Script demo dành cho người dùng mới.",
+    price: 25000,
+    icon: "💻",
+    badge: "SCRIPT"
   },
 
   {
-    id: "script-002",
-
+    id: "script-pro",
     name: "Script Pro",
-
     description:
-      "Phiên bản nâng cao với nhiều tính năng.",
-
-    price: 100000,
-
+      "Gói script nâng cao dành cho người dùng.",
+    price: 50000,
     icon: "⚡",
-
     badge: "HOT"
-
   },
 
   {
-    id: "account-001",
-
-    name: "Tài khoản Demo",
-
-    description:
-      "Tài khoản demo hợp lệ để thử nghiệm.",
-
-    price: 30000,
-
-    icon: "👤",
-
-    badge: "DEMO"
-
-  },
-
-  {
-    id: "minecraft-001",
-
+    id: "minecraft-pack",
     name: "Minecraft Pack",
-
     description:
-      "Gói nội dung Minecraft dành cho server.",
-
-    price: 75000,
-
+      "Gói tài nguyên và tiện ích Minecraft demo.",
+    price: 35000,
     icon: "⛏️",
+    badge: "MINECRAFT"
+  },
 
-    badge: "NEW"
+  {
+    id: "minecraft-tool",
+    name: "Minecraft Tool",
+    description:
+      "Công cụ hỗ trợ Minecraft.",
+    price: 45000,
+    icon: "🧰",
+    badge: "MINECRAFT"
+  },
 
+  {
+    id: "website-template",
+    name: "Website Template",
+    description:
+      "Mẫu website hiện đại dành cho dự án cá nhân.",
+    price: 70000,
+    icon: "🌐",
+    badge: "WEB"
+  },
+
+  {
+    id: "premium-pack",
+    name: "Premium Pack",
+    description:
+      "Gói sản phẩm số demo cao cấp.",
+    price: 100000,
+    icon: "⭐",
+    badge: "PREMIUM"
   }
 
 ];
 
 
 /* =========================================================
-   CART
-========================================================= */
+   FORMAT MONEY
+   ========================================================= */
 
-let cart =
-  getJSON(
-    "tuan4422_cart",
-    []
-  );
+function money(value){
 
-
-function saveCart() {
-
-  setJSON(
-    "tuan4422_cart",
-    cart
-  );
-
-  updateCartCount();
-
-}
-
-
-function updateCartCount() {
-
-  const element =
-    $("#cartCount");
-
-  if (!element) {
-    return;
-  }
-
-  const count =
-    cart.reduce(
-      (total, item) =>
-        total + item.quantity,
-      0
-    );
-
-  element.textContent =
-    count;
-
-}
-
-
-function getCartTotal() {
-
-  return cart.reduce(
-    (total, item) =>
-      total +
-      item.price *
-      item.quantity,
-    0
-  );
+  return Number(value).toLocaleString("vi-VN") + "$";
 
 }
 
 
 /* =========================================================
-   ADD CART
-========================================================= */
+   SHOP RENDER
+   ========================================================= */
 
-function addToCart(
-  productId,
-  quantity = 1
-) {
+const productGrid = $("#productGrid");
 
-  const product =
-    PRODUCTS.find(
-      item =>
-        item.id === productId
-    );
 
+function renderProducts(list = PRODUCTS){
 
-  if (!product) {
+  if(!productGrid) return;
 
-    showToast(
-      "Không tìm thấy sản phẩm."
-    );
+  productGrid.innerHTML = "";
 
-    return;
+  if(list.length === 0){
 
-  }
-
-
-  const existing =
-    cart.find(
-      item =>
-        item.id === productId
-    );
-
-
-  if (existing) {
-
-    existing.quantity +=
-      Number(quantity);
-
-  } else {
-
-    cart.push({
-
-      id:
-        product.id,
-
-      name:
-        product.name,
-
-      price:
-        product.price,
-
-      icon:
-        product.icon,
-
-      quantity:
-        Number(quantity)
-
-    });
-
-  }
-
-
-  saveCart();
-
-  renderCart();
-
-  showToast(
-    "Đã thêm sản phẩm vào giỏ."
-  );
-
-}
-
-
-/* =========================================================
-   REMOVE CART
-========================================================= */
-
-function removeFromCart(id) {
-
-  cart =
-    cart.filter(
-      item =>
-        item.id !== id
-    );
-
-  saveCart();
-
-  renderCart();
-
-  showToast(
-    "Đã xóa sản phẩm."
-  );
-
-}
-
-
-/* =========================================================
-   CHANGE QUANTITY
-========================================================= */
-
-function changeCartQuantity(
-  id,
-  amount
-) {
-
-  const item =
-    cart.find(
-      product =>
-        product.id === id
-    );
-
-
-  if (!item) {
-    return;
-  }
-
-
-  item.quantity += amount;
-
-
-  if (item.quantity <= 0) {
-
-    removeFromCart(id);
-
-    return;
-
-  }
-
-
-  if (item.quantity > 99) {
-
-    item.quantity = 99;
-
-  }
-
-
-  saveCart();
-
-  renderCart();
-
-}
-
-
-/* =========================================================
-   RENDER CART
-========================================================= */
-
-function renderCart() {
-
-  const container =
-    $("#cartItems");
-
-  const total =
-    $("#cartTotal");
-
-
-  if (!container) {
-    return;
-  }
-
-
-  if (cart.length === 0) {
-
-    container.innerHTML = `
+    productGrid.innerHTML = `
       <div class="empty">
-        Giỏ hàng đang trống.
+        Không tìm thấy sản phẩm.
       </div>
     `;
 
-  } else {
-
-    container.innerHTML =
-      cart.map(item => `
-
-        <div class="cart-item">
-
-          <div class="cart-item-icon">
-            ${escapeHTML(item.icon)}
-          </div>
-
-          <div class="cart-item-info">
-
-            <strong>
-              ${escapeHTML(item.name)}
-            </strong>
-
-            <span>
-              ${formatMoney(item.price)}
-            </span>
-
-            <div
-              style="
-                display:flex;
-                gap:8px;
-                align-items:center;
-                margin-top:8px;
-              "
-            >
-
-              <button
-                class="small-btn"
-                data-minus="${item.id}"
-              >
-                −
-              </button>
-
-              <span>
-                ${item.quantity}
-              </span>
-
-              <button
-                class="small-btn"
-                data-plus="${item.id}"
-              >
-                +
-              </button>
-
-            </div>
-
-          </div>
-
-          <button
-            class="remove-cart"
-            data-remove="${item.id}"
-          >
-            ×
-          </button>
-
-        </div>
-
-      `).join("");
-
-
-    container
-      .querySelectorAll("[data-minus]")
-      .forEach(button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            changeCartQuantity(
-              button.dataset.minus,
-              -1
-            );
-
-          }
-        );
-
-      });
-
-
-    container
-      .querySelectorAll("[data-plus]")
-      .forEach(button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            changeCartQuantity(
-              button.dataset.plus,
-              1
-            );
-
-          }
-        );
-
-      });
-
-
-    container
-      .querySelectorAll("[data-remove]")
-      .forEach(button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            removeFromCart(
-              button.dataset.remove
-            );
-
-          }
-        );
-
-      });
-
-  }
-
-
-  if (total) {
-
-    total.textContent =
-      formatMoney(
-        getCartTotal()
-      );
-
-  }
-
-}
-
-
-/* =========================================================
-   CART MODAL
-========================================================= */
-
-const cartBtn =
-  $("#cartBtn");
-
-const cartModal =
-  $("#cartModal");
-
-const closeCart =
-  $("#closeCart");
-
-
-function openCart() {
-
-  if (!cartModal) {
-    return;
-  }
-
-  renderCart();
-
-  cartModal.classList.add(
-    "show"
-  );
-
-  document.body.classList.add(
-    "cart-open"
-  );
-
-}
-
-
-function closeCartModal() {
-
-  if (!cartModal) {
-    return;
-  }
-
-  cartModal.classList.remove(
-    "show"
-  );
-
-  document.body.classList.remove(
-    "cart-open"
-  );
-
-}
-
-
-function toggleCart() {
-
-  if (
-    cartModal &&
-    cartModal.classList.contains(
-      "show"
-    )
-  ) {
-
-    closeCartModal();
-
-  } else {
-
-    openCart();
-
-  }
-
-}
-
-
-if (cartBtn) {
-
-  cartBtn.addEventListener(
-    "click",
-    event => {
-
-      event.preventDefault();
-
-      event.stopPropagation();
-
-      toggleCart();
-
-    }
-  );
-
-}
-
-
-if (closeCart) {
-
-  closeCart.addEventListener(
-    "click",
-    event => {
-
-      event.preventDefault();
-
-      event.stopPropagation();
-
-      closeCartModal();
-
-    }
-  );
-
-}
-
-
-if (cartModal) {
-
-  cartModal.addEventListener(
-    "click",
-    event => {
-
-      if (
-        event.target === cartModal
-      ) {
-
-        closeCartModal();
-
-      }
-
-    }
-  );
-
-
-  const box =
-    cartModal.querySelector(
-      ".modal-box"
-    );
-
-
-  if (box) {
-
-    box.addEventListener(
-      "click",
-      event => {
-
-        event.stopPropagation();
-
-      }
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   PRODUCT SHOP
-========================================================= */
-
-const productGrid =
-  $("#productGrid");
-
-const searchInput =
-  $("#shopSearch");
-
-
-function renderProducts(
-  products
-) {
-
-  if (!productGrid) {
-    return;
-  }
-
-
-  const noProducts =
-    $("#noProducts");
-
-
-  if (products.length === 0) {
-
-    productGrid.innerHTML = "";
-
-    if (noProducts) {
-      noProducts.style.display =
-        "block";
-    }
-
     return;
 
   }
 
 
-  if (noProducts) {
-    noProducts.style.display =
-      "none";
-  }
+  list.forEach(product => {
+
+    const element =
+      document.createElement("article");
+
+    element.className = "product";
 
 
-  productGrid.innerHTML =
-    products.map(product => `
+    element.innerHTML = `
 
-      <article class="product">
+      <span class="product-badge">
+        ${product.badge}
+      </span>
 
-        <div class="product-badge">
-          ${escapeHTML(product.badge)}
-        </div>
+      <div class="product-icon">
+        ${product.icon}
+      </div>
 
-        <div class="product-icon">
-          ${escapeHTML(product.icon)}
-        </div>
+      <h3>
+        ${product.name}
+      </h3>
 
-        <h3>
-          ${escapeHTML(product.name)}
-        </h3>
+      <p class="product-description">
+        ${product.description}
+      </p>
 
-        <p class="product-description">
-          ${escapeHTML(product.description)}
-        </p>
+      <div class="product-bottom">
 
-        <div class="product-bottom">
-
-          <div class="price">
-            ${formatMoney(product.price)}
-          </div>
-
-        </div>
+        <strong class="price">
+          ${money(product.price)}
+        </strong>
 
         <div class="product-buttons">
 
           <button
             class="small-btn"
-            data-detail="${product.id}"
-          >
-            Chi tiết
+            data-detail="${product.id}">
+            Xem
           </button>
 
           <button
             class="small-btn buy-btn"
-            data-buy="${product.id}"
-          >
-            Mua
+            data-buy="${product.id}">
+            Thêm
           </button>
 
         </div>
 
-      </article>
+      </div>
 
-    `).join("");
+    `;
 
 
-  productGrid
-    .querySelectorAll("[data-buy]")
-    .forEach(button => {
+    productGrid.appendChild(element);
 
-      button.addEventListener(
-        "click",
-        () => {
+  });
 
-          addToCart(
-            button.dataset.buy
-          );
 
-        }
+  $$("[data-detail]").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      openProduct(
+        button.dataset.detail
       );
 
     });
 
+  });
 
-  productGrid
-    .querySelectorAll("[data-detail]")
-    .forEach(button => {
 
-      button.addEventListener(
-        "click",
-        () => {
+  $$("[data-buy]").forEach(button => {
 
-          openProductDetail(
-            button.dataset.detail
-          );
+    button.addEventListener("click", () => {
 
-        }
+      addToCart(
+        button.dataset.buy
       );
 
     });
 
-}
-
-
-if (productGrid) {
-
-  renderProducts(
-    PRODUCTS
-  );
+  });
 
 }
 
 
-if (searchInput) {
+renderProducts();
 
-  searchInput.addEventListener(
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+const productSearch = $("#productSearch");
+
+
+if(productSearch){
+
+  productSearch.addEventListener(
     "input",
     () => {
 
       const keyword =
-        searchInput.value
+        productSearch.value
           .trim()
           .toLowerCase();
 
 
       const result =
-        PRODUCTS.filter(
-          product =>
+        PRODUCTS.filter(product => {
 
+          return (
             product.name
               .toLowerCase()
               .includes(keyword)
-
             ||
-
             product.description
               .toLowerCase()
               .includes(keyword)
+            ||
+            product.badge
+              .toLowerCase()
+              .includes(keyword)
+          );
 
-        );
+        });
 
 
       renderProducts(result);
@@ -953,124 +386,544 @@ if (searchInput) {
 
 
 /* =========================================================
-   PRODUCT DETAIL
-========================================================= */
+   PRODUCT MODAL
+   ========================================================= */
 
-const productModal =
-  $("#productModal");
-
-const closeProduct =
-  $("#closeProduct");
-
-const detailIcon =
-  $("#detailIcon");
-
-const detailTitle =
-  $("#detailTitle");
-
-const detailDescription =
-  $("#detailDescription");
-
-const detailPrice =
-  $("#detailPrice");
-
-const detailAdd =
-  $("#detailAdd");
+const productModal = $("#productModal");
+const productDetail = $("#productDetail");
+const productClose = $("#productClose");
 
 
-let selectedProduct =
-  null;
-
-
-function openProductDetail(id) {
+function openProduct(id){
 
   const product =
     PRODUCTS.find(
-      item =>
-        item.id === id
+      item => item.id === id
     );
 
 
-  if (!product || !productModal) {
+  if(!product || !productModal){
     return;
   }
 
 
-  selectedProduct =
-    product;
+  if(productDetail){
+
+    productDetail.innerHTML = `
+
+      <div class="detail-icon">
+        ${product.icon}
+      </div>
+
+      <h2 class="detail-title">
+        ${product.name}
+      </h2>
+
+      <p class="detail-description">
+        ${product.description}
+      </p>
+
+      <div class="detail-price">
+        ${money(product.price)}
+      </div>
+
+      <button
+        id="detailBuy"
+        class="btn primary full">
+        Thêm vào giỏ hàng
+      </button>
+
+    `;
 
 
-  if (detailIcon)
-    detailIcon.textContent =
-      product.icon;
+    const detailBuy =
+      $("#detailBuy");
 
 
-  if (detailTitle)
-    detailTitle.textContent =
-      product.name;
+    if(detailBuy){
 
+      detailBuy.addEventListener(
+        "click",
+        () => {
 
-  if (detailDescription)
-    detailDescription.textContent =
-      product.description;
+          addToCart(product.id);
 
+          closeModal(productModal);
 
-  if (detailPrice)
-    detailPrice.textContent =
-      formatMoney(product.price);
+        }
+      );
 
+    }
 
-  productModal.classList.add(
-    "show"
-  );
-
-  document.body.classList.add(
-    "cart-open"
-  );
-
-}
-
-
-function closeProductModal() {
-
-  if (!productModal) {
-    return;
   }
 
-  productModal.classList.remove(
-    "show"
-  );
 
-  document.body.classList.remove(
-    "cart-open"
+  openModal(productModal);
+
+}
+
+
+if(productClose){
+
+  productClose.addEventListener(
+    "click",
+    () => {
+      closeModal(productModal);
+    }
   );
 
 }
 
 
-if (closeProduct) {
+/* =========================================================
+   CART STORAGE
+   ========================================================= */
 
-  closeProduct.addEventListener(
-    "click",
-    closeProductModal
+function getCart(){
+
+  try{
+
+    const saved =
+      localStorage.getItem("tuan4422_cart");
+
+    if(!saved) return [];
+
+    const parsed =
+      JSON.parse(saved);
+
+    return Array.isArray(parsed)
+      ? parsed
+      : [];
+
+  }catch(error){
+
+    console.warn(
+      "Cart read error:",
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+function saveCart(cart){
+
+  localStorage.setItem(
+    "tuan4422_cart",
+    JSON.stringify(cart)
+  );
+
+  updateCart();
+
+}
+
+
+/* =========================================================
+   ADD CART
+   ========================================================= */
+
+function addToCart(id){
+
+  const product =
+    PRODUCTS.find(
+      item => item.id === id
+    );
+
+
+  if(!product){
+
+    showToast(
+      "Không tìm thấy sản phẩm."
+    );
+
+    return;
+
+  }
+
+
+  const cart = getCart();
+
+  const existing =
+    cart.find(item => item.id === id);
+
+
+  if(existing){
+
+    existing.quantity += 1;
+
+  }else{
+
+    cart.push({
+
+      id:product.id,
+
+      quantity:1
+
+    });
+
+  }
+
+
+  saveCart(cart);
+
+  showToast(
+    "Đã thêm vào giỏ hàng."
   );
 
 }
 
 
-if (productModal) {
+/* =========================================================
+   REMOVE CART
+   ========================================================= */
 
-  productModal.addEventListener(
-    "click",
-    event => {
+function removeFromCart(id){
 
-      if (
-        event.target === productModal
-      ) {
+  let cart = getCart();
 
-        closeProductModal();
+  cart =
+    cart.filter(
+      item => item.id !== id
+    );
+
+  saveCart(cart);
+
+}
+
+
+/* =========================================================
+   CHANGE QUANTITY
+   ========================================================= */
+
+function changeQuantity(id, amount){
+
+  const cart = getCart();
+
+  const item =
+    cart.find(
+      item => item.id === id
+    );
+
+
+  if(!item) return;
+
+
+  item.quantity += amount;
+
+
+  if(item.quantity <= 0){
+
+    const newCart =
+      cart.filter(
+        cartItem => cartItem.id !== id
+      );
+
+    saveCart(newCart);
+
+    return;
+
+  }
+
+
+  saveCart(cart);
+
+}
+
+
+/* =========================================================
+   UPDATE CART
+   ========================================================= */
+
+function updateCart(){
+
+  const cart = getCart();
+
+  const count =
+    cart.reduce(
+      (total,item) =>
+        total + item.quantity,
+      0
+    );
+
+
+  const cartCount =
+    $("#cartCount");
+
+
+  if(cartCount){
+
+    cartCount.textContent =
+      count;
+
+  }
+
+
+  renderCart();
+
+}
+
+
+/* =========================================================
+   RENDER CART
+   ========================================================= */
+
+function renderCart(){
+
+  const cartItems =
+    $("#cartItems");
+
+  const cartTotal =
+    $("#cartTotal");
+
+
+  if(!cartItems) return;
+
+
+  const cart = getCart();
+
+
+  if(cart.length === 0){
+
+    cartItems.innerHTML = `
+      <div class="empty">
+        Giỏ hàng đang trống.
+      </div>
+    `;
+
+
+    if(cartTotal){
+
+      cartTotal.textContent =
+        "0$";
+
+    }
+
+    return;
+
+  }
+
+
+  let total = 0;
+
+
+  cartItems.innerHTML = "";
+
+
+  cart.forEach(cartItem => {
+
+    const product =
+      PRODUCTS.find(
+        item => item.id === cartItem.id
+      );
+
+
+    if(!product) return;
+
+
+    const subtotal =
+      product.price *
+      cartItem.quantity;
+
+
+    total += subtotal;
+
+
+    const element =
+      document.createElement("div");
+
+
+    element.className =
+      "cart-item";
+
+
+    element.innerHTML = `
+
+      <div class="cart-item-icon">
+        ${product.icon}
+      </div>
+
+      <div class="cart-item-info">
+
+        <strong>
+          ${product.name}
+        </strong>
+
+        <span>
+          ${money(product.price)}
+        </span>
+
+        <div style="
+          display:flex;
+          align-items:center;
+          gap:8px;
+          margin-top:7px;
+        ">
+
+          <button
+            class="small-btn"
+            data-minus="${product.id}">
+            −
+          </button>
+
+          <strong>
+            ${cartItem.quantity}
+          </strong>
+
+          <button
+            class="small-btn"
+            data-plus="${product.id}">
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+      <button
+        class="remove-cart"
+        data-remove="${product.id}"
+        aria-label="Xóa sản phẩm">
+        ×
+      </button>
+
+    `;
+
+
+    cartItems.appendChild(element);
+
+  });
+
+
+  if(cartTotal){
+
+    cartTotal.textContent =
+      money(total);
+
+  }
+
+
+  $$("[data-remove]").forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        removeFromCart(
+          button.dataset.remove
+        );
 
       }
+    );
+
+  });
+
+
+  $$("[data-minus]").forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        changeQuantity(
+          button.dataset.minus,
+          -1
+        );
+
+      }
+    );
+
+  });
+
+
+  $$("[data-plus]").forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        changeQuantity(
+          button.dataset.plus,
+          1
+        );
+
+      }
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   MODAL SYSTEM
+   ========================================================= */
+
+function openModal(modal){
+
+  if(!modal) return;
+
+  modal.classList.add("show");
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+function closeModal(modal){
+
+  if(!modal) return;
+
+  modal.classList.remove("show");
+
+  /*
+    Quan trọng:
+    Không dùng display:none trực tiếp.
+    Chỉ dùng class .show.
+  */
+
+  document.body.style.overflow = "";
+
+}
+
+
+function closeAllModals(){
+
+  $$(".modal").forEach(modal => {
+
+    modal.classList.remove("show");
+
+  });
+
+  document.body.style.overflow = "";
+
+}
+
+
+/* =========================================================
+   CART MODAL
+   ========================================================= */
+
+const cartModal = $("#cartModal");
+const cartBtn = $("#cartBtn");
+const cartClose = $("#cartClose");
+
+
+if(cartBtn){
+
+  cartBtn.addEventListener(
+    "click",
+    (event) => {
+
+      event.preventDefault();
+
+      event.stopPropagation();
+
+      renderCart();
+
+      openModal(cartModal);
 
     }
   );
@@ -1078,21 +931,40 @@ if (productModal) {
 }
 
 
-if (detailAdd) {
+if(cartClose){
 
-  detailAdd.addEventListener(
+  cartClose.addEventListener(
     "click",
-    () => {
+    (event) => {
 
-      if (!selectedProduct) {
-        return;
+      event.preventDefault();
+
+      event.stopPropagation();
+
+      closeModal(cartModal);
+
+    }
+  );
+
+}
+
+
+/*
+  Click vào phần nền tối để đóng.
+  Nhưng click bên trong modal-box sẽ KHÔNG đóng.
+*/
+
+if(cartModal){
+
+  cartModal.addEventListener(
+    "click",
+    (event) => {
+
+      if(event.target === cartModal){
+
+        closeModal(cartModal);
+
       }
-
-      addToCart(
-        selectedProduct.id
-      );
-
-      closeProductModal();
 
     }
   );
@@ -1101,20 +973,63 @@ if (detailAdd) {
 
 
 /* =========================================================
+   ALL MODALS BACKDROP
+   ========================================================= */
+
+$$(".modal").forEach(modal => {
+
+  modal.addEventListener(
+    "click",
+    event => {
+
+      if(event.target === modal){
+
+        closeModal(modal);
+
+      }
+
+    }
+  );
+
+});
+
+
+/* =========================================================
+   ESC TO CLOSE
+   ========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Escape"){
+
+      closeAllModals();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
    CHECKOUT
-========================================================= */
+   ========================================================= */
 
 const checkoutBtn =
   $("#checkoutBtn");
 
 
-if (checkoutBtn) {
+if(checkoutBtn){
 
   checkoutBtn.addEventListener(
     "click",
     () => {
 
-      if (cart.length === 0) {
+      const cart = getCart();
+
+
+      if(cart.length === 0){
 
         showToast(
           "Giỏ hàng đang trống."
@@ -1125,50 +1040,112 @@ if (checkoutBtn) {
       }
 
 
+      let total = 0;
+
+
+      cart.forEach(item => {
+
+        const product =
+          PRODUCTS.find(
+            product =>
+              product.id === item.id
+          );
+
+
+        if(product){
+
+          total +=
+            product.price *
+            item.quantity;
+
+        }
+
+      });
+
+
+      let balance =
+        Number(
+          localStorage.getItem(
+            "tuan4422_balance"
+          )
+        );
+
+
+      if(!Number.isFinite(balance)){
+
+        balance = 100000;
+
+      }
+
+
+      if(balance < total){
+
+        showToast(
+          "Số dư không đủ. Đây là thanh toán demo."
+        );
+
+        return;
+
+      }
+
+
+      balance -= total;
+
+
+      localStorage.setItem(
+        "tuan4422_balance",
+        String(balance)
+      );
+
+
       const orders =
-        getJSON(
-          "tuan4422_orders",
-          []
+        JSON.parse(
+          localStorage.getItem(
+            "tuan4422_orders"
+          ) || "[]"
         );
 
 
       orders.unshift({
 
         id:
-          "TT" + Date.now(),
+          "ORD-" +
+          Date.now(),
 
-        items:
-          [...cart],
-
-        total:
-          getCartTotal(),
+        total,
 
         date:
-          new Date()
-            .toLocaleString(
-              "vi-VN"
-            ),
+          new Date().toLocaleString(
+            "vi-VN"
+          ),
 
-        status:
-          "Đang xử lý"
+        items:cart
 
       });
 
 
-      setJSON(
+      localStorage.setItem(
         "tuan4422_orders",
-        orders
+        JSON.stringify(orders)
       );
 
 
-      cart = [];
+      localStorage.setItem(
+        "tuan4422_cart",
+        "[]"
+      );
 
-      saveCart();
 
-      renderCart();
+      updateCart();
+
+      closeModal(cartModal);
+
+      updateBalanceUI();
+
+      renderOrders();
 
       showToast(
-        "Đặt hàng demo thành công!"
+        "Thanh toán demo thành công!"
       );
 
     }
@@ -1178,47 +1155,191 @@ if (checkoutBtn) {
 
 
 /* =========================================================
-   SERVER
-========================================================= */
+   BALANCE
+   ========================================================= */
 
-const copyIP =
-  $("#copyIP");
+function getBalance(){
+
+  let balance =
+    Number(
+      localStorage.getItem(
+        "tuan4422_balance"
+      )
+    );
 
 
-if (copyIP) {
+  if(!Number.isFinite(balance)){
 
-  copyIP.addEventListener(
+    balance = 100000;
+
+    localStorage.setItem(
+      "tuan4422_balance",
+      String(balance)
+    );
+
+  }
+
+
+  return balance;
+
+}
+
+
+function updateBalanceUI(){
+
+  const balance =
+    getBalance();
+
+
+  const walletBalance =
+    $("#walletBalance");
+
+  const accountBalance =
+    $("#accountBalance");
+
+
+  if(walletBalance){
+
+    walletBalance.textContent =
+      money(balance);
+
+  }
+
+
+  if(accountBalance){
+
+    accountBalance.textContent =
+      money(balance);
+
+  }
+
+}
+
+
+updateBalanceUI();
+
+
+/* =========================================================
+   ORDERS
+   ========================================================= */
+
+function renderOrders(){
+
+  const container =
+    $("#accountOrders");
+
+
+  if(!container) return;
+
+
+  let orders;
+
+
+  try{
+
+    orders =
+      JSON.parse(
+        localStorage.getItem(
+          "tuan4422_orders"
+        ) || "[]"
+      );
+
+  }catch{
+
+    orders = [];
+
+  }
+
+
+  if(!orders.length){
+
+    container.innerHTML = `
+      <div class="empty">
+        Chưa có đơn hàng.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    orders.slice(0,5).map(order => {
+
+      return `
+
+        <div style="
+          padding:15px 0;
+          border-bottom:1px solid var(--border);
+        ">
+
+          <strong>
+            ${order.id}
+          </strong>
+
+          <div style="
+            color:var(--muted);
+            font-size:13px;
+            margin-top:4px;
+          ">
+            ${order.date}
+          </div>
+
+          <div style="
+            color:var(--yellow);
+            font-weight:900;
+            margin-top:5px;
+          ">
+            ${money(order.total)}
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+renderOrders();
+
+
+/* =========================================================
+   WALLET DEMO
+   ========================================================= */
+
+const addMoneyBtn =
+  $("#addMoneyBtn");
+
+
+if(addMoneyBtn){
+
+  addMoneyBtn.addEventListener(
     "click",
-    async () => {
+    () => {
 
-      const ip =
-        $("#serverIP")
-          ?.textContent
-          .trim();
+      const current =
+        getBalance();
 
 
-      if (!ip) {
-        return;
-      }
+      const newBalance =
+        current + 100000;
 
 
-      try {
+      localStorage.setItem(
+        "tuan4422_balance",
+        String(newBalance)
+      );
 
-        await navigator.clipboard.writeText(
-          ip
-        );
 
-        showToast(
-          "Đã sao chép IP server."
-        );
+      updateBalanceUI();
 
-      } catch {
 
-        showToast(
-          "Không thể sao chép tự động."
-        );
-
-      }
+      showToast(
+        "Đã nạp 100.000$ demo."
+      );
 
     }
   );
@@ -1227,14 +1348,100 @@ if (copyIP) {
 
 
 /* =========================================================
-   CHAT
-========================================================= */
+   TRANSACTIONS
+   ========================================================= */
+
+function renderTransactions(){
+
+  const list =
+    $("#transactionsList");
+
+
+  if(!list) return;
+
+
+  const orders =
+    JSON.parse(
+      localStorage.getItem(
+        "tuan4422_orders"
+      ) || "[]"
+    );
+
+
+  if(!orders.length){
+
+    list.innerHTML = `
+      <div class="empty">
+        Chưa có giao dịch.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    orders.map(order => {
+
+      return `
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:15px;
+          padding:14px 0;
+          border-bottom:1px solid var(--border);
+        ">
+
+          <div>
+
+            <strong>
+              ${order.id}
+            </strong>
+
+            <div style="
+              color:var(--muted);
+              font-size:12px;
+            ">
+              ${order.date}
+            </div>
+
+          </div>
+
+          <strong style="
+            color:var(--red);
+          ">
+            -${money(order.total)}
+          </strong>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+renderTransactions();
+
+
+/* =========================================================
+   CHAT DEMO
+   ========================================================= */
 
 const chatForm =
   $("#chatForm");
 
+const chatInput =
+  $("#chatInput");
 
-if (chatForm) {
+const chatMessages =
+  $("#chatMessages");
+
+
+if(chatForm && chatInput && chatMessages){
 
   chatForm.addEventListener(
     "submit",
@@ -1243,31 +1450,15 @@ if (chatForm) {
       event.preventDefault();
 
 
-      const input =
-        $("#chatInput");
-
-      const messages =
-        $("#chatMessages");
-
-
-      if (!input || !messages) {
-        return;
-      }
-
-
       const text =
-        input.value.trim();
+        chatInput.value.trim();
 
 
-      if (!text) {
-        return;
-      }
+      if(!text) return;
 
 
       const message =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
 
       message.className =
@@ -1277,7 +1468,7 @@ if (chatForm) {
       message.innerHTML = `
 
         <div class="avatar">
-          B
+          T
         </div>
 
         <div>
@@ -1295,21 +1486,14 @@ if (chatForm) {
       `;
 
 
-      messages.appendChild(
-        message
-      );
+      chatMessages.appendChild(message);
 
 
-      input.value = "";
+      chatInput.value = "";
 
 
-      messages.scrollTop =
-        messages.scrollHeight;
-
-
-      showToast(
-        "Đã gửi tin nhắn demo."
-      );
+      chatMessages.scrollTop =
+        chatMessages.scrollHeight;
 
     }
   );
@@ -1318,733 +1502,79 @@ if (chatForm) {
 
 
 /* =========================================================
-   FORUM
-========================================================= */
+   ESCAPE HTML
+   ========================================================= */
 
-const forumList =
-  $("#forumList");
+function escapeHTML(value){
 
+  const div =
+    document.createElement("div");
 
-const DEFAULT_POSTS = [
+  div.textContent =
+    value;
 
-  {
-    title:
-      "Chào mừng đến TUAN4422 MARKET",
-
-    content:
-      "Đây là khu vực forum của cộng đồng.",
-
-    author:
-      "TUAN4422",
-
-    time:
-      "Hôm nay",
-
-    icon:
-      "📢"
-
-  },
-
-  {
-    title:
-      "Khu vực Minecraft",
-
-    content:
-      "Chia sẻ kinh nghiệm và thảo luận về server.",
-
-    author:
-      "Admin",
-
-    time:
-      "Hôm nay",
-
-    icon:
-      "⛏️"
-
-  },
-
-  {
-    title:
-      "Góp ý cho website",
-
-    content:
-      "Bạn có thể gửi ý tưởng để website phát triển.",
-
-    author:
-      "Community",
-
-    time:
-      "Hôm nay",
-
-    icon:
-      "💡"
-
-  }
-
-];
-
-
-function renderForum() {
-
-  if (!forumList) {
-    return;
-  }
-
-
-  const posts =
-    getJSON(
-      "tuan4422_posts",
-      DEFAULT_POSTS
-    );
-
-
-  forumList.innerHTML =
-    posts.map(post => `
-
-      <article class="forum-post">
-
-        <div class="forum-icon">
-          ${escapeHTML(post.icon)}
-        </div>
-
-        <div>
-
-          <h3>
-            ${escapeHTML(post.title)}
-          </h3>
-
-          <p>
-            ${escapeHTML(post.content)}
-          </p>
-
-          <div class="post-meta">
-            ${escapeHTML(post.author)}
-            ·
-            ${escapeHTML(post.time)}
-          </div>
-
-        </div>
-
-      </article>
-
-    `).join("");
+  return div.innerHTML;
 
 }
 
 
-renderForum();
+/* =========================================================
+   SERVER COPY IP
+   ========================================================= */
+
+const copyIP =
+  $("#copyIP");
 
 
-const newPostBtn =
-  $("#newPostBtn");
+if(copyIP){
 
-const postModal =
-  $("#postModal");
-
-const closePost =
-  $("#closePost");
-
-const postForm =
-  $("#postForm");
-
-
-if (newPostBtn && postModal) {
-
-  newPostBtn.addEventListener(
+  copyIP.addEventListener(
     "click",
-    () => {
+    async () => {
 
-      postModal.classList.add(
-        "show"
-      );
-
-    }
-  );
-
-}
+      const ipElement =
+        $("#serverIP");
 
 
-if (closePost && postModal) {
-
-  closePost.addEventListener(
-    "click",
-    () => {
-
-      postModal.classList.remove(
-        "show"
-      );
-
-    }
-  );
-
-}
+      if(!ipElement) return;
 
 
-if (postForm) {
-
-  postForm.addEventListener(
-    "submit",
-    event => {
-
-      event.preventDefault();
+      const ip =
+        ipElement.textContent.trim();
 
 
-      const title =
-        $("#postTitle").value.trim();
+      try{
 
-      const content =
-        $("#postContent").value.trim();
-
-
-      if (!title || !content) {
-        return;
-      }
-
-
-      const posts =
-        getJSON(
-          "tuan4422_posts",
-          DEFAULT_POSTS
+        await navigator.clipboard.writeText(
+          ip
         );
 
-
-      posts.unshift({
-
-        title:
-          title,
-
-        content:
-          content,
-
-        author:
-          "Bạn",
-
-        time:
-          "Vừa xong",
-
-        icon:
-          "💬"
-
-      });
-
-
-      setJSON(
-        "tuan4422_posts",
-        posts
-      );
-
-
-      postForm.reset();
-
-
-      if (postModal) {
-
-        postModal.classList.remove(
-          "show"
+        showToast(
+          "Đã sao chép IP server."
         );
 
-      }
+      }catch{
 
-
-      renderForum();
-
-
-      showToast(
-        "Đã đăng bài demo."
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   ACCOUNT
-========================================================= */
-
-const profileName =
-  $("#profileName");
-
-
-const editName =
-  $("#editName");
-
-
-function getUsername() {
-
-  return localStorage.getItem(
-    "tuan4422_username"
-  ) || "TUAN4422";
-
-}
-
-
-function renderAccount() {
-
-  if (!profileName) {
-    return;
-  }
-
-
-  const name =
-    getUsername();
-
-
-  profileName.textContent =
-    name;
-
-
-  const avatar =
-    $("#profileAvatar");
-
-
-  if (avatar) {
-
-    avatar.textContent =
-      name
-        .charAt(0)
-        .toUpperCase();
-
-  }
-
-
-  const balance =
-    $("#accountBalance");
-
-
-  if (balance) {
-
-    const money =
-      Number(
-        localStorage.getItem(
-          "tuan4422_balance"
-        ) || 100000
-      );
-
-    balance.textContent =
-      formatMoney(money);
-
-  }
-
-}
-
-
-renderAccount();
-
-
-if (editName) {
-
-  editName.addEventListener(
-    "click",
-    () => {
-
-      const oldName =
-        getUsername();
-
-
-      const newName =
-        prompt(
-          "Nhập tên mới:",
-          oldName
-        );
-
-
-      if (!newName) {
-        return;
-      }
-
-
-      const clean =
-        newName.trim();
-
-
-      if (!clean) {
-        return;
-      }
-
-
-      localStorage.setItem(
-        "tuan4422_username",
-        clean.substring(0, 25)
-      );
-
-
-      renderAccount();
-
-
-      showToast(
-        "Đã cập nhật tên."
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   ORDERS
-========================================================= */
-
-const orderList =
-  $("#orderList");
-
-
-if (orderList) {
-
-  const orders =
-    getJSON(
-      "tuan4422_orders",
-      []
-    );
-
-
-  if (orders.length === 0) {
-
-    orderList.innerHTML = `
-      <div class="empty">
-        Chưa có đơn hàng.
-      </div>
-    `;
-
-  } else {
-
-    orderList.innerHTML =
-      orders.map(order => `
-
-        <div class="order-box">
-
-          <div class="order-header">
-
-            <strong>
-              ${escapeHTML(order.id)}
-            </strong>
-
-            <span>
-              ${escapeHTML(order.status)}
-            </span>
-
-          </div>
-
-          <p>
-            ${escapeHTML(order.date)}
-          </p>
-
-          <strong>
-            ${formatMoney(order.total)}
-          </strong>
-
-        </div>
-
-      `).join("");
-
-  }
-
-}
-
-
-/* =========================================================
-   WALLET
-========================================================= */
-
-const walletBalance =
-  $("#walletBalance");
-
-const addMoneyBtn =
-  $("#addMoneyBtn");
-
-
-function getBalance() {
-
-  return Number(
-    localStorage.getItem(
-      "tuan4422_balance"
-    ) || 100000
-  );
-
-}
-
-
-function setBalance(value) {
-
-  localStorage.setItem(
-    "tuan4422_balance",
-    value
-  );
-
-}
-
-
-function renderWallet() {
-
-  if (walletBalance) {
-
-    walletBalance.textContent =
-      formatMoney(
-        getBalance()
-      );
-
-  }
-
-
-  const transactions =
-    $("#transactions");
-
-
-  if (!transactions) {
-    return;
-  }
-
-
-  const history =
-    getJSON(
-      "tuan4422_transactions",
-      []
-    );
-
-
-  if (history.length === 0) {
-
-    transactions.innerHTML = `
-      <div class="empty">
-        Chưa có giao dịch.
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  transactions.innerHTML =
-    history.map(item => `
-
-      <div class="transaction">
-
-        <div>
-
-          <strong>
-            ${escapeHTML(item.title)}
-          </strong>
-
-          <br>
-
-          <span>
-            ${escapeHTML(item.date)}
-          </span>
-
-        </div>
-
-        <strong>
-          +${formatMoney(item.amount)}
-        </strong>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-renderWallet();
-
-
-if (addMoneyBtn) {
-
-  addMoneyBtn.addEventListener(
-    "click",
-    () => {
-
-      const amount =
-        100000;
-
-
-      const newBalance =
-        getBalance() +
-        amount;
-
-
-      setBalance(
-        newBalance
-      );
-
-
-      const history =
-        getJSON(
-          "tuan4422_transactions",
-          []
-        );
-
-
-      history.unshift({
-
-        title:
-          "Nạp tiền demo",
-
-        amount:
-          amount,
-
-        date:
-          new Date()
-            .toLocaleString(
-              "vi-VN"
-            )
-
-      });
-
-
-      setJSON(
-        "tuan4422_transactions",
-        history
-      );
-
-
-      renderWallet();
-
-      renderAccount();
-
-
-      showToast(
-        "Đã nạp 100.000đ demo."
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-let toastTimer;
-
-
-function showToast(message) {
-
-  const toast =
-    $("#toast");
-
-
-  if (!toast) {
-    return;
-  }
-
-
-  toast.textContent =
-    message;
-
-
-  toast.classList.add(
-    "show"
-  );
-
-
-  clearTimeout(
-    toastTimer
-  );
-
-
-  toastTimer =
-    setTimeout(
-      () => {
-
-        toast.classList.remove(
-          "show"
-        );
-
-      },
-      2500
-    );
-
-}
-
-
-/* =========================================================
-   ESC
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if (
-      event.key === "Escape"
-    ) {
-
-      closeCartModal();
-
-      closeProductModal();
-
-
-      if (postModal) {
-
-        postModal.classList.remove(
-          "show"
-        );
-
-      }
-
-
-      if (nav) {
-
-        nav.classList.remove(
-          "open"
+        showToast(
+          "Không thể tự động sao chép."
         );
 
       }
 
     }
-
-  }
-);
-
-
-/* =========================================================
-   YEAR
-========================================================= */
-
-const year =
-  $("#year");
-
-
-if (year) {
-
-  year.textContent =
-    new Date().getFullYear();
+  );
 
 }
 
 
 /* =========================================================
-   GLOBAL FUNCTIONS
-========================================================= */
+   INITIALIZE
+   ========================================================= */
 
-window.addToCart =
-  addToCart;
+updateCart();
 
-window.removeFromCart =
-  removeFromCart;
+updateBalanceUI();
 
-window.changeCartQuantity =
-  changeCartQuantity;
+renderOrders();
 
-window.openCart =
-  openCart;
-
-window.closeCart =
-  closeCartModal;
-
-window.showToast =
-  showToast;
-
-
-/* =========================================================
-   START
-========================================================= */
-
-updateCartCount();
-
-renderCart();
+renderTransactions();
