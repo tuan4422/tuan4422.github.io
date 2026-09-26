@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tài khoản - TUAN4422</title>
+  <title>Tài khoản - TUAN4422 MARKET</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,7 +11,7 @@
 
 <header class="header">
 
-  <a class="logo" href="index.html">
+  <a href="index.html" class="logo">
     TUAN<span>4422</span>
   </a>
 
@@ -20,20 +20,21 @@
     <a href="shop.html">Shop</a>
     <a href="server.html">Server</a>
     <a href="chat.html">Chat</a>
-    <a href="forum.html">Diễn đàn</a>
-    <a class="active" href="account.html">Tài khoản</a>
+    <a href="forum.html">Forum</a>
+    <a href="account.html" class="active">Tài khoản</a>
     <a href="wallet.html">Ví</a>
   </nav>
 
   <div class="header-actions">
 
-    <button id="themeBtn" class="icon-btn">
-      ☾
+    <button id="themeBtn" class="icon-btn">☾</button>
+
+    <button id="cartBtn" class="cart-btn">
+      🛒
+      <span id="cartCount">0</span>
     </button>
 
-    <button id="menuBtn" class="menu-btn">
-      ☰
-    </button>
+    <button id="menuBtn" class="menu-btn">☰</button>
 
   </div>
 
@@ -42,77 +43,130 @@
 
 <main class="page">
 
-  <div class="page-heading center">
+  <div class="page-heading">
 
-    <div class="small-title">
-      ACCOUNT
+    <div>
+
+      <div class="small-title">
+        ACCOUNT
+      </div>
+
+      <h1>Tài khoản</h1>
+
+      <p>
+        Quản lý thông tin và đơn hàng.
+      </p>
+
     </div>
-
-    <h1>Tài khoản</h1>
 
   </div>
 
 
   <div class="account-card">
 
-    <div class="profile-avatar">
+    <div class="profile-avatar" id="profileAvatar">
       T
     </div>
 
     <div class="profile-info">
 
-      <span>Tài khoản</span>
-
-      <h2>
-        tuan4422
+      <h2 id="profileName">
+        TUAN4422
       </h2>
 
       <p>
         Thành viên TUAN4422 MARKET
       </p>
 
-    </div>
+      <button
+        id="editName"
+        class="small-btn"
+      >
+        Đổi tên
+      </button>
 
+    </div>
 
     <div class="profile-balance">
 
-      <span>Số dư</span>
+      <span>Số dư demo</span>
 
       <strong id="accountBalance">
         100.000đ
       </strong>
 
+      <a href="wallet.html">
+        Quản lý ví →
+      </a>
+
     </div>
 
   </div>
 
 
-  <div class="order-box">
+  <section class="quick-section">
 
-    <div class="order-header">
+    <div class="section-title">
 
-      <h3>
-        Đơn hàng của tôi
-      </h3>
-
-      <span id="orderCount">
-        0 đơn
-      </span>
-
-    </div>
-
-
-    <div id="orders">
-
-      <div class="empty">
-        Chưa có đơn hàng.
+      <div class="small-title">
+        LỊCH SỬ
       </div>
 
+      <h2>
+        Đơn hàng
+      </h2>
+
     </div>
+
+    <div id="orderList"></div>
+
+  </section>
+
+</main>
+
+
+<div id="cartModal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2>🛒 Giỏ hàng</h2>
+      <button id="closeCart">×</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      <span>Tổng cộng</span>
+      <strong id="cartTotal">0đ</strong>
+    </div>
+
+    <button id="checkoutBtn" class="btn primary full">
+      Thanh toán
+    </button>
 
   </div>
 
-</main>
+</div>
+
+
+<div id="toast"></div>
+
+
+<footer>
+
+  <div class="footer-logo">
+    TUAN<span>4422</span>
+  </div>
+
+  <p>TUAN4422 MARKET</p>
+
+  <small>
+    © <span id="year"></span>
+    TUAN4422. All rights reserved.
+  </small>
+
+</footer>
 
 
 <script src="script.js"></script>
