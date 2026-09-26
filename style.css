@@ -2385,4 +2385,180 @@ footer small {
     font-size: 19px;
   }
 
+}/* =========================================================
+   CART FIX - PC + MOBILE
+========================================================= */
+
+body.cart-open {
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.75);
+
+  z-index: 99999;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-box {
+  position: relative;
+
+  width: min(520px, 100%);
+
+  max-height: calc(100vh - 40px);
+
+  overflow-y: auto;
+
+  box-sizing: border-box;
+
+  border-radius: 18px;
+}
+
+
+/* Nút X */
+
+#closeCart {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background: transparent;
+
+  color: inherit;
+
+  font-size: 28px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  z-index: 20;
+}
+
+#closeCart:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+
+/* Nút tăng giảm */
+
+.small-btn {
+  min-width: 32px;
+  min-height: 32px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 8px;
+
+  background: var(--surface-2);
+
+  color: var(--text);
+
+  cursor: pointer;
+}
+
+.small-btn:hover {
+  background: var(--surface-3);
+}
+
+
+/* Nút xóa */
+
+.remove-cart {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: var(--red);
+
+  font-size: 24px;
+
+  cursor: pointer;
+}
+
+.remove-cart:hover {
+  background: rgba(255, 70, 70, 0.1);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+  .modal {
+    padding: 10px;
+
+    align-items: flex-end;
+  }
+
+  .modal-box {
+
+    width: 100%;
+
+    max-height:
+      calc(100vh - 20px);
+
+    border-radius:
+      18px 18px 0 0;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONE
+========================================================= */
+
+@media (max-width: 360px) {
+
+  .modal {
+    padding: 5px;
+  }
+
+  .modal-box {
+    max-height:
+      calc(100vh - 10px);
+  }
+
 }
