@@ -1,365 +1,215 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - TUAN4422 MARKET</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - TUAN4422</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
-
-    <a href="index.html" class="brand">
-      <div class="brand-logo">T</div>
-
-      <div class="brand-text">
-        <strong>TUAN4422</strong>
-        <span>MARKET</span>
-      </div>
+<header class="header">
+    <a href="index.html" class="logo">
+        <span>TUAN</span>4422 <small>MARKET</small>
     </a>
 
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html">Trang chủ</a>
-      <a href="shop.html">Shop</a>
-      <a href="server.html">Server</a>
-      <a href="chat.html">Chat</a>
-      <a href="forum.html">Forum</a>
-      <a href="account.html">Tài khoản</a>
-      <a href="wallet.html">Ví</a>
-      <a href="admin.html" id="adminMenu" class="admin-only is-visible">Admin</a>
+    <button class="mobile-menu" id="mobileMenuBtn">☰</button>
+
+    <nav id="mainNav">
+        <a href="index.html">Trang chủ</a>
+        <a href="shop.html">Cửa hàng</a>
+        <a href="server.html">Minecraft Server</a>
+        <a href="chat.html">Chat</a>
+        <a href="forum.html">Forum</a>
+        <a href="account.html">Tài khoản</a>
+        <a href="wallet.html">Ví</a>
+        <a href="admin.html" class="active">Admin</a>
     </nav>
 
-    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-
-  </div>
+    <button class="theme-btn" id="themeBtn">☾</button>
 </header>
 
-<main>
+<main class="page">
 
-  <section class="page-hero">
-    <div class="eyebrow">CONTROL PANEL</div>
-    <h1>Admin</h1>
-    <p>Quản lý sản phẩm và đơn hàng.</p>
-  </section>
+    <section class="page-title">
+        <span class="section-label">CONTROL PANEL</span>
+        <h1>Admin</h1>
+        <p>Quản lý TUAN4422 MARKET.</p>
+    </section>
 
+    <section id="adminLoginSection" class="admin-login panel">
 
-  <!-- LOGIN -->
+        <h2>Đăng nhập Admin</h2>
 
-  <section
-    class="section"
-    id="adminLoginSection"
-    style="padding-top:20px"
-  >
-
-    <div class="panel">
-
-      <div class="panel-title">
-        <div>
-          <h2>Đăng nhập Admin</h2>
-          <span>Demo quản trị website</span>
-        </div>
-      </div>
-
-      <form id="adminLoginForm">
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Tài khoản Admin</label>
-
-            <input
-              id="adminUsername"
-              type="text"
-              placeholder="admin"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label>Mật khẩu</label>
-
-            <input
-              id="adminPassword"
-              type="password"
-              placeholder="tuan4422"
-              required
-            >
-          </div>
-
-        </div>
-
-        <div class="form-actions">
-
-          <button
-            class="btn btn-primary"
-            type="submit"
-          >
-            Đăng nhập Admin
-          </button>
-
-        </div>
-
-        <p style="
-          margin-top:12px;
-          color:var(--muted);
-          font-size:11px;
-        ">
-          Demo: admin / tuan4422
+        <p class="description">
+            Demo Admin: <strong>admin</strong> /
+            <strong>tuan4422</strong>
         </p>
 
-      </form>
+        <form id="adminLoginForm">
 
-    </div>
-
-  </section>
-
-
-  <!-- DASHBOARD -->
-
-  <section
-    class="section"
-    id="adminDashboard"
-    style="display:none;padding-top:20px"
-  >
-
-    <div class="admin-dashboard">
-
-
-      <!-- STATS -->
-
-      <div class="stats-grid">
-
-        <div class="stat-card">
-          <span>Sản phẩm</span>
-          <strong id="adminProductCount">0</strong>
-        </div>
-
-        <div class="stat-card">
-          <span>Đơn hàng</span>
-          <strong id="adminOrderCount">0</strong>
-        </div>
-
-        <div class="stat-card">
-          <span>Người dùng</span>
-          <strong id="adminUserCount">0</strong>
-        </div>
-
-        <div class="stat-card">
-          <span>Trạng thái</span>
-          <strong style="color:var(--green)">
-            Online
-          </strong>
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCT FORM -->
-
-      <div class="panel">
-
-        <div class="panel-title">
-
-          <div>
-            <h2>Thêm / sửa sản phẩm</h2>
-            <span>Quản lý sản phẩm của Market</span>
-          </div>
-
-        </div>
-
-        <form id="productForm">
-
-          <input
-            type="hidden"
-            id="productId"
-          >
-
-          <div class="form-grid">
-
-            <div class="form-group">
-              <label>Tên sản phẩm</label>
-
-              <input
-                id="productName"
+            <input
+                id="adminUsername"
+                class="input"
+                type="text"
+                placeholder="Tên Admin"
                 required
-                placeholder="Tên sản phẩm"
-              >
-            </div>
+            >
 
-            <div class="form-group">
-              <label>Danh mục</label>
-
-              <select id="productCategory">
-
-                <option value="Script">
-                  Script
-                </option>
-
-                <option value="Minecraft">
-                  Minecraft
-                </option>
-
-                <option value="Account">
-                  Account
-                </option>
-
-                <option value="Khác">
-                  Khác
-                </option>
-
-              </select>
-
-            </div>
-
-            <div class="form-group">
-              <label>Giá</label>
-
-              <input
-                id="productPrice"
-                type="number"
-                min="0"
+            <input
+                id="adminPassword"
+                class="input"
+                type="password"
+                placeholder="Mật khẩu"
                 required
-                placeholder="49000"
-              >
-            </div>
-
-            <div class="form-group">
-              <label>Icon / hình ảnh</label>
-
-              <input
-                id="productIcon"
-                placeholder="URL hình ảnh"
-              >
-            </div>
-
-            <div class="form-group full">
-              <label>Mô tả</label>
-
-              <textarea
-                id="productDescription"
-                placeholder="Mô tả sản phẩm..."
-              ></textarea>
-            </div>
-
-            <div class="form-group full">
-
-              <label class="checkbox-row">
-
-                <input
-                  id="productFeatured"
-                  type="checkbox"
-                >
-
-                Sản phẩm nổi bật
-
-              </label>
-
-            </div>
-
-          </div>
-
-          <div class="form-actions">
-
-            <button
-              id="saveProductBtn"
-              class="btn btn-primary"
-              type="submit"
             >
-              Lưu sản phẩm
-            </button>
 
-            <button
-              id="cancelEditBtn"
-              class="btn btn-secondary"
-              type="button"
-            >
-              Hủy
+            <button class="btn btn-primary">
+                Đăng nhập
             </button>
-
-          </div>
 
         </form>
 
-      </div>
+    </section>
 
+    <section id="adminDashboard" class="hidden">
 
-      <!-- PRODUCTS -->
+        <div class="admin-stats">
 
-      <div class="panel">
+            <div class="stat-card">
+                <span>SẢN PHẨM</span>
+                <strong id="adminProductCount">0</strong>
+            </div>
 
-        <div class="panel-title">
+            <div class="stat-card">
+                <span>ĐƠN HÀNG</span>
+                <strong id="adminOrderCount">0</strong>
+            </div>
 
-          <div>
-            <h2>Sản phẩm</h2>
-            <span>Danh sách sản phẩm</span>
-          </div>
-
-          <button
-            class="btn btn-secondary btn-small"
-            id="refreshProductsBtn"
-          >
-            Làm mới
-          </button>
-
-        </div>
-
-        <div
-          class="admin-product-list"
-          id="adminProductList"
-        ></div>
-
-      </div>
-
-
-      <!-- ORDERS -->
-
-      <div class="panel">
-
-        <div class="panel-title">
-
-          <div>
-            <h2>Đơn hàng</h2>
-            <span>Danh sách giao dịch demo</span>
-          </div>
-
-          <button
-            class="btn btn-secondary btn-small"
-            id="refreshOrdersBtn"
-          >
-            Làm mới
-          </button>
+            <div class="stat-card">
+                <span>USER</span>
+                <strong id="adminUserCount">0</strong>
+            </div>
 
         </div>
 
-        <div
-          class="admin-order-list"
-          id="adminOrderList"
-        ></div>
+        <div class="panel">
 
-      </div>
+            <div class="panel-head">
+                <h2>Thêm / chỉnh sửa sản phẩm</h2>
+            </div>
 
-    </div>
+            <form id="productForm" class="admin-form">
 
-  </section>
+                <input type="hidden" id="productId">
+
+                <input
+                    id="productName"
+                    class="input"
+                    placeholder="Tên sản phẩm"
+                    required
+                >
+
+                <select id="productCategory" class="input">
+                    <option value="Script">Script</option>
+                    <option value="Account">Account</option>
+                    <option value="Minecraft">Minecraft</option>
+                </select>
+
+                <input
+                    id="productPrice"
+                    class="input"
+                    type="number"
+                    placeholder="Giá"
+                    required
+                >
+
+                <input
+                    id="productImage"
+                    class="input"
+                    placeholder="Ảnh sản phẩm, ví dụ: images/products/script-ui.png"
+                >
+
+                <textarea
+                    id="productDescription"
+                    class="input textarea"
+                    placeholder="Mô tả sản phẩm"
+                ></textarea>
+
+                <label class="checkbox">
+                    <input type="checkbox" id="productFeatured">
+                    Sản phẩm nổi bật
+                </label>
+
+                <div class="form-buttons">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="saveProductBtn"
+                    >
+                        Lưu sản phẩm
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary hidden"
+                        id="cancelEditBtn"
+                    >
+                        Hủy chỉnh sửa
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-head">
+                <h2>Quản lý sản phẩm</h2>
+
+                <button
+                    class="btn btn-secondary"
+                    id="refreshProductsBtn"
+                >
+                    Làm mới
+                </button>
+            </div>
+
+            <div id="adminProductList"></div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-head">
+                <h2>Đơn hàng</h2>
+
+                <button
+                    class="btn btn-secondary"
+                    id="refreshOrdersBtn"
+                >
+                    Làm mới
+                </button>
+            </div>
+
+            <div id="adminOrderList"></div>
+
+        </div>
+
+        <button id="adminLogoutBtn" class="btn btn-danger">
+            Đăng xuất Admin
+        </button>
+
+    </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
+<div id="toast" class="toast"></div>
 
-    <div class="footer-brand">
-      <strong>TUAN4422 MARKET</strong>
-      <p>Admin Control Panel.</p>
-    </div>
-
-  </div>
-</footer>
-
-<div class="toast" id="toast"></div>
-
+<script src="database.js"></script>
 <script src="script.js"></script>
 
 </body>
